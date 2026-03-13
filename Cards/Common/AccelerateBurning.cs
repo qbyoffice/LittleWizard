@@ -1,0 +1,33 @@
+using LittleWizard.Powers;
+using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
+
+namespace LittleWizard.Cards.Common;
+
+public class AccelerateBurning() : LittleWizardCard(1, CardType.Skill, CardRarity.Common, TargetType.AllEnemies)
+{
+    private const string CalculatedFireElement = "CalculatedFireElement";
+    private const string CalculatedFireElementThreshold = "CalculatedWaterElementThreshold";
+    
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new CalculationBaseVar(1),
+        new DynamicVar(CalculatedFireElementThreshold, 5),
+        new CalculationExtraVar(1),
+        new CalculatedVar(CalculatedFireElement).WithMultiplier((card, target) => Math.Floor((decimal)(target?.GetPowerAmount<FireElement>() ?? 0)) / card.DynamicVars[CalculatedFireElementThreshold].BaseValue)
+    ];
+
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    {
+        ArgumentNullException.ThrowIfNull(cardPlay.Target);
+        await PowerCmd.Apply<FireElement>(cardPlay.Target,((CalculatedVar) DynamicVars[CalculatedFireElement]).Calculate(cardPlay.Target), Owner.Creature, this);
+    }
+
+    protected override void OnUpgrade()
+    {
+        DynamicVars[CalculatedFireElementThreshold].UpgradeValueBy(-1);
+        DynamicVars.CalculationExtra.UpgradeValueBy(1);
+    }
+}

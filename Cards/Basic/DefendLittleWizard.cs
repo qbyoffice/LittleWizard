@@ -20,5 +20,4 @@ public class DefendLittleWizard() : LittleWizardCard(1, CardType.Skill, CardRari
     {
         DynamicVars["Block"].UpgradeValueBy(3m);
     }
-
 }

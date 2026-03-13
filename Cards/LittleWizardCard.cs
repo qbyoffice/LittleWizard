@@ -15,5 +15,4 @@ public abstract class LittleWizardCard(
     bool autoAdd = true)
     : CustomCardModel(baseCost, type, rarity, target, showInCardLibrary, autoAdd)
 {
-    
 }

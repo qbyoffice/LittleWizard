@@ -9,5 +9,14 @@
     "LITTLEWIZARD-DEFEND_LITTLE_WIZARD.title": "Defend",
     
     "LITTLEWIZARD-STRIKE_LITTLE_WIZARD.title": "Strike",
-    "LITTLEWIZARD-STRIKE_LITTLE_WIZARD.description": ""
+    "LITTLEWIZARD-STRIKE_LITTLE_WIZARD.description": "",
+
+    "LITTLEWIZARD-WAND_STRIKE.title": "WandStrike",
+    "LITTLEWIZARD-WAND_STRIKE.description": "",
+
+    "LITTLEWIZARD-FIREBALL.description": "",
+    "LITTLEWIZARD-FIREBALL.title": "Fireball",
+
+    "LITTLEWIZARD-ACCELERATE_BURNING.description": "",
+    "LITTLEWIZARD-ACCELERATE_BURNING.title": "AccelerateBurning"
 }
