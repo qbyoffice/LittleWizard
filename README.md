@@ -1,3 +1,15 @@
-A template for an empty Slay the Spire 2 mod with BaseLib as a dependency.
+# LittleWizard
 
-See the [wiki](https://github.com/Alchyr/ModTemplate-StS2/wiki) to get started.
+A custom character mod for Slay the Spire 2.
+
+## Content
+
+- Adds a new playable character: **Little Wizard**
+
+## Requirements
+
+- BaseLib
+
+## Credits
+
+- Built with the StS2 Mod Template
