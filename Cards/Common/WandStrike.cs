@@ -15,7 +15,7 @@ public class WandStrike() : LittleWizardCard(1, CardType.Attack, CardRarity.Comm
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(5, ValueProp.Move),
+        new DamageVar(8, ValueProp.Move),
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
