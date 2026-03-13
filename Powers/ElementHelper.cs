@@ -38,6 +38,7 @@ public static class ElementHelper
     public static void FireAndWater(FireElement fireElement, WaterElement waterElement)
     {
         PowerCmd.Apply<StrengthPower>(fireElement.Owner, -1 * (fireElement.Amount + waterElement.Amount), null, null);
+        PowerCmd.Apply<VulnerablePower>(fireElement.Owner, fireElement.Amount + waterElement.Amount, null, null);
     }
 
     public static void FireAndEarth(FireElement fireElement, EarthElement earthElement)
