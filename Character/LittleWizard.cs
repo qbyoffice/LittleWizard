@@ -23,9 +23,9 @@ public class LittleWizard : PlaceholderCharacterModel
 
     public override IEnumerable<CardModel> StartingDeck => [
         ModelDb.Card<StrikeLittleWizard>(),
-        Utils.EnchantedCard(ModelDb.Card<StrikeLittleWizard>(), ModelDb.Enchantment<FireEnchantment>()),
-        Utils.EnchantedCard(ModelDb.Card<StrikeLittleWizard>(), ModelDb.Enchantment<WaterEnchantment>()),
-        Utils.EnchantedCard(ModelDb.Card<StrikeLittleWizard>(), ModelDb.Enchantment<EarthEnchantment>()),
+        ModelDb.Card<StrikeFireLittleWizard>(),
+        ModelDb.Card<StrikeWaterLittleWizard>(),
+        ModelDb.Card<StrikeEarthLittleWizard>(),
         ModelDb.Card<ColorfulBalls>(),
         ModelDb.Card<DefendLittleWizard>(),
         ModelDb.Card<DefendLittleWizard>(),
