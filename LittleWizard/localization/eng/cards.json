@@ -94,5 +94,9 @@
   "LITTLEWIZARD-DEEPEN_MEMORY.description": "",
   "LITTLEWIZARD-DEEPEN_MEMORY.title": "DeepenMemory",
   "LITTLEWIZARD-MEMORY_PALACE.description": "",
-  "LITTLEWIZARD-MEMORY_PALACE.title": "MemoryPalace"
+  "LITTLEWIZARD-MEMORY_PALACE.title": "MemoryPalace",
+  "LITTLEWIZARD-FOCUSED_CASTING.description": "",
+  "LITTLEWIZARD-FOCUSED_CASTING.title": "FocusedCasting",
+  "LITTLEWIZARD-LIKE_NEW.description": "",
+  "LITTLEWIZARD-LIKE_NEW.title": "LikeNew"
 }

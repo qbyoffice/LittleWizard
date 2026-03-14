@@ -34,5 +34,8 @@
   "LITTLEWIZARD-MANA_BURST_POWER.title": "ManaBurstPower",
   "LITTLEWIZARD-MANA_BURST_UPGRADE_POWER.description": "",
   "LITTLEWIZARD-MANA_BURST_UPGRADE_POWER.smartDescription": "",
-  "LITTLEWIZARD-MANA_BURST_UPGRADE_POWER.title": "ManaBurstUpgradePower"
+  "LITTLEWIZARD-MANA_BURST_UPGRADE_POWER.title": "ManaBurstUpgradePower",
+  "ELEMENT_TEMPORARY_STRENGTH_POWER.description": "",
+  "ELEMENT_TEMPORARY_STRENGTH_POWER.smartDescription": "",
+  "ELEMENT_TEMPORARY_STRENGTH_POWER.title": "ElementTemporaryStrengthPower"
 }
