@@ -13,5 +13,9 @@
 
     "LITTLEWIZARD-FOCUSED_CASTING_POWER.smartDescription": "",
     "LITTLEWIZARD-FOCUSED_CASTING_POWER.title": "FocusedCastingPower",
-    "LITTLEWIZARD-FOCUSED_CASTING_POWER.description": ""
+    "LITTLEWIZARD-FOCUSED_CASTING_POWER.description": "",
+
+    "LITTLEWIZARD-WARMUP_BEAM_POWER.title": "WarmupBeamPower",
+    "LITTLEWIZARD-WARMUP_BEAM_POWER.description": "",
+    "LITTLEWIZARD-WARMUP_BEAM_POWER.smartDescription": ""
 }

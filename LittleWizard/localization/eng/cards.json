@@ -66,5 +66,8 @@
     "LITTLEWIZARD-REMOVE_DEFENSE.title": "RemoveDefense",
 
     "LITTLEWIZARD-MAGIC_MISSILE.title": "MagicMissile",
-    "LITTLEWIZARD-MAGIC_MISSILE.description": ""
+    "LITTLEWIZARD-MAGIC_MISSILE.description": "",
+
+    "LITTLEWIZARD-WARMUP_BEAM.description": "",
+    "LITTLEWIZARD-WARMUP_BEAM.title": "WarmupBeam"
 }
