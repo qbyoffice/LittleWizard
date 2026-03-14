@@ -17,7 +17,7 @@ public class MagicMissile() : LittleWizardCard(0, CardType.Attack, CardRarity.Co
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await CommonActions.CardAttack(this, cardPlay, ResolveEnergyXValue()).Execute(choiceContext);
+        await CommonActions.CardAttack(this, cardPlay, ResolveEnergyXValue() * ResolveEnergyXValue()).Execute(choiceContext);
     }
 
     protected override void OnUpgrade()

@@ -72,5 +72,8 @@
     "LITTLEWIZARD-WARMUP_BEAM.title": "WarmupBeam",
 
     "LITTLEWIZARD-EROSION_RAY.title": "ErosionRay",
-    "LITTLEWIZARD-EROSION_RAY.description": ""
+    "LITTLEWIZARD-EROSION_RAY.description": "",
+
+    "LITTLEWIZARD-PROPHECY.description": "",
+    "LITTLEWIZARD-PROPHECY.title": "Prophecy"
 }
