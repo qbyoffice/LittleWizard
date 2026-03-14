@@ -29,10 +29,8 @@ public static class Utils
     {
         Debug.Assert(cardModel.CombatState != null);
         foreach (var enemy in cardModel.CombatState.HittableEnemies)
-        {
             await GivePower<T>(enemy, cardModel.DynamicVars,
                 cardModel.Owner.Creature,
                 cardModel);
-        }
     }
 }

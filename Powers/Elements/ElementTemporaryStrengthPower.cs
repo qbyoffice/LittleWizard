@@ -6,6 +6,5 @@ namespace LittleWizard.Powers.Elements;
 public class ElementTemporaryStrengthPower : TemporaryStrengthPower
 {
     public override AbstractModel OriginModel => ModelDb.Power<FireElement>();
-
     protected override bool IsPositive => false;
 }

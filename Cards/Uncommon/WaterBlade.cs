@@ -32,7 +32,6 @@ public class WaterBlade()
             if (enemy.Block > 0) await CreatureCmd.LoseBlock(enemy, enemy.Block);
             await PowerCmd.Remove<WaterElement>(enemy);
         }
-        
     }
 
     protected override void OnUpgrade()
