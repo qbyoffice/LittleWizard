@@ -1,14 +1,18 @@
-using LittleWizard.Powers;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 
-namespace LittleWizard.Localization.DynamicVars;
+namespace LittleWizard.Api.DynamicVars;
 
 public static class DynamicVarsHelper
 {
     public static RandomElementVar GetRandomElementVar(DynamicVarSet varSet)
     {
         return (RandomElementVar) varSet[RandomElementVar.DefaultName];
+    }
+
+    public static DiscardsVar GetDiscardsVar(DynamicVarSet varSet)
+    {
+        return (DiscardsVar) varSet[DiscardsVar.DefaultName];
     }
 
     public static PowerVar<T> GetPowerVar<T>(DynamicVarSet varSet) where T : PowerModel

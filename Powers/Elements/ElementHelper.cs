@@ -4,9 +4,8 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Random;
 
-namespace LittleWizard.Powers;
+namespace LittleWizard.Powers.Elements;
 
-#nullable enable
 public static class ElementHelper
 {
     public static async Task RandomElement(Creature target,
@@ -35,22 +34,20 @@ public static class ElementHelper
         }
     }
 
-    public static void FireAndWater(FireElement fireElement, WaterElement waterElement)
+    public static void FireAndWater(Creature owner, decimal amountA, decimal amountB)
     {
-        PowerCmd.Apply<StrengthPower>(fireElement.Owner, -1 * (fireElement.Amount + waterElement.Amount), null, null);
-        PowerCmd.Apply<VulnerablePower>(fireElement.Owner, fireElement.Amount + waterElement.Amount, null, null);
+        var sum = amountA + amountB;
+        PowerCmd.Apply<ElementTemporaryStrengthPower>(owner, sum, null, null);
+        PowerCmd.Apply<VulnerablePower>(owner, sum, null, null);
     }
 
-    public static void FireAndEarth(FireElement fireElement, EarthElement earthElement)
+    public static void FireAndEarth(Creature owner, decimal amountA, decimal amountB)
     {
-        DamageCmd.Attack(fireElement.Amount * earthElement.Amount).Targeting(fireElement.Owner).Execute(null);
+        DamageCmd.Attack(amountA * amountB).Targeting(owner).Execute(null);
     }
 
-    public static void WaterAndEarth(WaterElement waterElement, EarthElement earthElement)
+    public static void WaterAndEarth(Creature owner, decimal amountA, decimal amountB)
     {
-        if (waterElement.Amount * earthElement.Amount > Rng.Chaotic.NextInt(0, 100))
-        {
-            CreatureCmd.Stun(waterElement.Owner);
-        }
+        if (amountA * amountB > Rng.Chaotic.NextInt(0, 100)) CreatureCmd.Stun(owner);
     }
 }

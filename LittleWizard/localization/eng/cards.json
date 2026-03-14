@@ -45,5 +45,14 @@
     "LITTLEWIZARD-DEADLINE_DASH.description": "",
 
     "LITTLEWIZARD-ANVIL_TRANSFER.description": "",
-    "LITTLEWIZARD-ANVIL_TRANSFER.title": "AnvilTransfer"
+    "LITTLEWIZARD-ANVIL_TRANSFER.title": "AnvilTransfer",
+
+    "LITTLEWIZARD-TEMPORARY_HANDWRITING.title": "TemporaryHandwriting",
+    "LITTLEWIZARD-TEMPORARY_HANDWRITING.description": "",
+
+    "LITTLEWIZARD-REST_MOMENT.title": "RestMoment",
+    "LITTLEWIZARD-REST_MOMENT.description": "",
+
+    "LITTLEWIZARD-WHIM.description": "",
+    "LITTLEWIZARD-WHIM.title": "Whim"
 }
