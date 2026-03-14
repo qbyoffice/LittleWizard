@@ -9,5 +9,9 @@
     
     "LITTLEWIZARD-EARTH_ELEMENT.smartDescription": "",
     "LITTLEWIZARD-EARTH_ELEMENT.description": "",
-    "LITTLEWIZARD-EARTH_ELEMENT.title": "EarthElement"
+    "LITTLEWIZARD-EARTH_ELEMENT.title": "EarthElement",
+
+    "LITTLEWIZARD-FOCUSED_CASTING_POWER.smartDescription": "",
+    "LITTLEWIZARD-FOCUSED_CASTING_POWER.title": "FocusedCastingPower",
+    "LITTLEWIZARD-FOCUSED_CASTING_POWER.description": ""
 }

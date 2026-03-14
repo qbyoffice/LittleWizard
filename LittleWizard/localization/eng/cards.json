@@ -54,5 +54,8 @@
     "LITTLEWIZARD-REST_MOMENT.description": "",
 
     "LITTLEWIZARD-WHIM.description": "",
-    "LITTLEWIZARD-WHIM.title": "Whim"
+    "LITTLEWIZARD-WHIM.title": "Whim",
+
+    "LITTLEWIZARD-DESTROY_GRADES.title": "DestroyGrades",
+    "LITTLEWIZARD-DESTROY_GRADES.description": ""
 }
