@@ -1,7 +1,6 @@
 using LittleWizard.Api;
 using LittleWizard.Api.DynamicVars;
 using LittleWizard.Powers.Cards;
-using LittleWizard.Powers.Elements;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -19,12 +18,9 @@ public class ManaBurst() : LittleWizardCard(1, CardType.Power, CardRarity.Uncomm
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         if (IsUpgraded)
-        {
-            await PowerCmd.Apply<ManaBurstUpgradePower>(Owner.Creature, DynamicVarsHelper.GetPowerVar<ManaBurstPower>(DynamicVars).BaseValue, Owner.Creature, this);
-        }
+            await PowerCmd.Apply<ManaBurstUpgradePower>(Owner.Creature,
+                DynamicVarsHelper.GetPowerVar<ManaBurstPower>(DynamicVars).BaseValue, Owner.Creature, this);
         else
-        {
             await Utils.GivePower<ManaBurstPower>(this, cardPlay);
-        }
     }
 }

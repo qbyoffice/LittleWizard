@@ -21,15 +21,9 @@ public class ErosionRay() : LittleWizardCard(1, CardType.Attack, CardRarity.Comm
         await CommonActions.CardAttack(this, play.Target).Execute(choiceContext);
         ArgumentNullException.ThrowIfNull(play.Target);
         var debuffs = play.Target.Powers.Where(p => p.Type == PowerType.Debuff).ToList();
-        if (debuffs.Count <= 0)
-        {
-            return;
-        }
+        if (debuffs.Count <= 0) return;
         var randomDebuff = Rng.Chaotic.NextItem(debuffs);
-        if (randomDebuff == null)
-        {
-            return;
-        }
+        if (randomDebuff == null) return;
         await PowerCmd.Apply(randomDebuff, play.Target, randomDebuff.Amount, Owner.Creature, this);
     }
 

@@ -22,9 +22,9 @@ public class GatherElementsUpgradePower : LittleWizardPower
         if (player != Owner.Player) return;
 
         var cards = CardFactory.GetDistinctForCombat(player,
-                ModelDb.CardPool<LittleWizardCardPool>().GetUnlockedCards(player.UnlockState,
-                    player.RunState.CardMultiplayerConstraint).Where(model => model is IElementCard),
-                Amount, Rng.Chaotic).ToList();
+            ModelDb.CardPool<LittleWizardCardPool>().GetUnlockedCards(player.UnlockState,
+                player.RunState.CardMultiplayerConstraint).Where(model => model is IElementCard),
+            Amount, Rng.Chaotic).ToList();
 
         foreach (var card in cards)
         {

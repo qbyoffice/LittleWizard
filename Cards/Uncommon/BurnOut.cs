@@ -1,5 +1,3 @@
-using LittleWizard.Api;
-using LittleWizard.Api.DynamicVars;
 using LittleWizard.Cards.Interface;
 using LittleWizard.Powers.Elements;
 using MegaCrit.Sts2.Core.Commands;
@@ -16,7 +14,8 @@ public class BurnOut() : LittleWizardCard(1, CardType.Skill, CardRarity.Uncommon
     [
         new CalculationBaseVar(0),
         new CalculationExtraVar(6),
-        new CalculatedDamageVar(ValueProp.Move).WithMultiplier((card, target) => target?.GetPowerAmount<FireElement>() ?? 0)
+        new CalculatedDamageVar(ValueProp.Move).WithMultiplier((card, target) =>
+            target?.GetPowerAmount<FireElement>() ?? 0)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

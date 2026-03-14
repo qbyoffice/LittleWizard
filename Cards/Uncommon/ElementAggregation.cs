@@ -1,8 +1,5 @@
-using LittleWizard.Api;
 using LittleWizard.Cards.Interface;
 using LittleWizard.Character;
-using LittleWizard.Powers.Elements;
-using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Factories;
@@ -25,14 +22,8 @@ public class ElementAggregation() : LittleWizardCard(1, CardType.Skill, CardRari
             ModelDb.CardPool<LittleWizardCardPool>().GetUnlockedCards(Owner.UnlockState,
                 Owner.RunState.CardMultiplayerConstraint).Where(model => model is IElementCard),
             1, Rng.Chaotic).FirstOrDefault();
-        if (card == null)
-        {
-            return;
-        }
-        if (IsUpgraded)
-        {
-            card.SetToFreeThisTurn();
-        }
+        if (card == null) return;
+        if (IsUpgraded) card.SetToFreeThisTurn();
         await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, true);
     }
 

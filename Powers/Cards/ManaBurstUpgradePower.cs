@@ -2,5 +2,8 @@ namespace LittleWizard.Powers.Cards;
 
 public class ManaBurstUpgradePower : ManaBurstPower
 {
-    protected override int GetThreshold() => 3;
+    protected override int GetThreshold()
+    {
+        return 3;
+    }
 }

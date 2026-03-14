@@ -1,4 +1,3 @@
-using LittleWizard.Api;
 using LittleWizard.Api.DynamicVars;
 using LittleWizard.Cards.Interface;
 using LittleWizard.Powers.Elements;
@@ -17,12 +16,12 @@ public class MoldArmor() : LittleWizardCard(2, CardType.Skill, CardRarity.Uncomm
         new BlockVar(8, ValueProp.Move),
         new PowerVar<EarthElement>(6)
     ];
-    
+
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
-        
+
         var earthAmount = cardPlay.Target.GetPowerAmount<EarthElement>();
         if (earthAmount >= DynamicVarsHelper.GetPowerVar<EarthElement>(DynamicVars).BaseValue)
         {

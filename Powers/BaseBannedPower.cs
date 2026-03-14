@@ -11,15 +11,16 @@ public abstract class BaseBannedPower<T> : LittleWizardPower
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
-    
+
     public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {
         if (side != CombatSide.Enemy)
             return;
         await PowerCmd.TickDownDuration(this);
     }
-    
-    public override bool TryModifyPowerAmountReceived(PowerModel canonicalPower, Creature target, decimal amount, Creature? applier,
+
+    public override bool TryModifyPowerAmountReceived(PowerModel canonicalPower, Creature target, decimal amount,
+        Creature? applier,
         out decimal modifiedAmount)
     {
         if (amount == 0 || canonicalPower is not T || !canonicalPower.Owner.IsEnemy || applier != Owner)
@@ -27,6 +28,7 @@ public abstract class BaseBannedPower<T> : LittleWizardPower
             modifiedAmount = amount;
             return false;
         }
+
         modifiedAmount = 0;
         return true;
     }

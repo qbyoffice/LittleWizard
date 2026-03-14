@@ -1,4 +1,3 @@
-using LittleWizard.Api;
 using LittleWizard.Api.DynamicVars;
 using LittleWizard.Cards.Interface;
 using LittleWizard.Powers.Elements;

@@ -3,7 +3,7 @@ using Godot;
 
 namespace LittleWizard.Character;
 
-public partial class LittleWizardCardPool : CustomCardPoolModel
+public class LittleWizardCardPool : CustomCardPoolModel
 {
     public override string Title => LittleWizard.InnerName;
 

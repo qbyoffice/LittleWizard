@@ -1,4 +1,3 @@
-using LittleWizard.Api;
 using LittleWizard.Api.DynamicVars;
 using LittleWizard.Cards.Interface;
 using LittleWizard.Powers.Elements;
@@ -9,7 +8,8 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace LittleWizard.Cards.Uncommon;
 
-public class WaterBlade() : LittleWizardCard(2, CardType.Skill, CardRarity.Uncommon, TargetType.AllEnemies), IElementCard
+public class WaterBlade()
+    : LittleWizardCard(2, CardType.Skill, CardRarity.Uncommon, TargetType.AllEnemies), IElementCard
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
@@ -24,12 +24,10 @@ public class WaterBlade() : LittleWizardCard(2, CardType.Skill, CardRarity.Uncom
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
-        if (cardPlay.Target.GetPowerAmount<WaterElement>() > DynamicVarsHelper.GetPowerVar<WaterElement>(DynamicVars).BaseValue)
+        if (cardPlay.Target.GetPowerAmount<WaterElement>() >
+            DynamicVarsHelper.GetPowerVar<WaterElement>(DynamicVars).BaseValue)
         {
-            if (cardPlay.Target.Block > 0)
-            {
-                await CreatureCmd.LoseBlock(cardPlay.Target, cardPlay.Target.Block);
-            }
+            if (cardPlay.Target.Block > 0) await CreatureCmd.LoseBlock(cardPlay.Target, cardPlay.Target.Block);
             await PowerCmd.Remove<WaterElement>(cardPlay.Target);
         }
     }

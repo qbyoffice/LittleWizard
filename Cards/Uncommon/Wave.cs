@@ -12,7 +12,8 @@ namespace LittleWizard.Cards.Uncommon;
 
 public class Wave() : LittleWizardCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.AllEnemies), IElementCard
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new BlockVar(6, ValueProp.Move),
         new PowerVar<WaterElement>(1)
     ];

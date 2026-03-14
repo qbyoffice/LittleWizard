@@ -22,13 +22,10 @@ public class GatherElementsPower : LittleWizardPower
         if (player != Owner.Player) return;
 
         var cards = CardFactory.GetDistinctForCombat(player,
-                ModelDb.CardPool<LittleWizardCardPool>().GetUnlockedCards(player.UnlockState,
-                    player.RunState.CardMultiplayerConstraint).Where(model => model is IElementCard),
-                Amount, Rng.Chaotic).ToList();
+            ModelDb.CardPool<LittleWizardCardPool>().GetUnlockedCards(player.UnlockState,
+                player.RunState.CardMultiplayerConstraint).Where(model => model is IElementCard),
+            Amount, Rng.Chaotic).ToList();
 
-        foreach (var card in cards)
-        {
-            await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, true);
-        }
+        foreach (var card in cards) await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, true);
     }
 }

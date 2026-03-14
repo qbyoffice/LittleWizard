@@ -2,7 +2,6 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Models;
 
 namespace LittleWizard.Powers.Cards;
 
@@ -12,16 +11,19 @@ public class ManaBurstPower : LittleWizardPower
     public override PowerStackType StackType => PowerStackType.Counter;
     public override int DisplayAmount => GetInternalData<Data>().SkillCardsUsed;
 
-    protected override object InitInternalData() => (object)new ManaBurstPower.Data();
+    protected override object InitInternalData()
+    {
+        return new Data();
+    }
 
-    protected virtual int GetThreshold() => 4;
+    protected virtual int GetThreshold()
+    {
+        return 4;
+    }
 
     public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
     {
-        if (cardPlay.Card.Owner != Owner.Player)
-        {
-            return;
-        }
+        if (cardPlay.Card.Owner != Owner.Player) return;
         var data = GetInternalData<Data>();
         data.SkillCardsUsed += 1;
         if (data.SkillCardsUsed >= GetThreshold())

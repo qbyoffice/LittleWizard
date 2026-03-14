@@ -1,6 +1,4 @@
-using LittleWizard.Api;
 using LittleWizard.Cards.Interface;
-using LittleWizard.Powers.Elements;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -15,12 +13,9 @@ public class ManaConvert() : LittleWizardCard(2, CardType.Skill, CardRarity.Unco
     {
         var prefs = new CardSelectorPrefs(SelectionScreenPrompt, 1);
         var cards = await CardSelectCmd.FromSimpleGrid(choiceContext, PileType.Hand.GetPile(Owner)
-                .Cards.Where(c => c is IElementCard || c.Enchantment is IElementCard).ToList(), Owner, prefs);
+            .Cards.Where(c => c is IElementCard || c.Enchantment is IElementCard).ToList(), Owner, prefs);
         var cardModels = cards as CardModel[] ?? cards.ToArray();
-        if (cardModels.Length == 0)
-        {
-            return;
-        }
+        if (cardModels.Length == 0) return;
         foreach (var card in cardModels)
         {
             await CardCmd.Exhaust(choiceContext, card);

@@ -3,7 +3,6 @@ using LittleWizard.Api.DynamicVars;
 using LittleWizard.Cards.Interface;
 using LittleWizard.Powers.Cards;
 using LittleWizard.Powers.Elements;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -18,16 +17,16 @@ public class ExploreTaboo() : LittleWizardCard(1, CardType.Power, CardRarity.Unc
         new PowerVar<ExploreTabooPower>(1)
     ];
 
+    public override IEnumerable<CardKeyword> CanonicalKeywords =>
+    [
+        CardKeyword.Ethereal
+    ];
+
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await Utils.GivePower<FireElement>(this, cardPlay);
         await Utils.GivePower<ExploreTabooPower>(this, cardPlay);
     }
-
-    public override IEnumerable<CardKeyword> CanonicalKeywords =>
-    [
-        CardKeyword.Ethereal
-    ];
 
     protected override void OnUpgrade()
     {

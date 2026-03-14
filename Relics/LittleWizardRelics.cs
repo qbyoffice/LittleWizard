@@ -7,5 +7,4 @@ namespace LittleWizard.Relics;
 [Pool(typeof(LittleWizardRelicPool))]
 public abstract class LittleWizardRelics : CustomRelicModel
 {
-    
 }

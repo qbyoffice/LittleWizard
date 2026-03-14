@@ -9,11 +9,12 @@ namespace LittleWizard.Api;
 
 public static class Utils
 {
-    public static async Task GivePower<T>(Creature target, DynamicVarSet varSet, Creature? applier, CardModel cardModel) where T : PowerModel
+    public static async Task GivePower<T>(Creature target, DynamicVarSet varSet, Creature? applier, CardModel cardModel)
+        where T : PowerModel
     {
         await PowerCmd.Apply<T>(target, DynamicVarsHelper.GetPowerVar<T>(varSet).BaseValue, applier, cardModel);
     }
-    
+
     public static async Task GivePower<T>(CardModel cardModel, CardPlay play) where T : PowerModel
     {
         ArgumentNullException.ThrowIfNull(play.Target);
