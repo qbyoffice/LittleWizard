@@ -8,18 +8,11 @@ public class DeadlineDash() : LittleWizardCard(0, CardType.Skill, CardRarity.Com
 {
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        if (Owner.PlayerCombatState == null)
-        {
-            return;
-        }
+        if (Owner.PlayerCombatState == null) return;
         if (Owner.PlayerCombatState.Energy != 0)
-        {
             await PlayerCmd.GainEnergy(1, Owner);
-        }
         else
-        {
             await CardPileCmd.Draw(choiceContext, Owner);
-        }
     }
 
     protected override void OnUpgrade()

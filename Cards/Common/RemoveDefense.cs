@@ -1,7 +1,5 @@
-using BaseLib.Utils;
 using LittleWizard.Api;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.DevConsole.ConsoleCommands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -19,10 +17,7 @@ public class RemoveDefense() : LittleWizardCard(2, CardType.Skill, CardRarity.Co
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
-        if (cardPlay.Target.Block > 0)
-        {
-            await CreatureCmd.LoseBlock(cardPlay.Target, cardPlay.Target.Block);
-        }
+        if (cardPlay.Target.Block > 0) await CreatureCmd.LoseBlock(cardPlay.Target, cardPlay.Target.Block);
         await Utils.GivePower<VulnerablePower>(this, cardPlay);
     }
 

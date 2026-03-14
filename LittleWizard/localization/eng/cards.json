@@ -69,5 +69,8 @@
     "LITTLEWIZARD-MAGIC_MISSILE.description": "",
 
     "LITTLEWIZARD-WARMUP_BEAM.description": "",
-    "LITTLEWIZARD-WARMUP_BEAM.title": "WarmupBeam"
+    "LITTLEWIZARD-WARMUP_BEAM.title": "WarmupBeam",
+
+    "LITTLEWIZARD-EROSION_RAY.title": "ErosionRay",
+    "LITTLEWIZARD-EROSION_RAY.description": ""
 }

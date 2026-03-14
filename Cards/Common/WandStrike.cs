@@ -1,7 +1,5 @@
 using BaseLib.Utils;
-using LittleWizard.Powers;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -14,17 +12,14 @@ public class WandStrike() : LittleWizardCard(1, CardType.Attack, CardRarity.Comm
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(8, ValueProp.Move),
+        new DamageVar(8, ValueProp.Move)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target, "cardPlay.Target");
         var damage = DynamicVars.Damage.BaseValue;
-        if (play.Target.Block > 0)
-        {
-            damage *= 2;
-        }
+        if (play.Target.Block > 0) damage *= 2;
         await CommonActions.CardAttack(this, play.Target, damage).Execute(choiceContext);
     }
 

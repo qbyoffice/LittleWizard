@@ -1,6 +1,5 @@
 using BaseLib.Utils;
 using LittleWizard.Cards.Interface;
-using LittleWizard.Powers;
 using LittleWizard.Powers.Elements;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -9,19 +8,22 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LittleWizard.Cards.Common;
 
-public class FreezingRay() : LittleWizardCard(1, CardType.Attack, CardRarity.Common, TargetType.AllEnemies), IElementCard
+public class FreezingRay()
+    : LittleWizardCard(1, CardType.Attack, CardRarity.Common, TargetType.AllEnemies), IElementCard
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new CalculationBaseVar(6),
         new CalculationExtraVar(1),
-        new CalculatedDamageVar(ValueProp.Move).WithMultiplier((card, target) => target?.GetPowerAmount<WaterElement>() ?? 0)
+        new CalculatedDamageVar(ValueProp.Move).WithMultiplier((card, target) =>
+            target?.GetPowerAmount<WaterElement>() ?? 0)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
-        await CommonActions.CardAttack(this, cardPlay.Target, DynamicVars.CalculatedDamage.Calculate(cardPlay.Target)).Execute(choiceContext);
+        await CommonActions.CardAttack(this, cardPlay.Target, DynamicVars.CalculatedDamage.Calculate(cardPlay.Target))
+            .Execute(choiceContext);
     }
 
     protected override void OnUpgrade()

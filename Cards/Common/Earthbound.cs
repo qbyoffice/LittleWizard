@@ -1,6 +1,4 @@
-using BaseLib.Utils;
 using LittleWizard.Cards.Interface;
-using LittleWizard.Powers;
 using LittleWizard.Powers.Elements;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -16,7 +14,8 @@ public class Earthbound() : LittleWizardCard(1, CardType.Skill, CardRarity.Commo
     [
         new CalculationBaseVar(6),
         new CalculationExtraVar(1),
-        new CalculatedBlockVar(ValueProp.Move).WithMultiplier((card, target) => target?.GetPowerAmount<EarthElement>() ?? 0)
+        new CalculatedBlockVar(ValueProp.Move).WithMultiplier((card, target) =>
+            target?.GetPowerAmount<EarthElement>() ?? 0)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
