@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using LittleWizard.Api.DynamicVars;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -17,10 +18,21 @@ public static class Utils
 
     public static async Task GivePower<T>(CardModel cardModel, CardPlay play) where T : PowerModel
     {
-        ArgumentNullException.ThrowIfNull(play.Target);
+        Debug.Assert(play.Target != null);
         await GivePower<T>(play.Target,
             cardModel.DynamicVars,
             cardModel.Owner.Creature,
             cardModel);
+    }
+
+    public static async Task GivePowerToAllEnemies<T>(CardModel cardModel) where T : PowerModel
+    {
+        Debug.Assert(cardModel.CombatState != null);
+        foreach (var enemy in cardModel.CombatState.HittableEnemies)
+        {
+            await GivePower<T>(enemy, cardModel.DynamicVars,
+                cardModel.Owner.Creature,
+                cardModel);
+        }
     }
 }

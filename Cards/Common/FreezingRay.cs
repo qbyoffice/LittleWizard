@@ -1,6 +1,7 @@
 using BaseLib.Utils;
 using LittleWizard.Cards.Interface;
 using LittleWizard.Powers.Elements;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -21,9 +22,7 @@ public class FreezingRay()
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        ArgumentNullException.ThrowIfNull(cardPlay.Target);
-        await CommonActions.CardAttack(this, cardPlay.Target, DynamicVars.CalculatedDamage.Calculate(cardPlay.Target))
-            .Execute(choiceContext);
+        await DamageCmd.Attack(DynamicVars.CalculatedDamage.Calculate(cardPlay.Target)).FromCard(this).TargetingAllOpponents(CombatState).Execute(choiceContext);
     }
 
     protected override void OnUpgrade()

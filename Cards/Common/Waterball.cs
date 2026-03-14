@@ -17,7 +17,7 @@ public class Waterball() : LittleWizardCard(1, CardType.Skill, CardRarity.Common
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        await Utils.GivePower<WaterElement>(this, play);
+        await Utils.GivePowerToAllEnemies<WaterElement>(this);
     }
 
     protected override void OnUpgrade()

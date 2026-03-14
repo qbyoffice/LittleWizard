@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using LittleWizard.Api.DynamicVars;
 using LittleWizard.Cards.Interface;
 using LittleWizard.Powers.Elements;
@@ -23,13 +24,15 @@ public class WaterBlade()
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        ArgumentNullException.ThrowIfNull(cardPlay.Target);
-        if (cardPlay.Target.GetPowerAmount<WaterElement>() >
-            DynamicVarsHelper.GetPowerVar<WaterElement>(DynamicVars).BaseValue)
+        Debug.Assert(CombatState != null, nameof(CombatState) + " != null");
+        foreach (var enemy in CombatState.HittableEnemies)
         {
-            if (cardPlay.Target.Block > 0) await CreatureCmd.LoseBlock(cardPlay.Target, cardPlay.Target.Block);
-            await PowerCmd.Remove<WaterElement>(cardPlay.Target);
+            if (enemy.GetPowerAmount<WaterElement>() <=
+                DynamicVarsHelper.GetPowerVar<WaterElement>(DynamicVars).BaseValue) continue;
+            if (enemy.Block > 0) await CreatureCmd.LoseBlock(enemy, enemy.Block);
+            await PowerCmd.Remove<WaterElement>(enemy);
         }
+        
     }
 
     protected override void OnUpgrade()
