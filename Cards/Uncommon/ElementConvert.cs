@@ -1,4 +1,3 @@
-using LittleWizard.Api;
 using LittleWizard.Cards.Interface;
 using LittleWizard.Powers.Elements;
 using MegaCrit.Sts2.Core.Commands;
@@ -7,12 +6,13 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 
 namespace LittleWizard.Cards.Uncommon;
 
-public class ElementConvert() : LittleWizardCard(0, CardType.Skill, CardRarity.Uncommon, TargetType.AnyEnemy), IElementCard
+public class ElementConvert()
+    : LittleWizardCard(0, CardType.Skill, CardRarity.Uncommon, TargetType.AnyEnemy), IElementCard
 {
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
-        
+
         var fireAmount = cardPlay.Target.GetPowerAmount<FireElement>();
         var waterAmount = cardPlay.Target.GetPowerAmount<WaterElement>();
         var earthAmount = cardPlay.Target.GetPowerAmount<EarthElement>();
@@ -34,8 +34,10 @@ public class ElementConvert() : LittleWizardCard(0, CardType.Skill, CardRarity.U
         }
     }
 
-    protected override void OnUpgrade()
+    protected override PileType GetResultPileType()
     {
-        // Upgrade: Return this card to your hand
+        if (!IsUpgraded) return base.GetResultPileType();
+        var resultPileType = base.GetResultPileType();
+        return resultPileType != PileType.Discard ? resultPileType : PileType.Hand;
     }
 }

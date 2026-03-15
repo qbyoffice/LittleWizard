@@ -7,16 +7,21 @@ public static class DynamicVarsHelper
 {
     public static RandomElementVar GetRandomElementVar(DynamicVarSet varSet)
     {
-        return (RandomElementVar) varSet[RandomElementVar.DefaultName];
+        return (RandomElementVar)varSet[RandomElementVar.DefaultName];
     }
 
     public static DiscardsVar GetDiscardsVar(DynamicVarSet varSet)
     {
-        return (DiscardsVar) varSet[DiscardsVar.DefaultName];
+        return (DiscardsVar)varSet[DiscardsVar.DefaultName];
+    }
+
+    public static ThresholdVar GetThresholdVar(DynamicVarSet varSet)
+    {
+        return (ThresholdVar)varSet[ThresholdVar.DefaultName];
     }
 
     public static PowerVar<T> GetPowerVar<T>(DynamicVarSet varSet) where T : PowerModel
     {
-        return (PowerVar<T>) varSet[typeof(T).Name];
+        return (PowerVar<T>)varSet[typeof(T).Name];
     }
 }

@@ -8,7 +8,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace LittleWizard.Cards.Common;
 
-public class Fireball() : LittleWizardCard(1, CardType.Skill, CardRarity.Common, TargetType.AllEnemies), IElementCard
+public class Fireball() : LittleWizardCard(1, CardType.Skill, CardRarity.Common, TargetType.AnyEnemy), IElementCard
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [

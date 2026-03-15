@@ -1,9 +1,6 @@
 using BaseLib.Utils;
 using LittleWizard.Api;
-using LittleWizard.Api.DynamicVars;
-using LittleWizard.Powers;
 using LittleWizard.Powers.Elements;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -14,7 +11,9 @@ namespace LittleWizard.Cards.Basic;
 public class StrikeFireLittleWizard() : LittleWizardCard(1, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy)
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTag.Strike];
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new DamageVar(6, ValueProp.Move),
         new PowerVar<FireElement>(1)
     ];

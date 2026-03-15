@@ -8,7 +8,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace LittleWizard.Cards.Common;
 
-public class Rockball() : LittleWizardCard(1, CardType.Skill, CardRarity.Common, TargetType.AllEnemies), IElementCard
+public class Rockball() : LittleWizardCard(1, CardType.Skill, CardRarity.Common, TargetType.AnyEnemy), IElementCard
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
@@ -17,7 +17,6 @@ public class Rockball() : LittleWizardCard(1, CardType.Skill, CardRarity.Common,
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        ArgumentNullException.ThrowIfNull(play.Target);
         await Utils.GivePower<EarthElement>(this, play);
     }
 

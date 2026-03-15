@@ -1,7 +1,6 @@
 using BaseLib.Abstracts;
 using Godot;
 using LittleWizard.Cards.Basic;
-using LittleWizard.Enchantments;
 using LittleWizard.Relics;
 using MegaCrit.Sts2.Core.Entities.Characters;
 using MegaCrit.Sts2.Core.Models;
@@ -10,8 +9,8 @@ namespace LittleWizard.Character;
 
 public class LittleWizard : PlaceholderCharacterModel
 {
-    public static readonly Color CharacterColor = new("384A61");
     public const string InnerName = "little_wizard";
+    public static readonly Color CharacterColor = new("384A61");
 
     public override Color NameColor => CharacterColor;
     public override CharacterGender Gender => CharacterGender.Feminine;
@@ -21,7 +20,8 @@ public class LittleWizard : PlaceholderCharacterModel
     public override RelicPoolModel RelicPool => ModelDb.RelicPool<LittleWizardRelicPool>();
     public override PotionPoolModel PotionPool => ModelDb.PotionPool<LittleWizardPotionPool>();
 
-    public override IEnumerable<CardModel> StartingDeck => [
+    public override IEnumerable<CardModel> StartingDeck =>
+    [
         ModelDb.Card<StrikeLittleWizard>(),
         ModelDb.Card<StrikeFireLittleWizard>(),
         ModelDb.Card<StrikeWaterLittleWizard>(),
@@ -34,7 +34,8 @@ public class LittleWizard : PlaceholderCharacterModel
         ModelDb.Card<Callback>()
     ];
 
-    public override IReadOnlyList<RelicModel> StartingRelics => [
+    public override IReadOnlyList<RelicModel> StartingRelics =>
+    [
         ModelDb.Relic<FireElementGem>()
     ];
 }
