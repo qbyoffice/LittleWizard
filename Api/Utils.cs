@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LittleWizard.Api;
 
@@ -37,9 +38,20 @@ public static class Utils
                         cardModel);
                 return;
             }
+            case TargetType.RandomEnemy:
+            {
+                Debug.Assert(cardModel.CombatState != null);
+                var targets = cardModel.CombatState.HittableEnemies;
+                var target = cardModel.Owner.RunState.Rng.CombatTargets.NextItem(targets);
+                if (target == null) return;
+                await GivePower<T>(target,
+                    cardModel.DynamicVars,
+                    cardModel.Owner.Creature,
+                    cardModel);
+                return;
+            }
             case TargetType.None:
             case TargetType.AnyEnemy:
-            case TargetType.RandomEnemy:
             case TargetType.AnyPlayer:
             case TargetType.AnyAlly:
             case TargetType.TargetedNoCreature:
@@ -55,5 +67,10 @@ public static class Utils
                 return;
             }
         }
+    }
+
+    public static bool IsPoweredAttack(ValueProp props)
+    {
+        return props.HasFlag(ValueProp.Move) && !props.HasFlag(ValueProp.Unpowered);
     }
 }

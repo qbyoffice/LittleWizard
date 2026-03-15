@@ -1,7 +1,8 @@
-using LittleWizard.Api;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LittleWizard.Cards.Rare;
 
@@ -9,27 +10,22 @@ public class ForbiddenSoulBinding() : LittleWizardCard(2, CardType.Skill, CardRa
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DrainVar(15)
+        new CalculationBaseVar(15),
+        new ExtraDamageVar(1),
+        new CalculatedDamageVar(ValueProp.Unblockable).WithMultiplier((card, target) => target?.Block ?? 0)
     ];
 
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal, CardKeyword.Exhaust];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        var target = cardPlay.Target;
-        if (target != null)
-        {
-            // Deal 15 life drain + additional based on target's block
-            var blockAmount = target.CurrentBlock;
-            var totalDrain = DynamicVars.Drain.IntValue + blockAmount;
-            
-            await CommonActions.DamageTarget(this, target, totalDrain).Execute(choiceContext);
-            await CommonActions.Heal(this, Owner.Creature, totalDrain).Execute(choiceContext);
-        }
+        if (cardPlay.Target == null) return;
+        await DamageCmd.Attack(DynamicVars.CalculatedDamage).Targeting(cardPlay.Target).FromCard(this)
+            .Execute(choiceContext);
     }
 
     protected override void OnUpgrade()
     {
-        // Upgrade removes Exhaust keyword
+        RemoveKeyword(CardKeyword.Exhaust);
     }
 }

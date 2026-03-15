@@ -1,4 +1,4 @@
-namespace LittleWizard.Cards.Interface;
+namespace LittleWizard.Interface;
 
 public interface IElementCard
 {

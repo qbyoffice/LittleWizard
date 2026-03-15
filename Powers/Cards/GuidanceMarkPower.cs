@@ -1,27 +1,35 @@
-using LittleWizard.Interface;
+using LittleWizard.Api;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LittleWizard.Powers.Cards;
 
-public class RockWallPower : LittleWizardPower
+public class GuidanceMarkPower : LittleWizardPower
 {
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    public override bool ShouldPlay(CardModel card, AutoPlayType autoPlayType)
+    public override decimal ModifyDamageMultiplicative(
+        Creature? target,
+        decimal amount,
+        ValueProp props,
+        Creature? dealer,
+        CardModel? cardSource)
     {
-        return card is not IElementCard && card.Enchantment is not IElementCard;
+        if (target != Owner || !Utils.IsPoweredAttack(props))
+            return 1M;
+        return 1M + (decimal)Amount / 10;
     }
 
     public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {
         if (side != CombatSide.Enemy)
             return;
-        await PowerCmd.Decrement(this);
+        await PowerCmd.Remove(this);
     }
 }

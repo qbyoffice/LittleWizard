@@ -1,4 +1,4 @@
-using LittleWizard.Cards.Interface;
+using LittleWizard.Interface;
 using LittleWizard.Powers.Elements;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;

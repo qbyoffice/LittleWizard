@@ -1,12 +1,11 @@
-using LittleWizard.Cards.Interface;
 using LittleWizard.Character;
+using LittleWizard.Interface;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Random;
 
 namespace LittleWizard.Cards.Uncommon;
 
@@ -14,6 +13,7 @@ public class LikeNew() : LittleWizardCard(1, CardType.Skill, CardRarity.Uncommon
 {
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        if (Owner.Creature.Player == null) return;
         var prefs = new CardSelectorPrefs(CardSelectorPrefs.ExhaustSelectionPrompt, 1);
         var cardToExhaust =
             (await CardSelectCmd.FromSimpleGrid(choiceContext, PileType.Hand.GetPile(Owner).Cards.ToList(), Owner,
@@ -26,7 +26,7 @@ public class LikeNew() : LittleWizardCard(1, CardType.Skill, CardRarity.Uncommon
         var card = CardFactory.GetDistinctForCombat(Owner,
             ModelDb.CardPool<LittleWizardCardPool>().GetUnlockedCards(Owner.UnlockState,
                 Owner.RunState.CardMultiplayerConstraint).Where(model => model is IElementCard),
-            1, Rng.Chaotic).FirstOrDefault();
+            1, Owner.Creature.Player.RunState.Rng.CombatCardSelection).FirstOrDefault();
 
         if (card == null) return;
         card.SetStarCostThisCombat(cost);

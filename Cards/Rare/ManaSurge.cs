@@ -1,12 +1,15 @@
+using LittleWizard.Api;
+using LittleWizard.Api.DynamicVars;
 using LittleWizard.Powers.Cards;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace LittleWizard.Cards.Rare;
 
 public class ManaSurge() : LittleWizardCard(1, CardType.Power, CardRarity.Rare, TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<ManaSurgePower>(1)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -15,7 +18,6 @@ public class ManaSurge() : LittleWizardCard(1, CardType.Power, CardRarity.Rare, 
 
     protected override void OnUpgrade()
     {
-        // Upgrade effect: gain 2 energy instead of 1
-        // This would need custom implementation in the power
+        DynamicVarsHelper.GetPowerVar<ManaSurgePower>(DynamicVars).UpgradeValueBy(1);
     }
 }

@@ -1,6 +1,6 @@
 using LittleWizard.Api;
 using LittleWizard.Api.DynamicVars;
-using LittleWizard.Cards.Interface;
+using LittleWizard.Interface;
 using LittleWizard.Powers.Cards;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;

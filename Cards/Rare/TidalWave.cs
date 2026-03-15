@@ -1,10 +1,12 @@
-using LittleWizard.Api;
+using BaseLib.Utils;
 using LittleWizard.Api.DynamicVars;
-using LittleWizard.Cards.Interface;
+using LittleWizard.Interface;
 using LittleWizard.Powers.Elements;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LittleWizard.Cards.Rare;
 
@@ -12,22 +14,19 @@ public class TidalWave() : LittleWizardCard(3, CardType.Attack, CardRarity.Rare,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(36, ValueProp.Move),
-        new PowerVar<MegaCrit.Sts2.Core.Powers.Stun>(1)
+        new DamageVar(24, ValueProp.Move),
+        new PowerVar<WaterElement>(6)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // Check if target has at least 6 Water Element stacks
         var target = cardPlay.Target;
-        if (target != null)
+        if (target == null) return;
+
+        if (target.GetPowerAmount<WaterElement>() >= DynamicVarsHelper.GetPowerVar<WaterElement>(DynamicVars).IntValue)
         {
-            var waterPower = target.GetPower<WaterElement>();
-            if (waterPower != null && waterPower.Stacks >= 6)
-            {
-                await CommonActions.CardAttack(this, cardPlay).Execute(choiceContext);
-                await Utils.GivePower<MegaCrit.Sts2.Core.Powers.Stun>(this, cardPlay);
-            }
+            CommonActions.CardAttack(this, cardPlay);
+            await CreatureCmd.Stun(target);
         }
     }
 

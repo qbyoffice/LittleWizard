@@ -1,5 +1,5 @@
-using LittleWizard.Cards.Interface;
 using LittleWizard.Character;
+using LittleWizard.Interface;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -8,7 +8,6 @@ using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Random;
 
 namespace LittleWizard.Powers.Cards;
 
@@ -24,7 +23,7 @@ public class GatherElementsPower : LittleWizardPower
         var cards = CardFactory.GetDistinctForCombat(player,
             ModelDb.CardPool<LittleWizardCardPool>().GetUnlockedCards(player.UnlockState,
                 player.RunState.CardMultiplayerConstraint).Where(model => model is IElementCard),
-            Amount, Rng.Chaotic).ToList();
+            Amount, player.RunState.Rng.CombatCardSelection).ToList();
 
         foreach (var card in cards) await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, true);
     }

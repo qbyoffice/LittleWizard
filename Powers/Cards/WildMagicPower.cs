@@ -1,5 +1,7 @@
-using MegaCrit.Sts2.Core.Combat;
+using LittleWizard.Api;
+using LittleWizard.Powers.Elements;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -9,21 +11,34 @@ namespace LittleWizard.Powers.Cards;
 public class WildMagicPower : LittleWizardPower
 {
     public override PowerType Type => PowerType.Buff;
-    public override PowerStackType StackType => PowerStackType.Single;
+    public override PowerStackType StackType => PowerStackType.Counter;
 
-    public override async Task ModifyDamage(PlayerChoiceContext choiceContext, ref DamageResult result, ValueProp props, CardModel card)
+    public override decimal ModifyDamageMultiplicative(
+        Creature? target,
+        decimal amount,
+        ValueProp props,
+        Creature? dealer,
+        CardModel? cardSource)
     {
-        if (card.CardType != CardType.Attack) return;
-        
-        // Double damage
-        result.BaseValue *= 2;
-        
-        // Double element stacks applied
-        // This would need custom logic to double element application
+        return dealer != null && (Utils.IsPoweredAttack(props) || cardSource == null ||
+                                  (dealer != Owner && !Owner.Pets.Contains(dealer)) || target == null)
+            ? base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource)
+            : Amount;
     }
 
-    public override bool ShouldTargetRandomEnemy(CardModel card)
+    public override decimal ModifyPowerAmountGiven(PowerModel power, Creature giver, decimal amount, Creature? target,
+        CardModel? cardSource)
     {
-        return card.CardType == CardType.Attack;
+        if (giver != Owner || power is not BaseElement)
+            return base.ModifyPowerAmountGiven(power, giver, amount, target, cardSource);
+
+        return Amount;
+    }
+
+    public override decimal ModifyBlockMultiplicative(Creature target, decimal block, ValueProp props,
+        CardModel? cardSource,
+        CardPlay? cardPlay)
+    {
+        return target != Owner ? base.ModifyBlockMultiplicative(target, block, props, cardSource, cardPlay) : 0;
     }
 }

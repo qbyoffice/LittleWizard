@@ -1,7 +1,9 @@
-using LittleWizard.Api;
+using BaseLib.Utils;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LittleWizard.Cards.Rare;
 
@@ -9,25 +11,26 @@ public class NotMyTime() : LittleWizardCard(1, CardType.Attack, CardRarity.Rare,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(3, ValueProp.Move)
+        new DamageVar(3, ValueProp.Move),
+        new CardsVar(2)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CommonActions.CardAttack(this, cardPlay).Execute(choiceContext);
-        
-        // Play 3 random attack cards from exhaust pile
-        var exhaustAttacks = Owner.Player.Exhaust.Pile.Where(c => c is AttackCardModel).ToList();
-        var randomAttacks = exhaustAttacks.OrderBy(x => Guid.NewGuid()).Take(3).ToList();
-        
-        foreach (var attack in randomAttacks)
+        if (Owner.Creature.Player == null) return;
+
+        for (var i = 0; i < DynamicVars.Cards.IntValue; i++)
         {
-            await CommonActions.PlayCard(attack, cardPlay).Execute(choiceContext);
+            var card = Owner.Creature.Player.RunState.Rng.CombatCardSelection.NextItem(PileType.Exhaust.GetPile(Owner)
+                .Cards);
+            if (card == null) continue;
+            await CardCmd.AutoPlay(choiceContext, card, Owner.Creature);
         }
     }
 
     protected override void OnUpgrade()
     {
-        // Already plays 3 attacks by default
+        DynamicVars.Cards.UpgradeValueBy(1);
     }
 }

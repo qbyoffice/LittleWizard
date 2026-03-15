@@ -1,25 +1,44 @@
-using LittleWizard.Api;
+using LittleWizard.Character;
+using MegaCrit.Sts2.Core.CardSelection;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 
 namespace LittleWizard.Cards.Rare;
 
-public class Copying() : LittleWizardCard(0, CardType.Skill, CardRarity.Rare, TargetType.Self)
+public class Copying() : LittleWizardCard(1, CardType.Skill, CardRarity.Rare, TargetType.Self)
 {
+    private const string Selected = "Selected";
+
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new(Selected, 9),
+        new CardsVar(3)
+    ];
+
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // Select up to 3 cards from other characters' 9 cards and add to hand
-        var allCards = CardDatabase.GetAllCards().Where(c => c.CharacterId != "LittleWizard").Take(9).ToList();
-        var selectedCards = await CommonActions.SelectCards(this, "Select up to 3 cards", choiceContext, allCards, 3);
-        
-        foreach (var card in selectedCards)
+        if (Owner.Creature.Player == null) return;
+        var allCards = new List<CardModel>();
+        foreach (var cardPool in ModelDb.AllCharacterCardPools)
         {
-            await Owner.Player.Hand.AddCard(card.CreateCopy());
+            if (cardPool == ModelDb.CardPool<LittleWizardCardPool>()) continue;
+            allCards.AddRange(cardPool.GetUnlockedCards(Owner.UnlockState, Owner.RunState.CardMultiplayerConstraint));
         }
+
+        var canSelectedCards = CardFactory.GetDistinctForCombat(Owner, allCards, DynamicVars[Selected].IntValue,
+            Owner.Creature.Player.RunState.Rng.CombatCardSelection);
+        var prefs = new CardSelectorPrefs(SelectionScreenPrompt, DynamicVars.Cards.IntValue);
+        var cards = await CardSelectCmd.FromSimpleGrid(choiceContext, canSelectedCards.ToList(), Owner.Creature.Player,
+            prefs);
+        foreach (var card in cards) await CardPileCmd.Add(card, PileType.Hand);
     }
 
     protected override void OnUpgrade()
     {
-        // Already 0 energy by default
+        EnergyCost.UpgradeBy(-1);
     }
 }

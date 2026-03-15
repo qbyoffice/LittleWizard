@@ -1,3 +1,4 @@
+using LittleWizard.Interface;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Models;
@@ -39,15 +40,35 @@ public static class ElementHelper
         var sum = amountA + amountB;
         PowerCmd.Apply<ElementTemporaryStrengthPower>(owner, sum, null, null);
         PowerCmd.Apply<VulnerablePower>(owner, sum, null, null);
+        _ = OnElementReactor(owner);
     }
 
     public static void FireAndEarth(Creature owner, decimal amountA, decimal amountB)
     {
         DamageCmd.Attack(amountA * amountB).Targeting(owner).Execute(null);
+        _ = OnElementReactor(owner);
     }
 
     public static void WaterAndEarth(Creature owner, decimal amountA, decimal amountB)
     {
         if (amountA * amountB > Rng.Chaotic.NextInt(0, 100)) CreatureCmd.Stun(owner);
+        _ = OnElementReactor(owner);
+    }
+
+    private static async Task OnElementReactor(Creature owner)
+    {
+        if (owner.CombatState == null) return;
+        foreach (var player in owner.CombatState.Players)
+        foreach (var power in player.Creature.Powers)
+        {
+            if (power is not IAfterElementReactor afterElementReactor) continue;
+            await afterElementReactor.AfterElementReact(player.Creature, owner);
+        }
+
+        foreach (var power in owner.Powers)
+        {
+            if (power is not IAfterElementReactor afterElementReactor) continue;
+            await afterElementReactor.AfterElementReact(owner, owner);
+        }
     }
 }

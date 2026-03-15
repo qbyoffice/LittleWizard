@@ -1,19 +1,26 @@
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.Models;
 
 namespace LittleWizard.Powers.Cards;
 
 public class SimpleTrickPower : LittleWizardPower
 {
     public override PowerType Type => PowerType.Buff;
-    public override PowerStackType StackType => PowerStackType.Single;
+    public override PowerStackType StackType => PowerStackType.Counter;
 
-    public override int ModifyCardCost(CardModel card, int originalCost)
+    public override bool TryModifyEnergyCostInCombat(
+        CardModel card,
+        decimal originalCost,
+        out decimal modifiedCost)
     {
-        if (card.CardType == CardType.Power && Owner.Player == card.Owner)
+        if (card.Type == CardType.Power)
         {
-            return Mathf.Max(0, originalCost - 1);
+            modifiedCost = originalCost - Amount;
+            return true;
         }
-        return originalCost;
+
+        modifiedCost = originalCost;
+        return false;
     }
 }

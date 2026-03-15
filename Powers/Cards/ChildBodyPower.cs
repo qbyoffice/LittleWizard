@@ -1,23 +1,20 @@
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
-using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 
 namespace LittleWizard.Powers.Cards;
 
-public class ChildBodyPower : LittleWizardPower
+public sealed class ChildBodyPower : LittleWizardPower
 {
-    public override PowerType Type => PowerType.Debuff;
-    public override PowerStackType StackType => PowerStackType.Single;
+    public override PowerType Type => PowerType.Buff;
+    public override PowerStackType StackType => PowerStackType.Counter;
 
-    public override async Task AfterTurnStart(PlayerChoiceContext choiceContext, Player player)
+    public override decimal ModifyMaxEnergy(Player player, decimal amount)
     {
-        if (Owner != player.Creature) return;
-        await PlayerCmd.LoseEnergy(1, player);
+        return player != Owner.Player ? amount : amount - Amount;
     }
 
-    public override bool ShouldDiscardHandAtEndOfTurn(Player player)
+    public override bool ShouldFlush(Player player)
     {
-        return false;
+        return player != Owner.Player;
     }
 }

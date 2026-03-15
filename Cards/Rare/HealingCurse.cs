@@ -1,11 +1,12 @@
-using LittleWizard.Api;
+using System.Diagnostics;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace LittleWizard.Cards.Rare;
 
-public class HealingCurse() : LittleWizardCard(2, CardType.Skill, CardRarity.Rare, TargetType.AnyAlly)
+public class HealingCurse() : LittleWizardCard(3, CardType.Skill, CardRarity.Rare, TargetType.AnyPlayer)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
@@ -16,12 +17,12 @@ public class HealingCurse() : LittleWizardCard(2, CardType.Skill, CardRarity.Rar
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        var target = cardPlay.Target ?? Owner.Creature;
-        await CommonActions.Heal(this, target, DynamicVars.Heal.IntValue).Execute(choiceContext);
+        Debug.Assert(cardPlay.Target != null);
+        await CreatureCmd.Heal(cardPlay.Target, DynamicVars.Heal.IntValue);
     }
 
     protected override void OnUpgrade()
     {
-        EnergyCost.UpgradeBy(-4); // From 6 to 2
+        EnergyCost.UpgradeBy(-1);
     }
 }

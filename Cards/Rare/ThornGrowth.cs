@@ -1,8 +1,10 @@
-using LittleWizard.Api;
-using LittleWizard.Powers.Elements;
+using LittleWizard.Api.DynamicVars;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LittleWizard.Cards.Rare;
 
@@ -11,23 +13,28 @@ public class ThornGrowth() : LittleWizardCard(0, CardType.Skill, CardRarity.Rare
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DamageVar(2, ValueProp.Move),
-        new PowerVar<Thorns>(7),
-        new BlockVar(7)
+        new PowerVar<ThornsPower>(4),
+        new BlockVar(5, ValueProp.Move)
     ];
+
+    public override CardMultiplayerConstraint MultiplayerConstraint => CardMultiplayerConstraint.MultiplayerOnly;
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // Deal 2 damage to self and all allies
-        await CommonActions.DamageSelf(this, 2).Execute(choiceContext);
-        
-        // Gain 7 Thorns and 7 Block
-        await Utils.GivePower<Thorns>(this, cardPlay);
-        await CommonActions.GainBlock(this, DynamicVars.Block.IntValue).Execute(choiceContext);
+        if (CombatState == null) return;
+        foreach (var creature in CombatState.GetTeammatesOf(Owner.Creature)
+                     .Where(c => c is { IsAlive: true, IsPlayer: true }))
+        {
+            await CreatureCmd.Damage(choiceContext, creature, DynamicVars.Damage, this);
+            await PowerCmd.Apply<ThornsPower>(creature,
+                DynamicVarsHelper.GetPowerVar<ThornsPower>(DynamicVars).IntValue, Owner.Creature, this);
+            await CreatureCmd.GainBlock(creature, DynamicVars.Block, cardPlay);
+        }
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVarsHelper.GetPowerVar<Thorns>(DynamicVars).UpgradeValueBy(3);
+        DynamicVarsHelper.GetPowerVar<ThornsPower>(DynamicVars).UpgradeValueBy(3);
         DynamicVars.Block.UpgradeValueBy(2);
     }
 }
