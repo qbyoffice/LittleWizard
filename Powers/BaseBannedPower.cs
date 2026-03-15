@@ -16,7 +16,7 @@ public abstract class BaseBannedPower<T> : LittleWizardPower
     {
         if (side != CombatSide.Enemy)
             return;
-        await PowerCmd.TickDownDuration(this);
+        await PowerCmd.Decrement(this);
     }
 
     public override bool TryModifyPowerAmountReceived(PowerModel canonicalPower, Creature target, decimal amount,

@@ -16,7 +16,12 @@ public class ManagerMaster() : LittleWizardCard(0, CardType.Power, CardRarity.Un
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await Utils.GivePower<ManagerMasterPower>(this, cardPlay);
+        if (Owner.Creature.Player is { PlayerCombatState: not null })
+        {
+            var cards = Owner.Creature.Player.PlayerCombatState.Hand.Cards.ToList();
+            if (cards.Any(card => card.CanonicalKeywords.Contains(CardKeyword.Ethereal)))
+                await Utils.GivePower<ManagerMasterPower>(this, cardPlay);
+        }
     }
 
     protected override void OnUpgrade()

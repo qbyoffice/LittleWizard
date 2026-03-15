@@ -9,5 +9,5 @@ public class ElementTemporaryStrengthPower : TemporaryStrengthPower
     public override AbstractModel OriginModel => ModelDb.Power<FireElement>();
     protected override bool IsPositive => false;
 
-    public override LocString Title => new("powers", this.Id.Entry + ".title");
+    public override LocString Title => new("powers", Id.Entry + ".title");
 }
