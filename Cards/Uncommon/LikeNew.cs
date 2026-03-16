@@ -29,7 +29,7 @@ public class LikeNew() : LittleWizardCard(1, CardType.Skill, CardRarity.Uncommon
             1, Owner.Creature.Player.RunState.Rng.CombatCardSelection).FirstOrDefault();
 
         if (card == null) return;
-        card.SetStarCostThisCombat(cost);
+        card.EnergyCost.SetThisCombat(cost);
         await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, true);
     }
 

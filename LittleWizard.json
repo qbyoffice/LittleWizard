@@ -1,9 +1,9 @@
 {
   "id": "LittleWizard",
   "name": "LittleWizard",
-  "author": "{ModAuthor}",
+  "author": "iouter, w_s_l",
   "description": "Add a new character",
-  "version": "v0.1.0",
+  "version": "v0.1.1",
   "has_pck": true,
   "has_dll": true,
   "dependencies": [
