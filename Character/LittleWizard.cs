@@ -1,6 +1,5 @@
 using BaseLib.Abstracts;
 using Godot;
-using LittleWizard.Extensions;
 using LittleWizard.Cards.Basic;
 using LittleWizard.Relics;
 using MegaCrit.Sts2.Core.Entities.Characters;
