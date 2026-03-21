@@ -44,6 +44,6 @@ public class LittleWizard : PlaceholderCharacterModel
 	private string EnergyCounterPaths(int i)
 	{
 		return
-	"D:/sts2_project/LittleWizard-master/LittleWizard/images/ui/combat/LittleWizard/LittleWizard_orb_layer_" + i +".png";
+    "res://LittleWizard/images/ui/combat/energy_counters/LittleWizard/LittleWizard_orb_layer_" + i +".png";
 	}
 }
