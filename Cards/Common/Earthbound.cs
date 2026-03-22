@@ -8,7 +8,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LittleWizard.Cards.Common;
 
-public class Earthbound() : LittleWizardCard(1, CardType.Skill, CardRarity.Common, TargetType.Self), IElementCard
+public class Earthbound() : LittleWizardCard(1, CardType.Skill, CardRarity.Common, TargetType.AnyEnemy), IElementCard
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
@@ -21,7 +21,7 @@ public class Earthbound() : LittleWizardCard(1, CardType.Skill, CardRarity.Commo
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
-        await CreatureCmd.GainBlock(cardPlay.Target,
+        await CreatureCmd.GainBlock(Owner.Creature,
             DynamicVars.CalculatedBlock.Calculate(cardPlay.Target), ValueProp.Move, cardPlay);
     }
 
