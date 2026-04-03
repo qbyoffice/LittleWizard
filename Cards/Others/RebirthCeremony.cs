@@ -7,9 +7,9 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 
-namespace LittleWizard.Cards.Rare;
+namespace LittleWizard.Cards.Others;
 
-public class EscapingDanger() : LittleWizardCard(1, CardType.Skill, CardRarity.Rare, TargetType.Self)
+public class RebirthCeremony() : LittleWizardCard(1, CardType.Skill, CardRarity.Ancient, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [

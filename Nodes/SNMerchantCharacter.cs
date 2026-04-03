@@ -2,7 +2,7 @@
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Nodes.Screens.Shops;
 
-namespace LittleWizard.Code.Nodes;
+namespace LittleWizard.Nodes;
 
 [GlobalClass]
 public partial class SNMerchantCharacter : NMerchantCharacter

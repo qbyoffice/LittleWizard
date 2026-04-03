@@ -143,8 +143,6 @@
   "LITTLEWIZARD-EMERGE.title": "Emerge",
   "LITTLEWIZARD-ENDLESS_WALL.title": "EndlessWall",
   "LITTLEWIZARD-ENDLESS_WALL.description": "",
-  "LITTLEWIZARD-ESCAPING_DANGER.title": "EscapingDanger",
-  "LITTLEWIZARD-ESCAPING_DANGER.description": "",
   "LITTLEWIZARD-FORBIDDEN_SOUL_BINDING.title": "ForbiddenSoulBinding",
   "LITTLEWIZARD-FORBIDDEN_SOUL_BINDING.description": "",
   "LITTLEWIZARD-GUIDANCE.description": "",
@@ -192,6 +190,8 @@
   "LITTLEWIZARD-RETRAIN.description": "",
   "LITTLEWIZARD-WATER_VAPOUR.description": "",
   "LITTLEWIZARD-WATER_VAPOUR.title": "WaterVapour",
-  "LITTLEWIZARD-SHORT_CIRCUIT_STRIKE.description": "",
-  "LITTLEWIZARD-SHORT_CIRCUIT_STRIKE.title": "ShortCircuitStrike"
+  "LITTLEWIZARD-SHORT_CIRCUIT_WATER_BALL.description": "",
+  "LITTLEWIZARD-SHORT_CIRCUIT_WATER_BALL.title": "ShortCircuitWaterBall",
+  "LITTLEWIZARD-REBIRTH_CEREMONY.description": "",
+  "LITTLEWIZARD-REBIRTH_CEREMONY.title": "RebirthCeremony"
 }

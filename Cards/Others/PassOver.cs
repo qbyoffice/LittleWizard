@@ -1,12 +1,15 @@
-using LittleWizard.Api.Cards;
+using BaseLib.Abstracts;
+using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.CardPools;
 
 namespace LittleWizard.Cards.Others;
 
-public class PassOver() : LittleWizardCard(1, CardType.Skill, CardRarity.None, TargetType.Self)
+[Pool(typeof(TokenCardPool))]
+public class PassOver() : CustomCardModel(1, CardType.Skill, CardRarity.Token, TargetType.Self)
 {
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
