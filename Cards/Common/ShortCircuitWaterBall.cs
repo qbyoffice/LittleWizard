@@ -12,7 +12,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LittleWizard.Cards.Common;
 
-public class ShortCircuitStrike() : LittleWizardCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+public class ShortCircuitWaterBall() : LittleWizardCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTag.Strike];
 

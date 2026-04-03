@@ -3,7 +3,7 @@ using MegaCrit.Sts2.Core.GameActions;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Multiplayer.Serialization;
 
-namespace LittleWizard.Code.Actions;
+namespace LittleWizard.Actions;
 
 public struct NetDrawCardsAction : INetAction
 {
