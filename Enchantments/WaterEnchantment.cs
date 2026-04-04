@@ -16,7 +16,7 @@ public class WaterEnchantment : EnchantmentModel, IElementCard
         return cardType == CardType.Attack;
     }
 
-    public override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    public override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay? cardPlay)
     {
         if (cardPlay is { Target: not null })
             await PowerCmd.Apply<WaterElement>(cardPlay.Target, 1, cardPlay.Card.Owner.Creature, cardPlay.Card);
