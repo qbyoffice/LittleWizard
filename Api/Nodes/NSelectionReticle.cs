@@ -25,34 +25,28 @@ public partial class NSelectionReticle : Control
 
     public void OnSelect()
     {
-        if (!NCombatUi.IsDebugHideTargetingUi)
-        {
-            _currentTween?.Kill();
-            _currentTween = CreateTween().SetParallel();
-            _currentTween.TweenProperty(this, "modulate:a", 1f, 0.20000000298023224);
-            _currentTween.TweenProperty(this, "scale", Vector2.One, 0.5).SetEase(Tween.EaseType.Out)
-                .SetTrans(Tween.TransitionType.Expo)
-                .From(Vector2.One * 0.9f);
-            Modulate = Colors.White;
-            Scale = Vector2.One;
-            IsSelected = true;
-        }
+        if (NCombatUi.IsDebugHideTargetingUi) return;
+        _currentTween?.Kill();
+        _currentTween = CreateTween().SetParallel();
+        _currentTween.TweenProperty(this, "modulate:a", 1f, 0.20000000298023224);
+        _currentTween.TweenProperty(this, "scale", Vector2.One, 0.5).SetEase(Tween.EaseType.Out)
+            .SetTrans(Tween.TransitionType.Expo)
+            .From(Vector2.One * 0.9f);
+        Modulate = Colors.White;
+        Scale = Vector2.One;
+        IsSelected = true;
     }
 
     public void OnDeselect()
     {
-        if (!_cancelToken.IsCancellationRequested)
-        {
-            _currentTween?.Kill();
-            if (this.IsValid() && IsInsideTree())
-            {
-                _currentTween = CreateTween()?.SetParallel();
-                _currentTween?.TweenProperty(this, "modulate:a", 0f, 0.20000000298023224).SetEase(Tween.EaseType.Out)
-                    .SetTrans(Tween.TransitionType.Sine);
-                _currentTween?.TweenProperty(this, "scale", Vector2.One * 1.05f, 0.20000000298023224)
-                    .SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Sine);
-                IsSelected = false;
-            }
-        }
+        if (_cancelToken.IsCancellationRequested) return;
+        _currentTween?.Kill();
+        if (!this.IsValid() || !IsInsideTree()) return;
+        _currentTween = CreateTween()?.SetParallel();
+        _currentTween?.TweenProperty(this, "modulate:a", 0f, 0.20000000298023224).SetEase(Tween.EaseType.Out)
+            .SetTrans(Tween.TransitionType.Sine);
+        _currentTween?.TweenProperty(this, "scale", Vector2.One * 1.05f, 0.20000000298023224)
+            .SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Sine);
+        IsSelected = false;
     }
 }

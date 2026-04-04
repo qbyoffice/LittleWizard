@@ -12,7 +12,7 @@ public partial class NSpineAutoPlayer : Node
         var animations = megaSprite.GetSkeleton().GetData().GetAnimations();
         if (animations.Count != 1)
             throw new InvalidOperationException(
-                $"{"NSpineAutoPlayer"}'s parent's skeleton data must have exactly 1 animation. This has {animations.Count}.");
+                $"NSpineAutoPlayer's parent's skeleton data must have exactly 1 animation. This has {animations.Count}.");
         megaSprite.GetAnimationState().SetAnimation(new MegaAnimation(animations[0]).GetName());
     }
 }

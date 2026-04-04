@@ -23,8 +23,7 @@ public partial class SNCreatureVisuals : NCreatureVisuals
             BlendMode = CanvasItemMaterial.BlendModeEnum.PremultAlpha
         };
 
-        if (SpineBody != null)
-            SpineBody.SetNormalMaterial(premultMat);
+        SpineBody?.SetNormalMaterial(premultMat);
 
 
         //StancePower.EnsureEyeSetup(Body);

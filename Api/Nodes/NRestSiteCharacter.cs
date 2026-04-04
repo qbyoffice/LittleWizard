@@ -16,48 +16,48 @@ namespace LittleWizard.Api.Nodes;
 
 public partial class NRestSiteCharacter : Node2D
 {
-    private static readonly StringName _v = new("v");
+    private static readonly StringName V = new("v");
 
-    private static readonly StringName _s = new("s");
+    private static readonly StringName S = new("s");
 
-    private static readonly StringName _noise2Panning = new("Noise2Panning");
+    private static readonly StringName Noise2Panning = new("Noise2Panning");
 
-    private static readonly StringName _noise1Panning = new("Noise1Panning");
+    private static readonly StringName Noise1Panning = new("Noise1Panning");
 
-    private static readonly StringName _globalOffset = new("GlobalOffset");
+    private static readonly StringName GlobalOffset = new("GlobalOffset");
 
-    private static readonly Vector2 _multiplayerConfirmationOffset = new(-25f, -123f);
+    private static readonly Vector2 MultiplayerConfirmationOffset = new(-25f, -123f);
 
-    private static readonly Vector2 _multiplayerConfirmationFlipOffset = new(-155f, 0f);
+    private static readonly Vector2 MultiplayerConfirmationFlipOffset = new(-155f, 0f);
 
-    private static readonly string _multiplayerConfirmationScenePath =
+    private static readonly string MultiplayerConfirmationScenePath =
         SceneHelper.GetScenePath("rest_site/rest_site_multiplayer_confirmation");
 
     private int _characterIndex;
 
-    private Control _controlRoot;
+    public required Control ControlRoot;
 
     private RestSiteOption? _hoveredRestSiteOption;
 
-    private Control _leftThoughtAnchor;
+    public required Control LeftThoughtAnchor;
 
     private RestSiteOption? _restSiteOptionInThoughtBubble;
 
-    private Control _rightThoughtAnchor;
+    public required Control RightThoughtAnchor;
 
     private Control? _selectedOptionConfirmation;
 
     private RestSiteOption? _selectingRestSiteOption;
 
-    private NSelectionReticle _selectionReticle;
+    public required NSelectionReticle SelectionReticle;
 
     private CancellationTokenSource? _thoughtBubbleGoAwayCancellation;
 
     private NThoughtBubbleVfx? _thoughtBubbleVfx;
 
-    public Control Hitbox { get; private set; }
+    public required Control Hitbox { get; set; }
 
-    public Player Player { get; private set; }
+    public required Player Player { get; set; }
 
     public static NRestSiteCharacter Create(Player player, int characterIndex)
     {
@@ -70,11 +70,11 @@ public partial class NRestSiteCharacter : Node2D
 
     public override void _Ready()
     {
-        _controlRoot = GetNode<Control>("ControlRoot");
+        ControlRoot = GetNode<Control>("ControlRoot");
         Hitbox = GetNode<Control>("%Hitbox");
-        _selectionReticle = GetNode<NSelectionReticle>("%SelectionReticle");
-        _leftThoughtAnchor = GetNode<Control>("%ThoughtBubbleLeft");
-        _rightThoughtAnchor = GetNode<Control>("%ThoughtBubbleRight");
+        SelectionReticle = GetNode<NSelectionReticle>("%SelectionReticle");
+        LeftThoughtAnchor = GetNode<Control>("%ThoughtBubbleLeft");
+        RightThoughtAnchor = GetNode<Control>("%ThoughtBubbleRight");
         var animationName = Player.RunState.CurrentActIndex switch
         {
             0 => "overgrowth_loop",
@@ -109,26 +109,24 @@ public partial class NRestSiteCharacter : Node2D
         Hitbox.Connect(Control.SignalName.MouseExited, Callable.From(OnUnfocus));
     }
 
-    private void RandomizeFire(ShaderMaterial mat)
+    private static void RandomizeFire(ShaderMaterial mat)
     {
-        mat.SetShaderParameter(_globalOffset,
+        mat.SetShaderParameter(GlobalOffset,
             new Vector2(Rng.Chaotic.NextFloat(-50f, 50f), Rng.Chaotic.NextFloat(-50f, 50f)));
-        mat.SetShaderParameter(_noise1Panning,
-            mat.GetShaderParameter(_noise1Panning).AsVector2() + new Vector2(Rng.Chaotic.NextFloat(-0.1f, 0.1f),
+        mat.SetShaderParameter(Noise1Panning,
+            mat.GetShaderParameter(Noise1Panning).AsVector2() + new Vector2(Rng.Chaotic.NextFloat(-0.1f, 0.1f),
                 Rng.Chaotic.NextFloat(-0.1f, 0.1f)));
-        mat.SetShaderParameter(_noise2Panning,
-            mat.GetShaderParameter(_noise2Panning).AsVector2() + new Vector2(Rng.Chaotic.NextFloat(-0.1f, 0.1f),
+        mat.SetShaderParameter(Noise2Panning,
+            mat.GetShaderParameter(Noise2Panning).AsVector2() + new Vector2(Rng.Chaotic.NextFloat(-0.1f, 0.1f),
                 Rng.Chaotic.NextFloat(-0.1f, 0.1f)));
     }
 
     private void OnFocus()
     {
-        if (NTargetManager.Instance.IsInSelection && NTargetManager.Instance.AllowedToTargetNode(this))
-        {
-            NTargetManager.Instance.OnNodeHovered(this);
-            _selectionReticle.OnSelect();
-            NRun.Instance.GlobalUi.MultiplayerPlayerContainer.HighlightPlayer(Player);
-        }
+        if (!NTargetManager.Instance.IsInSelection || !NTargetManager.Instance.AllowedToTargetNode(this)) return;
+        NTargetManager.Instance.OnNodeHovered(this);
+        SelectionReticle.OnSelect();
+        NRun.Instance?.GlobalUi.MultiplayerPlayerContainer.HighlightPlayer(Player);
     }
 
     private void OnUnfocus()
@@ -138,13 +136,13 @@ public partial class NRestSiteCharacter : Node2D
         Deselect();
     }
 
-    public void Deselect()
+    private void Deselect()
     {
-        if (_selectionReticle.IsSelected) _selectionReticle.OnDeselect();
-        NRun.Instance.GlobalUi.MultiplayerPlayerContainer.UnhighlightPlayer(Player);
+        if (SelectionReticle.IsSelected) SelectionReticle.OnDeselect();
+        NRun.Instance?.GlobalUi.MultiplayerPlayerContainer.UnhighlightPlayer(Player);
     }
 
-    public void FlipX()
+    private void FlipX()
     {
         Vector2 scale;
         foreach (var childSpineNode in GetChildSpineNodes())
@@ -157,13 +155,13 @@ public partial class NRestSiteCharacter : Node2D
             childSpineNode.Position = scale;
         }
 
-        var controlRoot = _controlRoot;
-        scale = _controlRoot.Scale;
-        scale.X = 0f - _controlRoot.Scale.X;
+        var controlRoot = ControlRoot;
+        scale = ControlRoot.Scale;
+        scale.X = 0f - ControlRoot.Scale.X;
         controlRoot.Scale = scale;
     }
 
-    public void HideFlameGlow()
+    private void HideFlameGlow()
     {
         foreach (var childSpineNode in GetChildSpineNodes())
         {
@@ -201,13 +199,13 @@ public partial class NRestSiteCharacter : Node2D
         if (_thoughtBubbleVfx == null)
         {
             var characterIndex = _characterIndex;
-            var flag = characterIndex == 0 || characterIndex == 3 ? true : false;
-            var flag2 = flag;
+            var flag = characterIndex is 0 or 3;
             _thoughtBubbleVfx = NThoughtBubbleVfx.Create(restSiteOption.Icon,
-                !flag2 ? DialogueSide.Left : DialogueSide.Right, null);
+                !flag ? DialogueSide.Left : DialogueSide.Right, null);
+            if (_thoughtBubbleVfx == null) return;
             var shaderMaterial = (ShaderMaterial)_thoughtBubbleVfx.GetNode<TextureRect>("%Image").Material;
-            shaderMaterial.SetShaderParameter(_s, 0.145f);
-            shaderMaterial.SetShaderParameter(_v, 0.85f);
+            shaderMaterial.SetShaderParameter(S, 0.145f);
+            shaderMaterial.SetShaderParameter(V, 0.85f);
             this.AddChildSafely(_thoughtBubbleVfx);
             _thoughtBubbleVfx.GlobalPosition = GetRestSiteOptionAnchor().GlobalPosition;
         }
@@ -222,18 +220,17 @@ public partial class NRestSiteCharacter : Node2D
         _thoughtBubbleVfx?.GoAway();
         _thoughtBubbleVfx = null;
         _selectedOptionConfirmation =
-            PreloadManager.Cache.GetScene(_multiplayerConfirmationScenePath).Instantiate<Control>();
+            PreloadManager.Cache.GetScene(MultiplayerConfirmationScenePath).Instantiate<Control>();
         _selectedOptionConfirmation.GetNode<TextureRect>("%Icon").Texture = option.Icon;
         this.AddChildSafely(_selectedOptionConfirmation);
         var characterIndex = _characterIndex;
-        var flag = characterIndex == 0 || characterIndex == 3 ? true : false;
-        var flag2 = flag;
+        var flag = characterIndex is 0 or 3;
         _selectedOptionConfirmation.GlobalPosition = GetRestSiteOptionAnchor().GlobalPosition;
-        _selectedOptionConfirmation.Position += _multiplayerConfirmationOffset +
-                                                (flag2 ? _multiplayerConfirmationFlipOffset : Vector2.Zero);
+        _selectedOptionConfirmation.Position += MultiplayerConfirmationOffset +
+                                                (flag ? MultiplayerConfirmationFlipOffset : Vector2.Zero);
     }
 
-    public void Shake()
+    private void Shake()
     {
         TaskHelper.RunSafely(DoShake());
     }
@@ -254,8 +251,7 @@ public partial class NRestSiteCharacter : Node2D
 
     private Control GetRestSiteOptionAnchor()
     {
-        if (_characterIndex < 2) return _leftThoughtAnchor;
-        return _rightThoughtAnchor;
+        return _characterIndex < 2 ? LeftThoughtAnchor : RightThoughtAnchor;
     }
 
     private async Task RemoveThoughtBubbleAfterDelay()
@@ -271,8 +267,6 @@ public partial class NRestSiteCharacter : Node2D
 
     private IEnumerable<Node2D> GetChildSpineNodes()
     {
-        foreach (var item in GetChildren().OfType<Node2D>())
-            if (!(item.GetClass() != "SpineSprite"))
-                yield return item;
+        return GetChildren().OfType<Node2D>().Where(item => item.GetClass() == "SpineSprite");
     }
 }

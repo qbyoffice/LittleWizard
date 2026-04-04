@@ -8,9 +8,9 @@ namespace LittleWizard.Api.Nodes;
 
 public partial class NCardTrailVfx : Node2D
 {
-    private Control _nodeToFollow;
+    public required Control NodeToFollow;
 
-    private Node2D _sprites;
+    public required Node2D Sprites;
 
     private Tween? _tween;
 
@@ -20,32 +20,30 @@ public partial class NCardTrailVfx : Node2D
     {
         if (TestMode.IsOn) return null;
         var nCardTrailVfx = PreloadManager.Cache.GetScene(characterTrailPath).Instantiate<NCardTrailVfx>();
-        nCardTrailVfx._nodeToFollow = card;
+        nCardTrailVfx.NodeToFollow = card;
         return nCardTrailVfx;
     }
 
     public override void _Ready()
     {
         if (NCombatUi.IsDebugHidingPlayContainer) Visible = false;
-        _sprites = GetNode<Node2D>("Sprites");
-        _sprites.Modulate = StsColors.transparentWhite;
+        Sprites = GetNode<Node2D>("Sprites");
+        Sprites.Modulate = StsColors.transparentWhite;
         _tween = CreateTween().SetParallel();
-        _tween.TweenProperty(_sprites, "scale", Vector2.One * 0.5f, 0.5).SetEase(Tween.EaseType.In)
+        _tween.TweenProperty(Sprites, "scale", Vector2.One * 0.5f, 0.5).SetEase(Tween.EaseType.In)
             .SetTrans(Tween.TransitionType.Cubic)
             .SetDelay(0.25);
-        _tween.TweenProperty(_nodeToFollow, "modulate:a", 0.75f, 0.5).SetEase(Tween.EaseType.Out)
+        _tween.TweenProperty(NodeToFollow, "modulate:a", 0.75f, 0.5).SetEase(Tween.EaseType.Out)
             .SetTrans(Tween.TransitionType.Cubic);
-        _tween.TweenProperty(_sprites, "modulate:a", 1f, 1.0).SetEase(Tween.EaseType.Out)
+        _tween.TweenProperty(Sprites, "modulate:a", 1f, 1.0).SetEase(Tween.EaseType.Out)
             .SetTrans(Tween.TransitionType.Cubic);
     }
 
     public override void _Process(double delta)
     {
-        if (_updateSprites)
-        {
-            GlobalPosition = _nodeToFollow.GlobalPosition;
-            Rotation = _nodeToFollow.Rotation;
-        }
+        if (!_updateSprites) return;
+        GlobalPosition = NodeToFollow.GlobalPosition;
+        Rotation = NodeToFollow.Rotation;
     }
 
     public async Task FadeOut()
@@ -60,7 +58,7 @@ public partial class NCardTrailVfx : Node2D
 
     private void StopParticles(Tween tween)
     {
-        foreach (var child in _sprites.GetChildren())
+        foreach (var child in Sprites.GetChildren())
             if (child is CpuParticles2D cpuParticles2D)
                 tween.TweenProperty(cpuParticles2D, "amount", 1, 0.5);
     }
