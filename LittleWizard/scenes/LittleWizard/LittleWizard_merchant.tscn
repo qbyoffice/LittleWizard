@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bowvvch36t701"]
 
-[ext_resource type="Script" uid="uid://danu0r2shpe6g" path="res://Api/Nodes/SNMerchantCharacter.cs" id="1_8sym6"]
+[ext_resource type="Script" uid="uid://cv7c7afw8w1wh" path="res://Api/Nodes/SNMerchantCharacter.cs" id="1_8sym6"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://bo0xchrk5fhc5" path="res://LittleWizard/animations/merchant/LittleWizard_merchant_skel_data.tres" id="2_g2n7t"]
 
 [node name="LittleWizardMerchant" type="Node2D"]
