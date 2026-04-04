@@ -7,7 +7,7 @@
         <DefaultItemExcludes>packages/**</DefaultItemExcludes>
         <AppOutputBase>$(MSBuildProjectDirectory)\</AppOutputBase>
         <PathMap>$(AppOutputBase)=.\</PathMap>
-        <Version>0.1.1</Version>
+        <Version>0.3.0</Version>
         <Authors>iouter, w_s_L</Authors>
     </PropertyGroup>
 
@@ -68,7 +68,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-
         <PackageReference Include="Alchyr.Sts2.BaseLib" Version="0.2.0" PrivateAssets="All"/>
         <PackageReference Include="Alchyr.Sts2.ModAnalyzers" Version="0.1.6"/>
         <AdditionalFiles Include="LittleWizard/localization/**/*.json"/>
@@ -99,15 +98,22 @@
         </PackageReference>
     </ItemGroup>
 
-    <ItemGroup>
+    <ItemGroup Condition="!Exists('$(Sts2DataDir)/sts2.dll')">
+        <PackageReference Include="BSchneppe.Sts2.ReferenceAssemblies" Version="0.99.*" PrivateAssets="All" />
+    </ItemGroup>
+
+    <ItemGroup Condition="Exists('$(Sts2DataDir)/sts2.dll')">
+        <Reference Include="sts2">
+            <HintPath>$(Sts2DataDir)/sts2.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
         <Reference Include="0Harmony">
-            <HintPath>..\..\..\SteamLibrary\steamapps\common\Slay the Spire 2\data_sts2_windows_x86_64\0Harmony.dll</HintPath>
+            <HintPath>$(Sts2DataDir)/0Harmony.dll</HintPath>
+            <Private>false</Private>
         </Reference>
         <Reference Include="GodotSharp">
-            <HintPath>..\..\..\SteamLibrary\steamapps\common\Slay the Spire 2\data_sts2_windows_x86_64\GodotSharp.dll</HintPath>
-        </Reference>
-        <Reference Include="sts2">
-            <HintPath>..\..\..\SteamLibrary\steamapps\common\Slay the Spire 2\data_sts2_windows_x86_64\sts2.dll</HintPath>
+            <HintPath>$(Sts2DataDir)/GodotSharp.dll</HintPath>
+            <Private>false</Private>
         </Reference>
     </ItemGroup>
 
