@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlw6in38goddu"
-path="res://.godot/imported/LittleWizard_energy_icon.png-9d92c6c485012388a91080970eee2462.ctex"
+uid="uid://dn1lmffvpayqo"
+path="res://.godot/imported/combat_reticle.png-60713aef0ad799b895ba6c0907677fde.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://LittleWizard/images/ui/combat/LittleWizard_energy_icon.png"
-dest_files=["res://.godot/imported/LittleWizard_energy_icon.png-9d92c6c485012388a91080970eee2462.ctex"]
+source_file="res://LittleWizard/images/ui/combat/combat_reticle.png"
+dest_files=["res://.godot/imported/combat_reticle.png-60713aef0ad799b895ba6c0907677fde.ctex"]
 
 [params]
 

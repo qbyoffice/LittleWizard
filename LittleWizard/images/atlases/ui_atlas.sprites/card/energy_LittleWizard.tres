@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://g1g8kd"]
+
+[ext_resource type="Texture2D" uid="uid://cbqsg0lsljmvo" path="res://LittleWizard/images/charui/text_LittleWizard_energy_icon.png" id="1_p5moy"]
+
+[resource]
+atlas = ExtResource("1_p5moy")
+region = Rect2(-0.23672104, 0.20884132, 74.46153, 74.101814)

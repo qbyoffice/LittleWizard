@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlw6in38goddu"
-path="res://.godot/imported/LittleWizard_energy_icon.png-9d92c6c485012388a91080970eee2462.ctex"
+uid="uid://dcwqv5drp5y66"
+path="res://.godot/imported/LittleWizard.png-030e1b30bceb337832289bb206edb43f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://LittleWizard/images/ui/combat/LittleWizard_energy_icon.png"
-dest_files=["res://.godot/imported/LittleWizard_energy_icon.png-9d92c6c485012388a91080970eee2462.ctex"]
+source_file="res://LittleWizard/animations/characters/LittleWizard/LittleWizard.png"
+dest_files=["res://.godot/imported/LittleWizard.png-030e1b30bceb337832289bb206edb43f.ctex"]
 
 [params]
 

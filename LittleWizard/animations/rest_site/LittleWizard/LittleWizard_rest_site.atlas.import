@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://baxmepbx5bq3a"
+path="res://.godot/imported/LittleWizard_rest_site.atlas-9797d6840f3f9173019bbdad07337150.spatlas"
+
+[deps]
+
+source_file="res://LittleWizard/animations/rest_site/LittleWizard/LittleWizard_rest_site.atlas"
+dest_files=["res://.godot/imported/LittleWizard_rest_site.atlas-9797d6840f3f9173019bbdad07337150.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

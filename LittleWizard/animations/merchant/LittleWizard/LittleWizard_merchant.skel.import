@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://c27nienkdefr0"
+path="res://.godot/imported/LittleWizard_merchant.skel-c6777f7de15442045d2770d937d499cd.spskel"
+
+[deps]
+
+source_file="res://LittleWizard/animations/merchant/LittleWizard/LittleWizard_merchant.skel"
+dest_files=["res://.godot/imported/LittleWizard_merchant.skel-c6777f7de15442045d2770d937d499cd.spskel"]
+
+[params]
+

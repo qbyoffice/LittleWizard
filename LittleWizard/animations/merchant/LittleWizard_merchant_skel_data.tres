@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://bo0xchrk5fhc5"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://ctf03adasvu7b" path="res://LittleWizard/animations/merchant/LittleWizard/LittleWizard_merchant.atlas" id="1_x0idp"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://c27nienkdefr0" path="res://LittleWizard/animations/merchant/LittleWizard/LittleWizard_merchant.skel" id="2_a2e20"]
+
+[resource]
+atlas_res = ExtResource("1_x0idp")
+skeleton_file_res = ExtResource("2_a2e20")
