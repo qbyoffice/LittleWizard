@@ -7,20 +7,20 @@ namespace LittleWizard.Code.Nodes;
 [GlobalClass]
 public partial class SNMerchantCharacter : NMerchantCharacter
 {
-	public override void _Ready()
-	{
-		base._Ready();
+    public override void _Ready()
+    {
+        base._Ready();
 
-		// Fix dark seams: atlas uses premultiplied alpha data,
-		// so the spine sprite must use PremultAlpha blend mode
-		var premultMat = new CanvasItemMaterial
-		{
-			BlendMode = CanvasItemMaterial.BlendModeEnum.PremultAlpha
-		};
-		var spineBody = new MegaSprite((Variant)(GodotObject)GetChild(0));
-		spineBody.SetNormalMaterial(premultMat);
+        // Fix dark seams: atlas uses premultiplied alpha data,
+        // so the spine sprite must use PremultAlpha blend mode
+        var premultMat = new CanvasItemMaterial
+        {
+            BlendMode = CanvasItemMaterial.BlendModeEnum.PremultAlpha
+        };
+        var spineBody = new MegaSprite((Variant)(GodotObject)GetChild(0));
+        spineBody.SetNormalMaterial(premultMat);
 
-		
-		PlayAnimation("relaxed_loop", true);
-	}
+
+        PlayAnimation("relaxed_loop", true);
+    }
 }

@@ -6,17 +6,14 @@ namespace MegaCrit.Sts2.Core.Nodes.Screens.Shops;
 
 public partial class NMerchantCharacter : Node2D
 {
-	public override void _Ready()
-	{
-		PlayAnimation("relaxed_loop", loop: true);
-	}
+    public override void _Ready()
+    {
+        PlayAnimation("relaxed_loop", true);
+    }
 
-	public void PlayAnimation(string anim, bool loop = false)
-	{
-		MegaTrackEntry megaTrackEntry = new MegaSprite(GetChild(0)).GetAnimationState().SetAnimation(anim, loop);
-		if (loop)
-		{
-			megaTrackEntry?.SetTrackTime(megaTrackEntry.GetAnimationEnd() * Rng.Chaotic.NextFloat());
-		}
-	}
+    public void PlayAnimation(string anim, bool loop = false)
+    {
+        var megaTrackEntry = new MegaSprite(GetChild(0)).GetAnimationState().SetAnimation(anim, loop);
+        if (loop) megaTrackEntry?.SetTrackTime(megaTrackEntry.GetAnimationEnd() * Rng.Chaotic.NextFloat());
+    }
 }
