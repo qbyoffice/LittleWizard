@@ -6,12 +6,13 @@ using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.RestSite;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models.Characters;
+using MegaCrit.Sts2.Core.Nodes;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.Nodes.Vfx.Utilities;
 using MegaCrit.Sts2.Core.Random;
 
-namespace MegaCrit.Sts2.Core.Nodes.RestSite;
+namespace LittleWizard.Api.Nodes;
 
 public partial class NRestSiteCharacter : Node2D
 {

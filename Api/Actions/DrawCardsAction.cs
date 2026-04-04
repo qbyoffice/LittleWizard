@@ -4,7 +4,7 @@ using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 
-namespace LittleWizard.Actions;
+namespace LittleWizard.Api.Actions;
 
 public sealed class DrawCardsAction : GameAction
 {

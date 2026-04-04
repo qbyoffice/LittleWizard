@@ -1,7 +1,7 @@
 using Godot;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 
-namespace MegaCrit.Sts2.Core.Nodes.Animation;
+namespace LittleWizard.Api.Animation;
 
 [GlobalClass]
 public partial class NSpineAutoPlayer : Node

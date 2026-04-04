@@ -1,7 +1,8 @@
 using Godot;
+using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.GodotExtensions;
 
-namespace MegaCrit.Sts2.Core.Nodes.Combat;
+namespace LittleWizard.Api.Nodes;
 
 public partial class NSelectionReticle : Control
 {
