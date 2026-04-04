@@ -23,8 +23,8 @@ jobs:
           wget https://github.com/godotengine/godot/releases/download/4.5.1-stable/Godot_v4.5.1-stable_mono_linux_headless_x86_64.zip
           unzip Godot_v4.5.1-stable_mono_linux_headless_x86_64.zip
           chmod +x Godot_v4.5.1-stable_mono_linux_headless_x86_64
-      - name: Build
-        run: dotnet build -c Release --no-restore
+      - name: Publish
+        run: dotnet publish -c Release --no-restore
         env:
           GodotPath: ${{ github.workspace }}/Godot_v4.5.1-stable_mono_linux_headless_x86_64
           ModsPath: ${{ github.workspace }}/mods_output

@@ -98,15 +98,22 @@
         </PackageReference>
     </ItemGroup>
 
-    <ItemGroup>
+    <ItemGroup Condition="!Exists('$(Sts2DataDir)/sts2.dll')">
+        <PackageReference Include="BSchneppe.Sts2.ReferenceAssemblies" Version="0.99.*" PrivateAssets="All" />
+    </ItemGroup>
+
+    <ItemGroup Condition="Exists('$(Sts2DataDir)/sts2.dll')">
+        <Reference Include="sts2">
+            <HintPath>$(Sts2DataDir)/sts2.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
         <Reference Include="0Harmony">
-            <HintPath>..\..\..\SteamLibrary\steamapps\common\Slay the Spire 2\data_sts2_windows_x86_64\0Harmony.dll</HintPath>
+            <HintPath>$(Sts2DataDir)/0Harmony.dll</HintPath>
+            <Private>false</Private>
         </Reference>
         <Reference Include="GodotSharp">
-            <HintPath>..\..\..\SteamLibrary\steamapps\common\Slay the Spire 2\data_sts2_windows_x86_64\GodotSharp.dll</HintPath>
-        </Reference>
-        <Reference Include="sts2">
-            <HintPath>..\..\..\SteamLibrary\steamapps\common\Slay the Spire 2\data_sts2_windows_x86_64\sts2.dll</HintPath>
+            <HintPath>$(Sts2DataDir)/GodotSharp.dll</HintPath>
+            <Private>false</Private>
         </Reference>
     </ItemGroup>
 
