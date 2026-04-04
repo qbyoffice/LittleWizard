@@ -24,10 +24,14 @@ jobs:
           version: 4.5.1
           use-dotnet: true
           include-templates: true
+      - name: Get Godot executable path
+        id: godot-path
+        run: |
+          echo "GODOT_EXE=$(which godot)" >> $GITHUB_OUTPUT
       - name: Publish
         run: dotnet publish -c Release --no-restore
         env:
-          GodotPath: godot
+          GodotPath: ${{ steps.godot-path.outputs.GODOT_EXE }}
           ModsPath: ${{ github.workspace }}/mods_output
       - name: Package Release Artifacts
         run: |
