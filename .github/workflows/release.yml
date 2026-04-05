@@ -34,6 +34,7 @@ jobs:
           unzip spine.zip -d spine_temp
           mkdir -p bin
           cp -r spine_temp/bin/* /home/runner/work/LittleWizard/LittleWizard/bin/
+          ls -l /home/runner/work/LittleWizard/LittleWizard
           ls -l /home/runner/work/LittleWizard/LittleWizard/bin/
       - name: Publish
         run: dotnet publish -c Release --no-restore
