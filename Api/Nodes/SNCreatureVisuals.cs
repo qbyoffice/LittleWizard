@@ -31,7 +31,7 @@ public partial class SNCreatureVisuals : NCreatureVisuals
 
     public void InitEye(MegaSprite controller)
     {
-        _eyeBone = controller.GetSkeleton().FindBone("eye_anchor");
+        _eyeBone = controller.GetSkeleton()?.FindBone("eye_anchor");
         controller.ConnectWorldTransformsChanged(Callable.From<Variant>(OnEyeWorldTransformsChanged));
         GetTree().ProcessFrame += SetupEye;
     }

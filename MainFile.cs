@@ -1,4 +1,6 @@
+using System.Reflection;
 using Godot;
+using Godot.Bridge;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Modding;
@@ -13,10 +15,17 @@ public partial class MainFile : Node
 
     public static Logger Logger { get; } = new(ModId, LogType.Generic);
 
+    private static void InitializeTools()
+    {
+        var assembly = Assembly.GetExecutingAssembly();
+        ScriptManagerBridge.LookupScriptsInAssembly(assembly);
+    }
+
+
     public static void Initialize()
     {
         Harmony harmony = new(ModId);
-
+        InitializeTools();
         harmony.PatchAll();
     }
 }
