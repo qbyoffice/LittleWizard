@@ -34,6 +34,7 @@ jobs:
           unzip spine.zip -d spine_temp
           mkdir -p bin
           cp -r spine_temp/bin/* bin/
+          ls -l bin/
       - name: Publish
         run: dotnet publish -c Release --no-restore
         env:
