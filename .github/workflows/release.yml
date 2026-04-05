@@ -36,7 +36,9 @@ jobs:
           cp -r spine_temp/bin/* "${{ github.workspace }}/bin/"
           ls -l "${{ github.workspace }}/bin/"
       - name: Publish
-        run: dotnet publish -c Release --no-restore
+        run: |
+          ls -l "${{ github.workspace }}/bin/"
+          dotnet publish -c Release --no-restore
         env:
           GodotPath: ${{ steps.godot-path.outputs.GODOT_EXE }}
           ModsPath: ${{ github.workspace }}/mods_output/
