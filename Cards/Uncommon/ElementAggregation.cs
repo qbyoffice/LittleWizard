@@ -18,10 +18,7 @@ public class ElementAggregation() : LittleWizardCard(1, CardType.Skill, CardRari
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        if (Owner.Creature.Player == null)
-        {
-            return;
-        }
+        if (Owner.Creature.Player == null) return;
         var card = CardFactory.GetDistinctForCombat(Owner,
             ModelDb.CardPool<LittleWizardCardPool>().GetUnlockedCards(Owner.UnlockState,
                 Owner.RunState.CardMultiplayerConstraint).Where(ElementHelper.IsElementCard),

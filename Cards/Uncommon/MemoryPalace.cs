@@ -1,6 +1,5 @@
 using BaseLib.Utils;
 using LittleWizard.Api.Cards;
-using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -24,7 +23,7 @@ public class MemoryPalace() : LittleWizardCard(3, CardType.Skill, CardRarity.Unc
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         var cards = await CommonActions.SelectCards(this, SelectionScreenPrompt, choiceContext, PileType.Draw,
-            minCount: 0, maxCount: DynamicVars.Cards.IntValue);
+            0, DynamicVars.Cards.IntValue);
         foreach (var card in cards)
             CardCmd.PreviewCardPileAdd(
                 await CardPileCmd.AddGeneratedCardToCombat(card.CreateClone(), PileType.Hand, true));

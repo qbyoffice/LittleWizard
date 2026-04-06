@@ -26,7 +26,8 @@ public class ThornGrowth() : LittleWizardCard(0, CardType.Skill, CardRarity.Rare
         foreach (var creature in CombatState.GetTeammatesOf(Owner.Creature)
                      .Where(c => c is { IsAlive: true, IsPlayer: true }))
         {
-            await CreatureCmd.Damage(choiceContext, creature, DynamicVars.HpLoss.BaseValue, ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move, this);
+            await CreatureCmd.Damage(choiceContext, creature, DynamicVars.HpLoss.BaseValue,
+                ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move, this);
             await PowerCmd.Apply<ThornsPower>(creature,
                 DynamicVarsHelper.GetPowerVar<ThornsPower>(DynamicVars).IntValue, Owner.Creature, this);
             await CreatureCmd.GainBlock(creature, DynamicVars.Block, cardPlay);

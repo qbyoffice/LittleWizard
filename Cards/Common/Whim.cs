@@ -27,13 +27,9 @@ public class Whim() : LittleWizardCard(1, CardType.Skill, CardRarity.Common, Tar
         var card = await CommonActions.SelectSingleCard(this, CardSelectorPrefs.DiscardSelectionPrompt, choiceContext,
             PileType.Hand);
         if (card != null)
-        {
             await CardCmd.DiscardAndDraw(choiceContext, [card], DynamicVars.Cards.IntValue);
-        }
         else
-        {
             await CommonActions.Draw(this, choiceContext);
-        }
     }
 
     protected override void OnUpgrade()
