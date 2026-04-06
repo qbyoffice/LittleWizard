@@ -37,21 +37,8 @@ jobs:
         run: |
           wget -O spine.zip "https://spine-godot.s3.eu-central-1.amazonaws.com/4.2/4.5.1-stable/spine-godot-extension-4.2-4.5.1-stable.zip"
           unzip spine.zip -d spine_temp
-          mkdir -p "${{ github.workspace }}/bin"
-          cp -r spine_temp/bin/* "${{ github.workspace }}/bin/"
-      - name: Debug Environment
-        run: |
-          echo "=== Godot Version ==="
-          ${{ steps.godot-path.outputs.GODOT_EXE }} --version
-          echo "=== .csproj Configuration ==="
-          grep -A5 "Configuration" LittleWizard.csproj || true
-          echo "=== Output Directory ==="
-          ls -la .godot/mono/temp/bin/ 2>/dev/null || echo "No .godot dir yet"
-          echo "=== Spine Extension Files ==="
-          ls -la bin/ 2>/dev/null || echo "No bin/ dir"
-          ls -la *.gdextension 2>/dev/null || echo "No .gdextension in root"
       - name: Publish
-        run: dotnet publish -c Release
+        run: dotnet publish -c Release --no-restore
         env:
           GodotPath: ${{ steps.godot-path.outputs.GODOT_EXE }}
           ModsPath: ${{ github.workspace }}/mods_output/
