@@ -1,6 +1,7 @@
 using BaseLib.Utils;
 using LittleWizard.Api;
 using LittleWizard.Api.Cards;
+using LittleWizard.Api.Interface;
 using LittleWizard.Powers.Elements;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -9,7 +10,8 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LittleWizard.Cards.Basic;
 
-public class StrikeWaterLittleWizard() : LittleWizardCard(1, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy)
+public class StrikeWaterLittleWizard()
+    : LittleWizardCard(1, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy), IElementCard
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTag.Strike];
 
