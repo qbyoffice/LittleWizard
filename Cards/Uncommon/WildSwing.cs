@@ -23,7 +23,7 @@ public class WildSwing() : LittleWizardCard(0, CardType.Attack, CardRarity.Uncom
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         await PowerCmd.Apply<VulnerablePower>(Owner.Creature, DynamicVars.Vulnerable.BaseValue, Owner.Creature, this);
-        CommonActions.CardAttack(this, play, DynamicVars.Repeat.IntValue + ResolveEnergyXValue());
+        await CommonActions.CardAttack(this, play, DynamicVars.Repeat.IntValue + ResolveEnergyXValue()).Execute(choiceContext);
     }
 
     protected override void OnUpgrade()

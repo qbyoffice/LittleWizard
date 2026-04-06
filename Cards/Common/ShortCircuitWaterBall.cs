@@ -24,7 +24,7 @@ public class ShortCircuitWaterBall() : LittleWizardCard(1, CardType.Attack, Card
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        CommonActions.CardAttack(this, cardPlay);
+        await CommonActions.CardAttack(this, cardPlay).Execute(choiceContext);
         await Utils.GivePower<WaterElement>(this, cardPlay);
         if (cardPlay.Target != null) await PowerCmd.Remove<ArtifactPower>(cardPlay.Target);
     }

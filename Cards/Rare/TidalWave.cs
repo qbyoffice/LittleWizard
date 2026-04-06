@@ -28,7 +28,7 @@ public class TidalWave() : LittleWizardCard(3, CardType.Attack, CardRarity.Rare,
 
         if (target.GetPowerAmount<WaterElement>() >= DynamicVarsHelper.GetPowerVar<WaterElement>(DynamicVars).IntValue)
         {
-            CommonActions.CardAttack(this, cardPlay);
+            await CommonActions.CardAttack(this, cardPlay).Execute(choiceContext);
             await CreatureCmd.Stun(target);
         }
     }

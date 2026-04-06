@@ -17,7 +17,7 @@ public class ElementBurst()
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new CalculationBaseVar(5),
+        new CalculationBaseVar(4),
         new CalculationExtraVar(3),
         new ThresholdVar(5),
         new CalculatedVar(AnyElement).WithMultiplier((card, target) =>

@@ -13,7 +13,7 @@ public class ThornGrowth() : LittleWizardCard(0, CardType.Skill, CardRarity.Rare
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(2, ValueProp.Move),
+        new HpLossVar(2),
         new PowerVar<ThornsPower>(4),
         new BlockVar(5, ValueProp.Move)
     ];
@@ -26,7 +26,7 @@ public class ThornGrowth() : LittleWizardCard(0, CardType.Skill, CardRarity.Rare
         foreach (var creature in CombatState.GetTeammatesOf(Owner.Creature)
                      .Where(c => c is { IsAlive: true, IsPlayer: true }))
         {
-            await CreatureCmd.Damage(choiceContext, creature, DynamicVars.Damage, this);
+            await CreatureCmd.Damage(choiceContext, creature, DynamicVars.HpLoss.BaseValue, ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move, this);
             await PowerCmd.Apply<ThornsPower>(creature,
                 DynamicVarsHelper.GetPowerVar<ThornsPower>(DynamicVars).IntValue, Owner.Creature, this);
             await CreatureCmd.GainBlock(creature, DynamicVars.Block, cardPlay);

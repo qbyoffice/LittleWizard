@@ -12,7 +12,7 @@ public class ManaConvert() : LittleWizardCard(2, CardType.Skill, CardRarity.Unco
 {
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        var prefs = new CardSelectorPrefs(SelectionScreenPrompt, 1);
+        var prefs = new CardSelectorPrefs(CardSelectorPrefs.ExhaustSelectionPrompt, 1);
         var cards = await CardSelectCmd.FromSimpleGrid(choiceContext, PileType.Hand.GetPile(Owner)
             .Cards.Where(ElementHelper.IsElementCard).ToList(), Owner, prefs);
         var cardModels = cards as CardModel[] ?? cards.ToArray();

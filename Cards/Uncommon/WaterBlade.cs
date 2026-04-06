@@ -30,10 +30,9 @@ public class WaterBlade()
         Debug.Assert(CombatState != null, nameof(CombatState) + " != null");
         foreach (var enemy in CombatState.HittableEnemies)
         {
-            if (enemy.GetPowerAmount<WaterElement>() <=
+            if (enemy.GetPowerAmount<WaterElement>() <
                 DynamicVarsHelper.GetPowerVar<WaterElement>(DynamicVars).BaseValue) continue;
             if (enemy.Block > 0) await CreatureCmd.LoseBlock(enemy, enemy.Block);
-            await PowerCmd.Remove<WaterElement>(enemy);
         }
     }
 

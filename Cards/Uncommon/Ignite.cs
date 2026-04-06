@@ -16,7 +16,10 @@ public class Ignite() : LittleWizardCard(1, CardType.Attack, CardRarity.Uncommon
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.LittleWizardElement];
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(5, ValueProp.Move)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new DamageVar(5, ValueProp.Move),
+        new PowerVar<IgnitePower>(1)
+    ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {

@@ -25,9 +25,8 @@ public class Stalagmite() : LittleWizardCard(1, CardType.Attack, CardRarity.Unco
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        ArgumentNullException.ThrowIfNull(cardPlay.Target);
-        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
-        await CommonActions.CardAttack(this, cardPlay.Target).Execute(choiceContext);
+        await CommonActions.CardBlock(this, cardPlay);
+        await CommonActions.CardAttack(this, cardPlay).Execute(choiceContext);
         await Utils.GivePower<EarthElement>(this, cardPlay);
     }
 

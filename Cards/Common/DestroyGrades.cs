@@ -1,3 +1,4 @@
+using BaseLib.Utils;
 using LittleWizard.Api;
 using LittleWizard.Api.Cards;
 using LittleWizard.Api.Extensions;
@@ -27,8 +28,8 @@ public class DestroyGrades() : LittleWizardCard(1, CardType.Skill, CardRarity.Co
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await Utils.GivePower<FireElement>(this, cardPlay);
-        var prefs = new CardSelectorPrefs(CardSelectorPrefs.ExhaustSelectionPrompt, 1);
-        var card = (await CardSelectCmd.FromHand(choiceContext, Owner, prefs, null, this)).FirstOrDefault();
+        var card = await CommonActions.SelectSingleCard(this, CardSelectorPrefs.ExhaustSelectionPrompt, choiceContext,
+            PileType.Hand);
         if (card == null)
             return;
         await CardCmd.Exhaust(choiceContext, card);

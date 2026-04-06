@@ -19,7 +19,7 @@ public class NumbHands() : LittleWizardCard(1, CardType.Attack, CardRarity.Commo
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        await CommonActions.CardAttack(this, play.Target).Execute(choiceContext);
+        await CommonActions.CardAttack(this, play).Execute(choiceContext);
         await Utils.GivePower<StrengthPower>(this, play);
     }
 

@@ -1,3 +1,4 @@
+using BaseLib.Utils;
 using LittleWizard.Api.Cards;
 using LittleWizard.Api.Powers;
 using LittleWizard.Character;
@@ -15,10 +16,8 @@ public class LikeNew() : LittleWizardCard(1, CardType.Skill, CardRarity.Uncommon
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         if (Owner.Creature.Player == null) return;
-        var prefs = new CardSelectorPrefs(CardSelectorPrefs.ExhaustSelectionPrompt, 1);
-        var cardToExhaust =
-            (await CardSelectCmd.FromSimpleGrid(choiceContext, PileType.Hand.GetPile(Owner).Cards.ToList(), Owner,
-                prefs)).FirstOrDefault();
+        var cardToExhaust = await CommonActions.SelectSingleCard(this, CardSelectorPrefs.ExhaustSelectionPrompt,
+            choiceContext, PileType.Hand);
 
         if (cardToExhaust == null) return;
         var cost = cardToExhaust.EnergyCost.GetResolved();

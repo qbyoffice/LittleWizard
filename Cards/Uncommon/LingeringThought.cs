@@ -17,10 +17,7 @@ public class LingeringThought() : LittleWizardCard(1, CardType.Skill, CardRarity
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         await CommonActions.CardBlock(this, play);
-        var prefs = new CardSelectorPrefs(SelectionScreenPrompt, 1);
-        var card = (await CardSelectCmd.FromSimpleGrid(choiceContext, PileType.Hand.GetPile(Owner)
-                .Cards.ToList(), Owner, prefs))
-            .FirstOrDefault();
+        var card = await CommonActions.SelectSingleCard(this, SelectionScreenPrompt, choiceContext, PileType.Hand);
         card?.AddKeyword(CardKeyword.Innate);
     }
 

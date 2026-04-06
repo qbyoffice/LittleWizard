@@ -38,7 +38,7 @@ public class Adapt() : LittleWizardCard(1, CardType.Skill, CardRarity.Uncommon, 
 
         if (fireAmount > 0)
         {
-            await CommonActions.CardAttack(this, cardPlay.Target).Execute(choiceContext);
+            await CommonActions.CardAttack(this, cardPlay).Execute(choiceContext);
             await Utils.GivePower<FireElement>(this, cardPlay);
             return;
         }
@@ -50,7 +50,7 @@ public class Adapt() : LittleWizardCard(1, CardType.Skill, CardRarity.Uncommon, 
             return;
         }
 
-        if (earthAmount > 0) await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
+        if (earthAmount > 0) await CommonActions.CardBlock(this, cardPlay);
     }
 
     protected override void OnUpgrade()

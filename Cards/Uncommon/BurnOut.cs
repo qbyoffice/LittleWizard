@@ -1,3 +1,4 @@
+using BaseLib.Utils;
 using LittleWizard.Api.Cards;
 using LittleWizard.Api.Extensions;
 using LittleWizard.Powers.Elements;
@@ -17,19 +18,15 @@ public class BurnOut() : LittleWizardCard(1, CardType.Skill, CardRarity.Uncommon
     [
         new CalculationBaseVar(0),
         new ExtraDamageVar(6),
-        new CalculatedDamageVar(ValueProp.Move).WithMultiplier((card, target) =>
+        new CalculatedDamageVar(ValueProp.Move).WithMultiplier((_, target) =>
             target?.GetPowerAmount<FireElement>() ?? 0)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await CommonActions.CardAttack(this, cardPlay).Execute(choiceContext);
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
-        var damage = DynamicVars.CalculatedDamage.Calculate(cardPlay.Target);
-        if (damage > 0)
-        {
-            await PowerCmd.Remove<FireElement>(cardPlay.Target);
-            await CreatureCmd.Damage(choiceContext, cardPlay.Target, damage, ValueProp.Move, Owner.Creature, this);
-        }
+        await PowerCmd.Remove<FireElement>(cardPlay.Target);
     }
 
     protected override void OnUpgrade()

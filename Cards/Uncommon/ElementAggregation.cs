@@ -18,16 +18,17 @@ public class ElementAggregation() : LittleWizardCard(1, CardType.Skill, CardRari
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        if (Owner.Creature.Player != null)
+        if (Owner.Creature.Player == null)
         {
-            var card = CardFactory.GetDistinctForCombat(Owner,
-                ModelDb.CardPool<LittleWizardCardPool>().GetUnlockedCards(Owner.UnlockState,
-                    Owner.RunState.CardMultiplayerConstraint).Where(ElementHelper.IsElementCard),
-                1, Owner.Creature.Player.RunState.Rng.CombatCardSelection).FirstOrDefault();
-            if (card == null) return;
-            if (IsUpgraded) card.SetToFreeThisTurn();
-            await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, true);
+            return;
         }
+        var card = CardFactory.GetDistinctForCombat(Owner,
+            ModelDb.CardPool<LittleWizardCardPool>().GetUnlockedCards(Owner.UnlockState,
+                Owner.RunState.CardMultiplayerConstraint).Where(ElementHelper.IsElementCard),
+            1, Owner.Creature.Player.RunState.Rng.CombatCardSelection).FirstOrDefault();
+        if (card == null) return;
+        if (IsUpgraded) card.SetToFreeThisTurn();
+        await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, true);
     }
 
     protected override void OnUpgrade()

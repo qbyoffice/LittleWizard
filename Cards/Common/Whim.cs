@@ -1,3 +1,4 @@
+using BaseLib.Utils;
 using LittleWizard.Api.Cards;
 using LittleWizard.Api.DynamicVars;
 using MegaCrit.Sts2.Core.CardSelection;
@@ -23,11 +24,16 @@ public class Whim() : LittleWizardCard(1, CardType.Skill, CardRarity.Common, Tar
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        var card = (await CardSelectCmd.FromHandForDiscard(choiceContext, Owner,
-            new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt,
-                DynamicVarsHelper.GetDiscardsVar(DynamicVars).IntValue), null, this)).FirstOrDefault();
-        if (card == null) return;
-        await CardCmd.DiscardAndDraw(choiceContext, [card], DynamicVars.Cards.IntValue);
+        var card = await CommonActions.SelectSingleCard(this, CardSelectorPrefs.DiscardSelectionPrompt, choiceContext,
+            PileType.Hand);
+        if (card != null)
+        {
+            await CardCmd.DiscardAndDraw(choiceContext, [card], DynamicVars.Cards.IntValue);
+        }
+        else
+        {
+            await CommonActions.Draw(this, choiceContext);
+        }
     }
 
     protected override void OnUpgrade()

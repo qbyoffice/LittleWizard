@@ -13,19 +13,19 @@ public class WandStrike() : LittleWizardCard(1, CardType.Attack, CardRarity.Comm
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(8, ValueProp.Move)
+        new CalculationBaseVar(8),
+        new ExtraDamageVar(8),
+        new CalculatedDamageVar(ValueProp.Move).WithMultiplier((_, target) => target is { Block: > 0 } ? 1 : 0)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        ArgumentNullException.ThrowIfNull(play.Target, "cardPlay.Target");
-        var damage = DynamicVars.Damage.BaseValue;
-        if (play.Target.Block > 0) damage *= 2;
-        await CommonActions.CardAttack(this, play.Target, damage).Execute(choiceContext);
+        await CommonActions.CardAttack(this, play).Execute(choiceContext);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(2);
+        DynamicVars.CalculationBase.UpgradeValueBy(2);
+        DynamicVars.ExtraDamage.UpgradeValueBy(2);
     }
 }

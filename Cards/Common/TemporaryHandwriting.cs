@@ -1,3 +1,4 @@
+using BaseLib.Utils;
 using LittleWizard.Api.Cards;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -18,14 +19,13 @@ public class TemporaryHandwriting() : LittleWizardCard(0, CardType.Skill, CardRa
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 抽1张牌
-        await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner);
+        await CommonActions.Draw(this, choiceContext);
 
         if (Owner.PlayerCombatState is { DrawPile.Cards.Count: > 0 })
         {
-            var count = Owner.PlayerCombatState.DrawPile.Cards.Count;
+            var count = Owner.PlayerCombatState.Hand.Cards.Count;
             var draws = DynamicVars[ExtraCards].BaseValue;
-            if (count >= draws)
+            if (count > draws)
                 await CardPileCmd.Draw(choiceContext, draws, Owner);
             else
                 await CardPileCmd.Draw(choiceContext, count, Owner);

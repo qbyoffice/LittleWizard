@@ -1,5 +1,6 @@
 using BaseLib.Utils;
 using LittleWizard.Api.Cards;
+using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -15,7 +16,7 @@ public class Rejuvenation() : LittleWizardCard(6, CardType.Power, CardRarity.Rar
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        var cards = await CommonActions.SelectCards(this, SelectionScreenPrompt, choiceContext, PileType.Deck,
+        var cards = await CommonActions.SelectCards(this, CardSelectorPrefs.RemoveSelectionPrompt, choiceContext, PileType.Deck,
             DynamicVars.Cards.IntValue);
         foreach (var card in cards)
         {

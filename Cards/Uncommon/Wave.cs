@@ -1,3 +1,4 @@
+using BaseLib.Utils;
 using LittleWizard.Api;
 using LittleWizard.Api.Cards;
 using LittleWizard.Api.DynamicVars;
@@ -23,7 +24,7 @@ public class Wave() : LittleWizardCard(1, CardType.Skill, CardRarity.Uncommon, T
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
+        await CommonActions.CardBlock(this, cardPlay);
         await Utils.GivePower<WaterElement>(this, cardPlay);
     }
 

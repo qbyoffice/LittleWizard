@@ -22,7 +22,7 @@ public class WarmupBeam() : LittleWizardCard(1, CardType.Attack, CardRarity.Comm
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        await CommonActions.CardAttack(this, play.Target).Execute(choiceContext);
+        await CommonActions.CardAttack(this, play).Execute(choiceContext);
         await Utils.GivePower<WarmupBeamPower>(this, play);
     }
 
