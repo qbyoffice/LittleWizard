@@ -1,7 +1,7 @@
 using BaseLib.Utils;
 using LittleWizard.Api;
 using LittleWizard.Api.Cards;
-using LittleWizard.Api.Interface;
+using LittleWizard.Api.Extensions;
 using LittleWizard.Powers.Elements;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -11,8 +11,10 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace LittleWizard.Cards.Rare;
 
 public class CelestialRockSpell()
-    : LittleWizardCard(2, CardType.Attack, CardRarity.Rare, TargetType.RandomEnemy), IElementCard
+    : LittleWizardCard(2, CardType.Attack, CardRarity.Rare, TargetType.RandomEnemy)
 {
+    protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.LittleWizardElement];
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DamageVar(48, ValueProp.Move),

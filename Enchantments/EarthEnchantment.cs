@@ -7,7 +7,7 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace LittleWizard.Enchantments;
 
-public sealed class EarthEnchantment : EnchantmentModel, IElementCard
+public sealed class EarthEnchantment : EnchantmentModel, IElementEnchantment
 {
     public override bool ShowAmount => true;
 
@@ -19,6 +19,6 @@ public sealed class EarthEnchantment : EnchantmentModel, IElementCard
     public override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay? cardPlay)
     {
         if (cardPlay is { Target: not null })
-            await PowerCmd.Apply<EarthElement>(cardPlay.Target, 1, cardPlay.Card.Owner.Creature, cardPlay.Card);
+            await PowerCmd.Apply<EarthElement>(cardPlay.Target, Amount, cardPlay.Card.Owner.Creature, cardPlay.Card);
     }
 }

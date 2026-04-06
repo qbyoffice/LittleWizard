@@ -1,4 +1,3 @@
-using LittleWizard.Api.Interface;
 using LittleWizard.Api.Powers;
 using LittleWizard.Character;
 using MegaCrit.Sts2.Core.Combat;
@@ -23,7 +22,7 @@ public class GatherElementsPower : LittleWizardPower
 
         var cards = CardFactory.GetDistinctForCombat(player,
             ModelDb.CardPool<LittleWizardCardPool>().GetUnlockedCards(player.UnlockState,
-                player.RunState.CardMultiplayerConstraint).Where(model => model is IElementCard),
+                player.RunState.CardMultiplayerConstraint).Where(ElementHelper.IsElementCard),
             Amount, player.RunState.Rng.CombatCardSelection).ToList();
 
         foreach (var card in cards) await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, true);

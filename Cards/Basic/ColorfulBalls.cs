@@ -1,7 +1,7 @@
 using BaseLib.Utils;
 using LittleWizard.Api.Cards;
 using LittleWizard.Api.DynamicVars;
-using LittleWizard.Api.Interface;
+using LittleWizard.Api.Extensions;
 using LittleWizard.Api.Powers;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -11,9 +11,9 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace LittleWizard.Cards.Basic;
 
 public sealed class ColorfulBalls()
-    : LittleWizardCard(1, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy), IElementCard
+    : LittleWizardCard(1, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy)
 {
-    protected override HashSet<CardTag> CanonicalTags => [CardTag.Strike];
+    protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.LittleWizardElement];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [

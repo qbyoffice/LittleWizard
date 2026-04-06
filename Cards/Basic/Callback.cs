@@ -1,5 +1,5 @@
 using LittleWizard.Api.Cards;
-using LittleWizard.Api.Interface;
+using LittleWizard.Api.Powers;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -13,7 +13,7 @@ public sealed class Callback() : LittleWizardCard(1, CardType.Skill, CardRarity.
     {
         var prefs = new CardSelectorPrefs(SelectionScreenPrompt, 1);
         var card = (await CardSelectCmd.FromSimpleGrid(choiceContext, PileType.Discard.GetPile(Owner)
-                .Cards.Where(c => c is IElementCard || c.Enchantment is IElementCard).ToList(), Owner, prefs))
+                .Cards.Where(ElementHelper.IsElementCard).ToList(), Owner, prefs))
             .FirstOrDefault();
         if (card == null)
             return;

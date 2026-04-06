@@ -1,7 +1,7 @@
 using LittleWizard.Api;
 using LittleWizard.Api.Cards;
 using LittleWizard.Api.DynamicVars;
-using LittleWizard.Api.Interface;
+using LittleWizard.Api.Extensions;
 using LittleWizard.Powers.Elements;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -11,8 +11,10 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LittleWizard.Cards.Uncommon;
 
-public class Wave() : LittleWizardCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.AllEnemies), IElementCard
+public class Wave() : LittleWizardCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.AllEnemies)
 {
+    protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.LittleWizardElement];
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new BlockVar(6, ValueProp.Move),

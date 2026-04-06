@@ -1,6 +1,6 @@
 using LittleWizard.Api.Cards;
 using LittleWizard.Api.DynamicVars;
-using LittleWizard.Api.Interface;
+using LittleWizard.Api.Extensions;
 using LittleWizard.Powers.Elements;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -9,8 +9,10 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace LittleWizard.Cards.Uncommon;
 
-public class IceBlock() : LittleWizardCard(3, CardType.Skill, CardRarity.Uncommon, TargetType.AnyEnemy), IElementCard
+public class IceBlock() : LittleWizardCard(3, CardType.Skill, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
+    protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.LittleWizardElement];
+
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
     [
         CardKeyword.Exhaust

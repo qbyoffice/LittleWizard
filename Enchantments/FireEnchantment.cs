@@ -7,7 +7,7 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace LittleWizard.Enchantments;
 
-public sealed class FireEnchantment : EnchantmentModel, IElementCard
+public sealed class FireEnchantment : EnchantmentModel, IElementEnchantment
 {
     public override bool ShowAmount => true;
 

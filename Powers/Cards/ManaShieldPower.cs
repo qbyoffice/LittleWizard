@@ -1,4 +1,3 @@
-using LittleWizard.Api.Interface;
 using LittleWizard.Api.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -27,7 +26,7 @@ public class ManaShieldPower : LittleWizardPower
 
         var card = cardPlay.Card;
 
-        if (card is IElementCard || card.Enchantment is IElementCard)
+        if (ElementHelper.IsElementCard(card))
         {
             await CreatureCmd.GainBlock(Owner, 2, ValueProp.Move, cardPlay);
             ;

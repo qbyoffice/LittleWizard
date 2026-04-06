@@ -1,7 +1,7 @@
 using BaseLib.Utils;
 using LittleWizard.Api.Cards;
 using LittleWizard.Api.DynamicVars;
-using LittleWizard.Api.Interface;
+using LittleWizard.Api.Extensions;
 using LittleWizard.Powers.Elements;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -11,8 +11,10 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LittleWizard.Cards.Rare;
 
-public class TidalWave() : LittleWizardCard(3, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy), IElementCard
+public class TidalWave() : LittleWizardCard(3, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
 {
+    protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.LittleWizardElement];
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new DamageVar(24, ValueProp.Move),

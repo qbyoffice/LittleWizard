@@ -1,5 +1,5 @@
 namespace LittleWizard.Api.Interface;
 
-public interface IElementCard
+public interface IElementEnchantment
 {
 }

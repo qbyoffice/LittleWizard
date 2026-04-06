@@ -1,7 +1,7 @@
 using LittleWizard.Api;
 using LittleWizard.Api.Cards;
 using LittleWizard.Api.DynamicVars;
-using LittleWizard.Api.Interface;
+using LittleWizard.Api.Extensions;
 using LittleWizard.Powers.Cards;
 using LittleWizard.Powers.Elements;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -10,8 +10,10 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace LittleWizard.Cards.Uncommon;
 
-public class ExploreTaboo() : LittleWizardCard(1, CardType.Power, CardRarity.Uncommon, TargetType.Self), IElementCard
+public class ExploreTaboo() : LittleWizardCard(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
+    protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.LittleWizardElement];
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new PowerVar<FireElement>(3),

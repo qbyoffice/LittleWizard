@@ -1,3 +1,4 @@
+using LittleWizard.Api.Extensions;
 using LittleWizard.Api.Interface;
 using LittleWizard.Powers.Elements;
 using MegaCrit.Sts2.Core.Commands;
@@ -74,5 +75,10 @@ public static class ElementHelper
             if (power is not IAfterElementReactor afterElementReactor) continue;
             await afterElementReactor.AfterElementReact(owner, owner);
         }
+    }
+
+    public static bool IsElementCard(CardModel card)
+    {
+        return card.Tags.Contains(CardTagExtensions.LittleWizardElement) || card.Enchantment is IElementEnchantment;
     }
 }

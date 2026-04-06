@@ -1,4 +1,3 @@
-using LittleWizard.Api.Interface;
 using LittleWizard.Api.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -18,7 +17,7 @@ public class ElementBlessingPower : LittleWizardPower
 
         var card = cardPlay.Card;
 
-        if (card is IElementCard || card.Enchantment is IElementCard)
+        if (ElementHelper.IsElementCard(card))
             await PlayerCmd.GainEnergy(Amount, cardPlay.Card.Owner);
     }
 }

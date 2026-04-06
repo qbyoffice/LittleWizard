@@ -1,4 +1,3 @@
-using LittleWizard.Api.Interface;
 using LittleWizard.Api.Powers;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -16,7 +15,7 @@ public class RockWallPower : LittleWizardPower
 
     public override bool ShouldPlay(CardModel card, AutoPlayType autoPlayType)
     {
-        return card is not IElementCard && card.Enchantment is not IElementCard;
+        return !ElementHelper.IsElementCard(card);
     }
 
     public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)

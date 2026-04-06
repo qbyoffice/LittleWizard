@@ -7,7 +7,7 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace LittleWizard.Enchantments;
 
-public class WaterEnchantment : EnchantmentModel, IElementCard
+public class WaterEnchantment : EnchantmentModel, IElementEnchantment
 {
     public override bool ShowAmount => true;
 

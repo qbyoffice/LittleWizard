@@ -2,7 +2,7 @@ using System.Diagnostics;
 using LittleWizard.Api;
 using LittleWizard.Api.Cards;
 using LittleWizard.Api.DynamicVars;
-using LittleWizard.Api.Interface;
+using LittleWizard.Api.Extensions;
 using LittleWizard.Powers.Cards;
 using LittleWizard.Powers.Elements;
 using MegaCrit.Sts2.Core.Commands;
@@ -13,8 +13,10 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 namespace LittleWizard.Cards.Rare;
 
 public class BurnEverything()
-    : LittleWizardCard(0, CardType.Skill, CardRarity.Rare, TargetType.AllEnemies), IElementCard
+    : LittleWizardCard(0, CardType.Skill, CardRarity.Rare, TargetType.AllEnemies)
 {
+    protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.LittleWizardElement];
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new PowerVar<FireElement>(4),

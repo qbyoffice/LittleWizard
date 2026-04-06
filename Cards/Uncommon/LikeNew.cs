@@ -1,5 +1,5 @@
 using LittleWizard.Api.Cards;
-using LittleWizard.Api.Interface;
+using LittleWizard.Api.Powers;
 using LittleWizard.Character;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
@@ -26,7 +26,7 @@ public class LikeNew() : LittleWizardCard(1, CardType.Skill, CardRarity.Uncommon
 
         var card = CardFactory.GetDistinctForCombat(Owner,
             ModelDb.CardPool<LittleWizardCardPool>().GetUnlockedCards(Owner.UnlockState,
-                Owner.RunState.CardMultiplayerConstraint).Where(model => model is IElementCard),
+                Owner.RunState.CardMultiplayerConstraint).Where(ElementHelper.IsElementCard),
             1, Owner.Creature.Player.RunState.Rng.CombatCardSelection).FirstOrDefault();
 
         if (card == null) return;
