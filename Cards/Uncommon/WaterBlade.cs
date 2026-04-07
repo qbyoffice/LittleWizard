@@ -32,6 +32,11 @@ public class WaterBlade()
             if (enemy.Block > 0)
                 await CreatureCmd.LoseBlock(enemy, enemy.Block);
         }
+        await CreatureCmd.TriggerAnim(
+            base.Owner.Creature,
+            "Cast",
+            base.Owner.Character.CastAnimDelay
+        );
     }
 
     protected override void OnUpgrade()

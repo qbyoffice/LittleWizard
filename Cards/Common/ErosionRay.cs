@@ -26,6 +26,11 @@ public class ErosionRay()
         if (randomDebuff == null)
             return;
         await PowerCmd.Apply(randomDebuff, play.Target, randomDebuff.Amount, Owner.Creature, this);
+        await CreatureCmd.TriggerAnim(
+            base.Owner.Creature,
+            "Cast",
+            base.Owner.Character.CastAnimDelay
+        );
     }
 
     protected override void OnUpgrade()

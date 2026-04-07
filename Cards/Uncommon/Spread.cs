@@ -30,6 +30,11 @@ public class Spread()
             else if (earth > 0)
                 await PowerCmd.Apply<EarthElement>(enemy, earth, Owner.Creature, this);
         }
+        await CreatureCmd.TriggerAnim(
+            base.Owner.Creature,
+            "Cast",
+            base.Owner.Character.CastAnimDelay
+        );
     }
 
     protected override void OnUpgrade()

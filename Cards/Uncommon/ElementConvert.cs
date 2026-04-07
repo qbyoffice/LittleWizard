@@ -35,6 +35,11 @@ public class ElementConvert()
             await PowerCmd.Remove<EarthElement>(cardPlay.Target);
             await PowerCmd.Apply<WaterElement>(cardPlay.Target, earthAmount, Owner.Creature, this);
         }
+        await CreatureCmd.TriggerAnim(
+            base.Owner.Creature,
+            "Cast",
+            base.Owner.Character.CastAnimDelay
+        );
     }
 
     protected override PileType GetResultPileType()

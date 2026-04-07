@@ -2,6 +2,7 @@ using BaseLib.Utils;
 using LittleWizard.Api;
 using LittleWizard.Api.Cards;
 using LittleWizard.Powers.Cards;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -18,6 +19,11 @@ public class RockWall() : LittleWizardCard(1, CardType.Skill, CardRarity.Uncommo
     {
         await CommonActions.CardBlock(this, play);
         await Utils.GivePower<RockWallPower>(this, play);
+        await CreatureCmd.TriggerAnim(
+            base.Owner.Creature,
+            "Cast",
+            base.Owner.Character.CastAnimDelay
+        );
     }
 
     protected override void OnUpgrade()

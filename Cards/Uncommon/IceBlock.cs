@@ -27,6 +27,11 @@ public class IceBlock()
             await PowerCmd.Remove<WaterElement>(cardPlay.Target);
             await CreatureCmd.Stun(cardPlay.Target);
         }
+        await CreatureCmd.TriggerAnim(
+            base.Owner.Creature,
+            "Cast",
+            base.Owner.Character.CastAnimDelay
+        );
     }
 
     protected override void OnUpgrade()

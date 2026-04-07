@@ -29,6 +29,11 @@ public class BurnOut()
         await CommonActions.CardAttack(this, cardPlay).Execute(choiceContext);
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
         await PowerCmd.Remove<FireElement>(cardPlay.Target);
+        await CreatureCmd.TriggerAnim(
+            base.Owner.Creature,
+            "Cast",
+            base.Owner.Character.CastAnimDelay
+        );
     }
 
     protected override void OnUpgrade()

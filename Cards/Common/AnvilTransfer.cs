@@ -23,6 +23,11 @@ public class AnvilTransfer()
         );
         if (card != null)
             CardCmd.Upgrade(card);
+        await CreatureCmd.TriggerAnim(
+            base.Owner.Creature,
+            "Cast",
+            base.Owner.Character.CastAnimDelay
+        );
     }
 
     protected override void OnUpgrade()

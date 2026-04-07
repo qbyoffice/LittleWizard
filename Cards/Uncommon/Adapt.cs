@@ -49,6 +49,11 @@ public class Adapt() : LittleWizardCard(1, CardType.Skill, CardRarity.Uncommon, 
 
         if (earthAmount > 0)
             await CommonActions.CardBlock(this, cardPlay);
+        await CreatureCmd.TriggerAnim(
+            base.Owner.Creature,
+            "Cast",
+            base.Owner.Character.CastAnimDelay
+        );
     }
 
     protected override void OnUpgrade()

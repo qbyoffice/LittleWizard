@@ -24,5 +24,10 @@ public class ManaBurst() : LittleWizardCard(1, CardType.Power, CardRarity.Uncomm
             );
         else
             await Utils.GivePower<ManaBurstPower>(this, cardPlay);
+        await CreatureCmd.TriggerAnim(
+            base.Owner.Creature,
+            "Cast",
+            base.Owner.Character.CastAnimDelay
+        );
     }
 }

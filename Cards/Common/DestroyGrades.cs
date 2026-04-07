@@ -32,6 +32,11 @@ public class DestroyGrades()
         if (card == null)
             return;
         await CardCmd.Exhaust(choiceContext, card);
+        await CreatureCmd.TriggerAnim(
+            base.Owner.Creature,
+            "Cast",
+            base.Owner.Character.CastAnimDelay
+        );
     }
 
     protected override void OnUpgrade()

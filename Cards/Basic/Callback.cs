@@ -24,6 +24,11 @@ public sealed class Callback()
         if (card == null)
             return;
         await CardPileCmd.Add(card, PileType.Draw, CardPilePosition.Top);
+        await CreatureCmd.TriggerAnim(
+            base.Owner.Creature,
+            "Cast",
+            base.Owner.Character.CastAnimDelay
+        );
     }
 
     protected override void OnUpgrade()

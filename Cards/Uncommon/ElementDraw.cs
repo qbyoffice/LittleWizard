@@ -31,6 +31,11 @@ public class ElementDraw()
         var totalElements = fireAmount + waterAmount + earthAmount;
         if (totalElements > 0)
             await PlayerCmd.GainEnergy(totalElements, Owner);
+        await CreatureCmd.TriggerAnim(
+            base.Owner.Creature,
+            "Cast",
+            base.Owner.Character.CastAnimDelay
+        );
     }
 
     protected override void OnUpgrade()

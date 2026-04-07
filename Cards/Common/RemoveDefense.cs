@@ -19,6 +19,11 @@ public class RemoveDefense()
         if (cardPlay.Target.Block > 0)
             await CreatureCmd.LoseBlock(cardPlay.Target, cardPlay.Target.Block);
         await Utils.GivePower<VulnerablePower>(this, cardPlay);
+        await CreatureCmd.TriggerAnim(
+            base.Owner.Creature,
+            "Cast",
+            base.Owner.Character.CastAnimDelay
+        );
     }
 
     protected override void OnUpgrade()

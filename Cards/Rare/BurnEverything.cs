@@ -31,6 +31,11 @@ public class BurnEverything()
         foreach (var enemy in CombatState.Enemies)
             await PowerCmd.Apply<FireElement>(enemy, xValue, Owner.Creature, this);
         await Utils.GivePower<BurnEverythingPower>(this, cardPlay);
+        await CreatureCmd.TriggerAnim(
+            base.Owner.Creature,
+            "Cast",
+            base.Owner.Character.CastAnimDelay
+        );
     }
 
     protected override void OnUpgrade()

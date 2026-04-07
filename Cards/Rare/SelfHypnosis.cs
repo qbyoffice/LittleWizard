@@ -2,6 +2,7 @@ using BaseLib.Utils;
 using LittleWizard.Api;
 using LittleWizard.Api.Cards;
 using LittleWizard.Api.Extensions;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -28,6 +29,11 @@ public class SelfHypnosis()
         await CommonActions.CardAttack(this, cardPlay).Execute(choiceContext);
         await Utils.GivePower<VulnerablePower>(this, cardPlay);
         await Utils.GivePower<WeakPower>(this, cardPlay);
+        await CreatureCmd.TriggerAnim(
+            base.Owner.Creature,
+            "Cast",
+            base.Owner.Character.CastAnimDelay
+        );
 
         var cards = await CommonActions.SelectCards(
             this,

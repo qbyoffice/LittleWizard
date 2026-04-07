@@ -18,6 +18,11 @@ public class Copying() : LittleWizardCard(1, CardType.Skill, CardRarity.Rare, Ta
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await CreatureCmd.TriggerAnim(
+            base.Owner.Creature,
+            "Cast",
+            base.Owner.Character.CastAnimDelay
+        );
         if (Owner.Creature.Player == null)
             return;
         var allCards = new List<CardModel>();

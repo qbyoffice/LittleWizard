@@ -34,6 +34,11 @@ public class ElementAggregation()
         if (IsUpgraded)
             card.SetToFreeThisTurn();
         await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, true);
+        await CreatureCmd.TriggerAnim(
+            base.Owner.Creature,
+            "Cast",
+            base.Owner.Character.CastAnimDelay
+        );
     }
 
     protected override void OnUpgrade()

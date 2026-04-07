@@ -78,6 +78,11 @@ public class ElementBurst()
                 Owner.Creature,
                 this
             );
+        await CreatureCmd.TriggerAnim(
+            base.Owner.Creature,
+            "Cast",
+            base.Owner.Character.CastAnimDelay
+        );
     }
 
     protected override void OnUpgrade()

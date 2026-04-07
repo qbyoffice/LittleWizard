@@ -3,6 +3,7 @@ using LittleWizard.Api;
 using LittleWizard.Api.Cards;
 using LittleWizard.Api.Extensions;
 using LittleWizard.Powers.Elements;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -30,6 +31,11 @@ public class Earthquake()
         await Utils.GivePower<EarthElement>(this, play);
         await Utils.GivePower<VulnerablePower>(this, play);
         await Utils.GivePower<WeakPower>(this, play);
+        await CreatureCmd.TriggerAnim(
+            base.Owner.Creature,
+            "Cast",
+            base.Owner.Character.CastAnimDelay
+        );
     }
 
     protected override void OnUpgrade()

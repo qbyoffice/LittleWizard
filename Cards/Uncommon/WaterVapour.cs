@@ -29,6 +29,11 @@ public class WaterVapour()
         }
 
         await Utils.GivePower<WaterVapourPower>(this, cardPlay);
+        await CreatureCmd.TriggerAnim(
+            base.Owner.Creature,
+            "Cast",
+            base.Owner.Character.CastAnimDelay
+        );
     }
 
     protected override void OnUpgrade()

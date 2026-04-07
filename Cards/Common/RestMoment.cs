@@ -23,6 +23,11 @@ public class RestMoment() : LittleWizardCard(2, CardType.Skill, CardRarity.Commo
             Owner.Creature,
             this
         );
+        await CreatureCmd.TriggerAnim(
+            base.Owner.Creature,
+            "Cast",
+            base.Owner.Character.CastAnimDelay
+        );
     }
 
     protected override void OnUpgrade()

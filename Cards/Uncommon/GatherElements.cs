@@ -31,5 +31,10 @@ public class GatherElements()
         {
             await Utils.GivePower<GatherElementsPower>(this, cardPlay);
         }
+        await CreatureCmd.TriggerAnim(
+            base.Owner.Creature,
+            "Cast",
+            base.Owner.Character.CastAnimDelay
+        );
     }
 }
