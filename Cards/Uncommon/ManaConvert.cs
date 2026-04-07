@@ -13,7 +13,7 @@ public class ManaConvert()
 {
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        var prefs = new CardSelectorPrefs(CardSelectorPrefs.ExhaustSelectionPrompt, 1);
+        var prefs = new CardSelectorPrefs(CardSelectorPrefs.ExhaustSelectionPrompt, 0, 10);
         var cards = await CardSelectCmd.FromSimpleGrid(
             choiceContext,
             PileType.Hand.GetPile(Owner).Cards.Where(ElementHelper.IsElementCard).ToList(),
