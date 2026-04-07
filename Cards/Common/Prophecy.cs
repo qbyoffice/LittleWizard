@@ -18,13 +18,11 @@ public class Prophecy() : LittleWizardCard(1, CardType.Skill, CardRarity.Common,
             SelectionScreenPrompt,
             choiceContext,
             PileType.Discard,
-            minCount: 0,
-            maxCount: DynamicVars.Cards.IntValue
+            0,
+            DynamicVars.Cards.IntValue
         );
         foreach (var card in cards)
-        {
             await CardPileCmd.Add(card, PileType.Draw, CardPilePosition.Top);
-        }
     }
 
     protected override void OnUpgrade()

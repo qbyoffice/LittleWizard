@@ -21,7 +21,7 @@ public class MorningGrumpiness()
         await CommonActions.CardBlock(this, play);
         await Utils.GivePower<MorningGrumpinessPower>(this, play);
         if (Owner.Creature.Player != null)
-            PlayerCmd.EndTurn(Owner.Creature.Player, true);
+            PlayerCmd.EndTurn(Owner.Creature.Player, false);
     }
 
     protected override void OnUpgrade()

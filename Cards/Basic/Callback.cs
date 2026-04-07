@@ -1,3 +1,4 @@
+using LittleWizard.Api.Animation;
 using LittleWizard.Api.Cards;
 using LittleWizard.Api.Powers;
 using MegaCrit.Sts2.Core.CardSelection;
@@ -24,11 +25,7 @@ public sealed class Callback()
         if (card == null)
             return;
         await CardPileCmd.Add(card, PileType.Draw, CardPilePosition.Top);
-        await CreatureCmd.TriggerAnim(
-            base.Owner.Creature,
-            "Cast",
-            base.Owner.Character.CastAnimDelay
-        );
+        await AnimationHelper.TriggerCastAnimationOwner(this);
     }
 
     protected override void OnUpgrade()

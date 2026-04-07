@@ -1,7 +1,7 @@
-using BaseLib.Utils;
 using LittleWizard.Api.Cards;
 using LittleWizard.Api.Extensions;
 using LittleWizard.Powers.Elements;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -19,13 +19,18 @@ public class Earthbound()
             new CalculationBaseVar(6),
             new CalculationExtraVar(1),
             new CalculatedBlockVar(ValueProp.Move).WithMultiplier(
-                (card, target) => target?.GetPowerAmount<EarthElement>() ?? 0
+                (_, target) => target?.GetPowerAmount<EarthElement>() ?? 0
             ),
         ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await CommonActions.CardBlock(this, cardPlay);
+        await CreatureCmd.GainBlock(
+            Owner.Creature,
+            DynamicVars.CalculatedBlock.Calculate(cardPlay.Target),
+            DynamicVars.CalculatedBlock.Props,
+            cardPlay
+        );
     }
 
     protected override void OnUpgrade()

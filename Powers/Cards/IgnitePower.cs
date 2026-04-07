@@ -21,9 +21,9 @@ public class IgnitePower : LittleWizardPower
     {
         if (
             amount == 0
+            || target != Owner
             || canonicalPower is not FireElement
-            || !canonicalPower.Owner.IsEnemy
-            || applier != Owner
+            || !canonicalPower.IsVisible
         )
         {
             modifiedAmount = amount;

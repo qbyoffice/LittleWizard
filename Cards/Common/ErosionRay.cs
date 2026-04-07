@@ -1,11 +1,11 @@
 using BaseLib.Utils;
+using LittleWizard.Api.Animation;
 using LittleWizard.Api.Cards;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LittleWizard.Cards.Common;
@@ -22,15 +22,23 @@ public class ErosionRay()
         var debuffs = play.Target.Powers.Where(p => p.Type == PowerType.Debuff).ToList();
         if (debuffs.Count <= 0)
             return;
-        var randomDebuff = Rng.Chaotic.NextItem(debuffs);
-        if (randomDebuff == null)
-            return;
-        await PowerCmd.Apply(randomDebuff, play.Target, randomDebuff.Amount, Owner.Creature, this);
-        await CreatureCmd.TriggerAnim(
-            base.Owner.Creature,
-            "Cast",
-            base.Owner.Character.CastAnimDelay
-        );
+        if (play.Target.CombatState != null)
+        {
+            var randomDebuff = play.Target.CombatState.RunState.Rng.CombatOrbGeneration.NextItem(
+                debuffs
+            );
+            if (randomDebuff == null)
+                return;
+            await PowerCmd.Apply(
+                randomDebuff,
+                play.Target,
+                randomDebuff.Amount,
+                Owner.Creature,
+                this
+            );
+        }
+
+        await AnimationHelper.TriggerCastAnimationOwner(this);
     }
 
     protected override void OnUpgrade()

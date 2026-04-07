@@ -7,12 +7,11 @@ using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 
-namespace LittleWizard.Powers.Cards;
+namespace LittleWizard.Powers;
 
-public class MorningGrumpinessPower : LittleWizardPower
+public class StunPower : LittleWizardPower
 {
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Counter;
@@ -37,11 +36,6 @@ public class MorningGrumpinessPower : LittleWizardPower
             return Task.CompletedTask;
         PlayerCmd.EndTurn(player, false);
         return Task.CompletedTask;
-    }
-
-    public override async Task AfterRemoved(Creature oldOwner)
-    {
-        await PowerCmd.Apply<StrengthPower>(oldOwner, 6, oldOwner, null);
     }
 
     public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)

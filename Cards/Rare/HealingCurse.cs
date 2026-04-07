@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using LittleWizard.Api.Animation;
 using LittleWizard.Api.Cards;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -18,11 +19,7 @@ public class HealingCurse()
     {
         Debug.Assert(cardPlay.Target != null);
         await CreatureCmd.Heal(cardPlay.Target, DynamicVars.Heal.IntValue);
-        await CreatureCmd.TriggerAnim(
-            base.Owner.Creature,
-            "Cast",
-            base.Owner.Character.CastAnimDelay
-        );
+        await AnimationHelper.TriggerCastAnimationOwner(this);
     }
 
     protected override void OnUpgrade()

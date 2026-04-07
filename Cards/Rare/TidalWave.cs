@@ -1,4 +1,5 @@
 using BaseLib.Utils;
+using LittleWizard.Api.Animation;
 using LittleWizard.Api.Cards;
 using LittleWizard.Api.DynamicVars;
 using LittleWizard.Api.Extensions;
@@ -22,11 +23,7 @@ public class TidalWave()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         var target = cardPlay.Target;
-        await CreatureCmd.TriggerAnim(
-            base.Owner.Creature,
-            "Cast",
-            base.Owner.Character.CastAnimDelay
-        );
+        await AnimationHelper.TriggerCastAnimationOwner(this);
         if (target == null)
             return;
 

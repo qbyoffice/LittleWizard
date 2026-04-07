@@ -1,3 +1,4 @@
+using LittleWizard.Api.Animation;
 using LittleWizard.Api.Cards;
 using LittleWizard.Api.Powers;
 using MegaCrit.Sts2.Core.CardSelection;
@@ -28,11 +29,8 @@ public class ManaConvert()
             await CardCmd.Exhaust(choiceContext, card);
             await PlayerCmd.GainEnergy(1, Owner);
         }
-        await CreatureCmd.TriggerAnim(
-            base.Owner.Creature,
-            "Cast",
-            base.Owner.Character.CastAnimDelay
-        );
+
+        await AnimationHelper.TriggerCastAnimationOwner(this);
     }
 
     protected override void OnUpgrade()

@@ -10,7 +10,7 @@ namespace LittleWizard.Api.Powers;
 
 public abstract class BaseMoreElementPower : CustomPowerModel
 {
-    public override PowerType Type => PowerType.Buff;
+    public override PowerType Type => Owner.IsPlayer ? PowerType.Buff : PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Counter;
 
     public override bool TryModifyPowerAmountReceived(
@@ -23,9 +23,9 @@ public abstract class BaseMoreElementPower : CustomPowerModel
     {
         if (
             amount == 0
+            || target != Owner
             || canonicalPower is not BaseElement
-            || !canonicalPower.Owner.IsEnemy
-            || applier != Owner
+            || !canonicalPower.IsVisible
         )
         {
             modifiedAmount = amount;

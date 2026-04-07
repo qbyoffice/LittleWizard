@@ -1,3 +1,4 @@
+using LittleWizard.Api.Animation;
 using LittleWizard.Api.Cards;
 using LittleWizard.Api.Extensions;
 using LittleWizard.Powers.Elements;
@@ -35,11 +36,8 @@ public class ElementConvert()
             await PowerCmd.Remove<EarthElement>(cardPlay.Target);
             await PowerCmd.Apply<WaterElement>(cardPlay.Target, earthAmount, Owner.Creature, this);
         }
-        await CreatureCmd.TriggerAnim(
-            base.Owner.Creature,
-            "Cast",
-            base.Owner.Character.CastAnimDelay
-        );
+
+        await AnimationHelper.TriggerCastAnimationOwner(this);
     }
 
     protected override PileType GetResultPileType()

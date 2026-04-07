@@ -1,4 +1,5 @@
 using BaseLib.Utils;
+using LittleWizard.Api.Animation;
 using LittleWizard.Api.Cards;
 using LittleWizard.Api.Extensions;
 using LittleWizard.Powers.Elements;
@@ -29,11 +30,7 @@ public class BurnOut()
         await CommonActions.CardAttack(this, cardPlay).Execute(choiceContext);
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
         await PowerCmd.Remove<FireElement>(cardPlay.Target);
-        await CreatureCmd.TriggerAnim(
-            base.Owner.Creature,
-            "Cast",
-            base.Owner.Character.CastAnimDelay
-        );
+        await AnimationHelper.TriggerCastAnimationOwner(this);
     }
 
     protected override void OnUpgrade()

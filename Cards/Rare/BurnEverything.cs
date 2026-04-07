@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using LittleWizard.Api;
+using LittleWizard.Api.Animation;
 using LittleWizard.Api.Cards;
 using LittleWizard.Api.DynamicVars;
 using LittleWizard.Api.Extensions;
@@ -31,11 +32,7 @@ public class BurnEverything()
         foreach (var enemy in CombatState.Enemies)
             await PowerCmd.Apply<FireElement>(enemy, xValue, Owner.Creature, this);
         await Utils.GivePower<BurnEverythingPower>(this, cardPlay);
-        await CreatureCmd.TriggerAnim(
-            base.Owner.Creature,
-            "Cast",
-            base.Owner.Character.CastAnimDelay
-        );
+        await AnimationHelper.TriggerCastAnimationOwner(this);
     }
 
     protected override void OnUpgrade()

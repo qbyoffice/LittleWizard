@@ -6,6 +6,7 @@ namespace LittleWizard.Character;
 public class LittleWizardCardPool : CustomCardPoolModel
 {
     public override string Title => LittleWizard.InnerName;
+
     public override string BigEnergyIconPath =>
         "res://LittleWizard/images/ui/combat/LittleWizard_energy_icon.png";
 

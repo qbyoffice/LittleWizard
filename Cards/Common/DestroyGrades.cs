@@ -1,5 +1,6 @@
 using BaseLib.Utils;
 using LittleWizard.Api;
+using LittleWizard.Api.Animation;
 using LittleWizard.Api.Cards;
 using LittleWizard.Api.Extensions;
 using LittleWizard.Powers.Elements;
@@ -32,11 +33,7 @@ public class DestroyGrades()
         if (card == null)
             return;
         await CardCmd.Exhaust(choiceContext, card);
-        await CreatureCmd.TriggerAnim(
-            base.Owner.Creature,
-            "Cast",
-            base.Owner.Character.CastAnimDelay
-        );
+        await AnimationHelper.TriggerCastAnimationOwner(this);
     }
 
     protected override void OnUpgrade()

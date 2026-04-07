@@ -1,10 +1,10 @@
 using LittleWizard.Api.Extensions;
 using LittleWizard.Api.Interface;
 using LittleWizard.Powers.Elements;
+using LittleWizard.Powers.Elements.Reacts;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Random;
 
 namespace LittleWizard.Api.Powers;
 
@@ -17,23 +17,26 @@ public static class ElementHelper
         CardModel? cardSource
     )
     {
-        var randomElement = Rng.Chaotic.NextInt(0, 3);
-        switch (randomElement)
+        if (applier is { CombatState: not null })
         {
-            case 0:
+            var randomElement = applier.CombatState.RunState.Rng.CombatOrbGeneration.NextInt(0, 3);
+            switch (randomElement)
             {
-                await PowerCmd.Apply<FireElement>(target, amount, applier, cardSource);
-                return;
-            }
-            case 1:
-            {
-                await PowerCmd.Apply<WaterElement>(target, amount, applier, cardSource);
-                return;
-            }
-            case 2:
-            {
-                await PowerCmd.Apply<EarthElement>(target, amount, applier, cardSource);
-                return;
+                case 0:
+                {
+                    await PowerCmd.Apply<FireElement>(target, amount, applier, cardSource);
+                    return;
+                }
+                case 1:
+                {
+                    await PowerCmd.Apply<WaterElement>(target, amount, applier, cardSource);
+                    return;
+                }
+                case 2:
+                {
+                    await PowerCmd.Apply<EarthElement>(target, amount, applier, cardSource);
+                    return;
+                }
             }
         }
     }
@@ -55,7 +58,7 @@ public static class ElementHelper
         Creature? applier
     )
     {
-        PowerCmd.Apply<FireAndEarthElementReactorPower>(owner, amountA * amountB, applier, null);
+        PowerCmd.Apply<FireAndEarthElementReactorPower>(owner, amountA + amountB, applier, null);
     }
 
     public static void WaterAndEarth(
@@ -65,7 +68,7 @@ public static class ElementHelper
         Creature? applier
     )
     {
-        PowerCmd.Apply<WaterAndEarthElementReactorPower>(owner, amountA * amountB, applier, null);
+        PowerCmd.Apply<WaterAndEarthElementReactorPower>(owner, amountA + amountB, applier, null);
     }
 
     public static bool IsElementCard(CardModel card)

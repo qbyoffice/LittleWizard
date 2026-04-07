@@ -15,6 +15,8 @@ public class RockWallPower : LittleWizardPower
 
     public override bool ShouldPlay(CardModel card, AutoPlayType autoPlayType)
     {
+        if (card.Owner.Creature != Owner)
+            return true;
         return !ElementHelper.IsElementCard(card);
     }
 

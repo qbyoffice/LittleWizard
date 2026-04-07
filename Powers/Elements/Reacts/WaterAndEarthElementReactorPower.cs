@@ -3,19 +3,20 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Random;
+using MegaCrit.Sts2.Core.ValueProps;
 
-namespace LittleWizard.Powers.Elements;
+namespace LittleWizard.Powers.Elements.Reacts;
 
 public class WaterAndEarthElementReactorPower : LittleWizardPower
 {
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
+    public override Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
-        if (Amount > Rng.Chaotic.NextInt(0, 100))
-            await CreatureCmd.Stun(Owner);
-        await PowerCmd.Remove(this);
+        if (applier != null)
+            CreatureCmd.GainBlock(applier, Amount, ValueProp.Move, null);
+        PowerCmd.Remove(this);
+        return Task.CompletedTask;
     }
 }

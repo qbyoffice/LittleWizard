@@ -1,6 +1,6 @@
 using BaseLib.Utils;
+using LittleWizard.Api.Animation;
 using LittleWizard.Api.Cards;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -28,11 +28,7 @@ public class ForbiddenSoulBinding()
         if (cardPlay.Target == null)
             return;
         await CommonActions.CardAttack(this, cardPlay).Execute(choiceContext);
-        await CreatureCmd.TriggerAnim(
-            base.Owner.Creature,
-            "Cast",
-            base.Owner.Character.CastAnimDelay
-        );
+        await AnimationHelper.TriggerCastAnimationOwner(this);
     }
 
     protected override void OnUpgrade()

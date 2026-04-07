@@ -35,7 +35,7 @@ public class FireElement : BaseElement
         out decimal modifiedAmount
     )
     {
-        if (target != Owner)
+        if (target != Owner || amount == 0)
         {
             modifiedAmount = amount;
             return false;

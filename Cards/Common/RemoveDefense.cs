@@ -1,4 +1,5 @@
 using LittleWizard.Api;
+using LittleWizard.Api.Animation;
 using LittleWizard.Api.Cards;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -19,11 +20,7 @@ public class RemoveDefense()
         if (cardPlay.Target.Block > 0)
             await CreatureCmd.LoseBlock(cardPlay.Target, cardPlay.Target.Block);
         await Utils.GivePower<VulnerablePower>(this, cardPlay);
-        await CreatureCmd.TriggerAnim(
-            base.Owner.Creature,
-            "Cast",
-            base.Owner.Character.CastAnimDelay
-        );
+        await AnimationHelper.TriggerCastAnimationOwner(this);
     }
 
     protected override void OnUpgrade()

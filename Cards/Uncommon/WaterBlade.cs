@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using LittleWizard.Api.Animation;
 using LittleWizard.Api.Cards;
 using LittleWizard.Api.DynamicVars;
 using LittleWizard.Api.Extensions;
@@ -32,11 +33,8 @@ public class WaterBlade()
             if (enemy.Block > 0)
                 await CreatureCmd.LoseBlock(enemy, enemy.Block);
         }
-        await CreatureCmd.TriggerAnim(
-            base.Owner.Creature,
-            "Cast",
-            base.Owner.Character.CastAnimDelay
-        );
+
+        await AnimationHelper.TriggerCastAnimationOwner(this);
     }
 
     protected override void OnUpgrade()

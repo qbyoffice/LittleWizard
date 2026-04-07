@@ -5,17 +5,18 @@ using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 
-namespace LittleWizard.Powers.Elements;
+namespace LittleWizard.Powers.Elements.Reacts;
 
 public class FireAndWaterElementReactorPower : LittleWizardPower
 {
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
+    public override Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
-        await PowerCmd.Apply<ElementTemporaryStrengthPower>(Owner, Amount, applier, cardSource);
-        await PowerCmd.Apply<VulnerablePower>(Owner, Amount, applier, cardSource);
-        await PowerCmd.Remove(this);
+        PowerCmd.Apply<ElementTemporaryStrengthPower>(Owner, Amount, applier, cardSource);
+        PowerCmd.Apply<VulnerablePower>(Owner, Amount, applier, cardSource);
+        PowerCmd.Remove(this);
+        return Task.CompletedTask;
     }
 }

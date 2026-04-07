@@ -1,3 +1,4 @@
+using LittleWizard.Api.Animation;
 using LittleWizard.Api.Cards;
 using LittleWizard.Api.DynamicVars;
 using LittleWizard.Api.Extensions;
@@ -27,11 +28,8 @@ public class IceBlock()
             await PowerCmd.Remove<WaterElement>(cardPlay.Target);
             await CreatureCmd.Stun(cardPlay.Target);
         }
-        await CreatureCmd.TriggerAnim(
-            base.Owner.Creature,
-            "Cast",
-            base.Owner.Character.CastAnimDelay
-        );
+
+        await AnimationHelper.TriggerCastAnimationOwner(this);
     }
 
     protected override void OnUpgrade()

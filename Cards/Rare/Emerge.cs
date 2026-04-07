@@ -8,8 +8,10 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace LittleWizard.Cards.Rare;
 
-public class Emerge() : LittleWizardCard(1, CardType.Power, CardRarity.Rare, TargetType.Self)
+public class Emerge() : LittleWizardCard(1, CardType.Skill, CardRarity.Rare, TargetType.AnyEnemy)
 {
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<EmergePower>(3)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

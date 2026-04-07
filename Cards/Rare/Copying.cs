@@ -1,3 +1,4 @@
+using LittleWizard.Api.Animation;
 using LittleWizard.Api.Cards;
 using LittleWizard.Character;
 using MegaCrit.Sts2.Core.CardSelection;
@@ -18,11 +19,7 @@ public class Copying() : LittleWizardCard(1, CardType.Skill, CardRarity.Rare, Ta
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await CreatureCmd.TriggerAnim(
-            base.Owner.Creature,
-            "Cast",
-            base.Owner.Character.CastAnimDelay
-        );
+        await AnimationHelper.TriggerCastAnimationOwner(this);
         if (Owner.Creature.Player == null)
             return;
         var allCards = new List<CardModel>();

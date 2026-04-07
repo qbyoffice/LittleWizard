@@ -20,19 +20,14 @@ public abstract class BaseBannedPower<T> : LittleWizardPower
     }
 
     public override bool TryModifyPowerAmountReceived(
-        PowerModel canonicalPower,
+        PowerModel? canonicalPower,
         Creature target,
         decimal amount,
         Creature? applier,
         out decimal modifiedAmount
     )
     {
-        if (
-            amount == 0
-            || canonicalPower is not T
-            || !canonicalPower.Owner.IsEnemy
-            || applier != Owner
-        )
+        if (amount == 0 || target != Owner || canonicalPower is not T || !canonicalPower.IsVisible)
         {
             modifiedAmount = amount;
             return false;

@@ -1,4 +1,5 @@
 using BaseLib.Utils;
+using LittleWizard.Api.Animation;
 using LittleWizard.Api.Cards;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
@@ -25,7 +26,7 @@ public class Rejuvenation() : LittleWizardCard(6, CardType.Power, CardRarity.Rar
         );
         foreach (var card in cards)
         {
-            await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
+            await AnimationHelper.TriggerCastAnimationOwner(this);
             await CardPileCmd.RemoveFromDeck(card);
         }
     }

@@ -1,3 +1,4 @@
+using System.Reflection;
 using BaseLib.Utils;
 using LittleWizard.Api.Cards;
 using LittleWizard.Api.Powers;
@@ -13,6 +14,8 @@ namespace LittleWizard.Cards.Uncommon;
 
 public class LikeNew() : LittleWizardCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
+    private static PropertyInfo? _hasEnergyCostXProperty;
+
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         if (Owner.Creature.Player == null)
@@ -27,6 +30,11 @@ public class LikeNew() : LittleWizardCard(1, CardType.Skill, CardRarity.Uncommon
         if (cardToExhaust == null)
             return;
         var cost = cardToExhaust.EnergyCost.GetResolved();
+        if (GetHasEnergyCostX(cardToExhaust))
+            cost = 1;
+
+        if (cardToExhaust.Keywords.Contains(CardKeyword.Unplayable))
+            cost = 0;
         await CardCmd.Exhaust(choiceContext, cardToExhaust);
 
         var card = CardFactory
@@ -50,5 +58,28 @@ public class LikeNew() : LittleWizardCard(1, CardType.Skill, CardRarity.Uncommon
     protected override void OnUpgrade()
     {
         EnergyCost.UpgradeBy(-1);
+    }
+
+    private static bool GetHasEnergyCostX(object cardToExhaust)
+    {
+        ArgumentNullException.ThrowIfNull(cardToExhaust);
+
+        // 缓存 PropertyInfo 避免重复反射
+        if (_hasEnergyCostXProperty == null)
+            _hasEnergyCostXProperty = cardToExhaust
+                .GetType()
+                .GetProperty(
+                    "HasEnergyCostX",
+                    BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public
+                );
+
+        if (_hasEnergyCostXProperty == null)
+            throw new InvalidOperationException(
+                "Property 'HasEnergyCostX' not found on type " + cardToExhaust.GetType()
+            );
+
+        return (bool)(
+            _hasEnergyCostXProperty.GetValue(cardToExhaust) ?? throw new InvalidOperationException()
+        );
     }
 }

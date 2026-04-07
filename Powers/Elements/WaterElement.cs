@@ -8,7 +8,7 @@ namespace LittleWizard.Powers.Elements;
 
 public class WaterElement : BaseElement
 {
-    public override decimal ModifyDamageMultiplicative(
+    public override decimal ModifyDamageAdditive(
         Creature? target,
         decimal amount,
         ValueProp props,
@@ -16,10 +16,10 @@ public class WaterElement : BaseElement
         CardModel? cardSource
     )
     {
-        if (dealer != Owner || !Utils.IsPoweredAttack(props))
-            return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
-        return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource)
-            - Amount * (decimal)0.03;
+        // ReSharper disable once PossibleLossOfFraction
+        return Owner != dealer || !Utils.IsPoweredAttack(props)
+            ? 0M
+            : -Math.Ceiling((decimal)(Amount / 2));
     }
 
     public override bool TryModifyPowerAmountReceived(
@@ -30,7 +30,7 @@ public class WaterElement : BaseElement
         out decimal modifiedAmount
     )
     {
-        if (target != Owner)
+        if (target != Owner || amount == 0)
         {
             modifiedAmount = amount;
             return false;

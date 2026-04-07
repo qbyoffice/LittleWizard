@@ -6,16 +6,16 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 
-namespace LittleWizard.Powers.Elements;
+namespace LittleWizard.Powers.Elements.Reacts;
 
 public class FireAndEarthElementReactorPower : LittleWizardPower
 {
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
+    public override Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
-        await CreatureCmd.Damage(
+        CreatureCmd.Damage(
             new ThrowingPlayerChoiceContext(),
             Owner,
             Amount,
@@ -23,6 +23,7 @@ public class FireAndEarthElementReactorPower : LittleWizardPower
             applier,
             cardSource
         );
-        await PowerCmd.Remove(this);
+        PowerCmd.Remove(this);
+        return Task.CompletedTask;
     }
 }

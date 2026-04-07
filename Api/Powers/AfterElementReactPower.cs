@@ -1,4 +1,4 @@
-using LittleWizard.Powers.Elements;
+using LittleWizard.Powers.Elements.Reacts;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Models;
 
@@ -13,6 +13,8 @@ public abstract class AfterElementReactPower : LittleWizardPower
         CardModel? cardSource
     )
     {
+        if (power.Owner != Owner)
+            return;
         if (
             power
             is FireAndWaterElementReactorPower
