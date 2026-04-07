@@ -17,20 +17,7 @@ public class DefendLittleWizard()
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        await CreatureCmd.TriggerAnim(
-            base.Owner.Creature,
-            "Cast",
-            base.Owner.Character.CastAnimDelay
-        );
-        await PotionCmd.TryToProcure(
-            PotionFactory
-                .CreateRandomPotionInCombat(
-                    base.Owner,
-                    base.Owner.RunState.Rng.CombatPotionGeneration
-                )
-                .ToMutable(),
-            base.Owner
-        );
+        await CommonActions.CardBlock(this, play);
     }
 
     protected override void OnUpgrade()
