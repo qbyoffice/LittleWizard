@@ -9,7 +9,8 @@ namespace LittleWizard.Powers.Elements;
 public class ElementTemporaryStrengthPower : CustomTemporaryPowerModel
 {
     protected override Func<Creature, decimal, Creature?, CardModel?, bool, Task> ApplyPowerFunc =>
-        PowerCmd.Apply<StrengthPower>;
+        async (creature, amount, applier, boolean, task) =>
+            await PowerCmd.Apply<StrengthPower>(creature, -amount, applier, boolean, task);
 
     public override PowerModel InternallyAppliedPower => ModelDb.Power<StrengthPower>();
     public override AbstractModel OriginModel => ModelDb.Power<FireAndWaterElementReactorPower>();
