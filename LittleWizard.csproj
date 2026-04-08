@@ -140,7 +140,7 @@
       Version="0.101.0-beta-a6b8b83d"
       PrivateAssets="All"
     />
-   </ItemGroup>
+  </ItemGroup>
 
   <Target Name="CopyToModsFolderOnBuild" AfterTargets="PostBuildEvent">
     <Message Text="Copying .dll and manifest to mods folder." Importance="high" />

@@ -9,7 +9,7 @@ namespace LittleWizard.Cards.Rare;
 
 public class WildMagic() : LittleWizardCard(4, CardType.Power, CardRarity.Rare, TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<WildMagicPower>(10)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<WildMagicPower>(1)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

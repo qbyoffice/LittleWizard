@@ -21,16 +21,9 @@ public class WildMagicPower : LittleWizardPower
         CardModel? cardSource
     )
     {
-        return
-            dealer != null
-            && (
-                Utils.IsPoweredAttack(props)
-                || cardSource == null
-                || (dealer != Owner && !Owner.Pets.Contains(dealer))
-                || target == null
-            )
+        return dealer != Owner || !Utils.IsPoweredAttack(props)
             ? base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource)
-            : Amount;
+            : Amount + 1;
     }
 
     public override decimal ModifyPowerAmountGiven(
@@ -44,7 +37,7 @@ public class WildMagicPower : LittleWizardPower
         if (giver != Owner || power is not BaseElement)
             return base.ModifyPowerAmountGiven(power, giver, amount, target, cardSource);
 
-        return Amount;
+        return (Amount + 1) * amount;
     }
 
     public override decimal ModifyBlockMultiplicative(

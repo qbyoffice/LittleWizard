@@ -41,7 +41,7 @@ public class Copying() : LittleWizardCard(1, CardType.Skill, CardRarity.Rare, Ta
             DynamicVars[Selected].IntValue,
             Owner.Creature.Player.RunState.Rng.CombatCardSelection
         );
-        var prefs = new CardSelectorPrefs(SelectionScreenPrompt, DynamicVars.Cards.IntValue);
+        var prefs = new CardSelectorPrefs(SelectionScreenPrompt, 0, DynamicVars.Cards.IntValue);
         var cards = await CardSelectCmd.FromSimpleGrid(
             choiceContext,
             canSelectedCards.ToList(),
