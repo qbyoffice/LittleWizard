@@ -69,9 +69,6 @@ public class LittleWizard : PlaceholderCharacterModel
 	public override string CustomCharacterSelectLockedIconPath =>
 		"res://LittleWizard/images/LittleWizard/char_select_LittleWizard_locked.png";
 
-    public override string CustomCharacterSelectLockedIconPath =>
-        "res://LittleWizard/images/LittleWizard/char_select_LittleWizard_locked.png";
-
     public override string CustomCharacterSelectIconPath =>
         "res://LittleWizard/images/LittleWizard/char_select_LittleWizard.png";
 }
