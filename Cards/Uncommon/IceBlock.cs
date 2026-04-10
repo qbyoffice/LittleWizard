@@ -17,7 +17,7 @@ public class IceBlock()
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<WaterElement>(7)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<WaterElement>(6)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -34,6 +34,6 @@ public class IceBlock()
 
     protected override void OnUpgrade()
     {
-        DynamicVarsHelper.GetPowerVar<WaterElement>(DynamicVars).UpgradeValueBy(-1);
+        AddKeyword(CardKeyword.Retain);
     }
 }

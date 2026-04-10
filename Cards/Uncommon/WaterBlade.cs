@@ -1,4 +1,6 @@
 using System.Diagnostics;
+using BaseLib.Utils;
+using LittleWizard.Api;
 using LittleWizard.Api.Animation;
 using LittleWizard.Api.Cards;
 using LittleWizard.Api.DynamicVars;
@@ -8,32 +10,24 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LittleWizard.Cards.Uncommon;
 
 public class WaterBlade()
-    : LittleWizardCard(2, CardType.Skill, CardRarity.Uncommon, TargetType.AllEnemies)
+    : LittleWizardCard(2, CardType.Skill, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.LittleWizardElement];
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<WaterElement>(6)];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new DamageVar(18, ValueProp.Move), new PowerVar<WaterElement>(6)];
 
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        Debug.Assert(CombatState != null, nameof(CombatState) + " != null");
-        foreach (var enemy in CombatState.HittableEnemies)
-        {
-            if (
-                enemy.GetPowerAmount<WaterElement>()
-                < DynamicVarsHelper.GetPowerVar<WaterElement>(DynamicVars).BaseValue
-            )
-                continue;
-            if (enemy.Block > 0)
-                await CreatureCmd.LoseBlock(enemy, enemy.Block);
-        }
-
+        await CommonActions.CardAttack(this, cardPlay).Execute(choiceContext);
+        await Utils.GivePower<WaterElement>(this, cardPlay);
         await AnimationHelper.TriggerCastAnimationOwner(this);
     }
 

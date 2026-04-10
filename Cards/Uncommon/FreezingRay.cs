@@ -8,10 +8,10 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 
-namespace LittleWizard.Cards.Common;
+namespace LittleWizard.Cards.Uncommon;
 
 public class FreezingRay()
-    : LittleWizardCard(1, CardType.Attack, CardRarity.Common, TargetType.AllEnemies)
+    : LittleWizardCard(1, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.LittleWizardElement];
 

@@ -10,10 +10,10 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace LittleWizard.Cards.Uncommon;
 
-public class RockWall() : LittleWizardCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
+public class RockWall() : LittleWizardCard(3, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new BlockVar(25, ValueProp.Move), new PowerVar<RockWallPower>(2)];
+        [new BlockVar(15, ValueProp.Move), new PowerVar<RockWallPower>(1)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {

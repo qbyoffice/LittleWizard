@@ -8,12 +8,13 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 
-namespace LittleWizard.Cards.Common;
+namespace LittleWizard.Cards.Uncommon;
 
-public class RestMoment() : LittleWizardCard(2, CardType.Skill, CardRarity.Common, TargetType.Self)
+public class RestMoment()
+    : LittleWizardCard(2, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new BlockVar(10, ValueProp.Move), new EnergyVar(2)];
+        [new BlockVar(12, ValueProp.Move), new EnergyVar(3)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -29,6 +30,6 @@ public class RestMoment() : LittleWizardCard(2, CardType.Skill, CardRarity.Commo
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Energy.UpgradeValueBy(1);
+        AddKeyword(CardKeyword.Retain);
     }
 }

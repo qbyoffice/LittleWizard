@@ -195,5 +195,7 @@
   "LITTLEWIZARD-REBIRTH_CEREMONY.title": "RebirthCeremony",
   "LITTLEWIZARD-TURNBACK.description": "",
   "LITTLEWIZARD-TURNBACK.title": "Turnback",
-  "LITTLEWIZARD-TURNBACK.selectionScreenPrompt": ""
+  "LITTLEWIZARD-TURNBACK.selectionScreenPrompt": "",
+  "LITTLEWIZARD-FROZEN_WORLD.description": "",
+  "LITTLEWIZARD-FROZEN_WORLD.title": "FrozenWorld"
 }

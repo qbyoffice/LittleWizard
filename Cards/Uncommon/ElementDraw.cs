@@ -5,33 +5,38 @@ using LittleWizard.Powers.Elements;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace LittleWizard.Cards.Uncommon;
 
 public class ElementDraw()
-    : LittleWizardCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.AnyEnemy)
+    : LittleWizardCard(0, CardType.Skill, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.LittleWizardElement];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new EnergyVar(2)];
+
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
 
-        var fireAmount = cardPlay.Target.GetPowerAmount<FireElement>();
-        if (fireAmount > 0)
+        if (cardPlay.Target.GetPowerAmount<FireElement>() > 0)
+        {
             await PowerCmd.Remove<FireElement>(cardPlay.Target);
-        var waterAmount = cardPlay.Target.GetPowerAmount<WaterElement>();
-        if (waterAmount > 0)
+            await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue, Owner);
+        }
+        else if (cardPlay.Target.GetPowerAmount<WaterElement>() > 0)
+        {
             await PowerCmd.Remove<WaterElement>(cardPlay.Target);
-        var earthAmount = cardPlay.Target.GetPowerAmount<EarthElement>();
-        if (earthAmount > 0)
+            await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue, Owner);
+        }
+        else if (cardPlay.Target.GetPowerAmount<EarthElement>() > 0)
+        {
             await PowerCmd.Remove<EarthElement>(cardPlay.Target);
-
-        var totalElements = fireAmount + waterAmount + earthAmount;
-        if (totalElements > 0)
-            await PlayerCmd.GainEnergy(totalElements, Owner);
+            await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue, Owner);
+        }
         await AnimationHelper.TriggerCastAnimationOwner(this);
     }
 
