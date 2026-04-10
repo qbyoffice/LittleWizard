@@ -186,7 +186,7 @@
   "LITTLEWIZARD-IGNITE.title": "引燃",
   "LITTLEWIZARD-IGNITE.description": "造成{Damage:diff()}点伤害。\n如果该名敌人未拥有[gold]火元素[/gold]，则接下来被给予的[gold]火元素[/gold]层数翻倍。",
   "LITTLEWIZARD-RETRAIN.title": "重修",
-  "LITTLEWIZARD-RETRAIN.description": "获得3张\"略过\"（{energyPrefix:energyIcons(1)}，[gold]技能[/gold]牌，丢弃所有手牌抽等量的牌）。",
+  "LITTLEWIZARD-RETRAIN.description": "获得3张\"略过\"。",
   "LITTLEWIZARD-WATER_VAPOUR.title": "水蒸气",
   "LITTLEWIZARD-WATER_VAPOUR.description": "去除敌人身上的所有[gold]人工制品[/gold]。\n每移除1层[gold]人工制品[/gold]，敌人永久失去1点[gold]力量[/gold]。\n在敌人的回合开始时给予该敌人{WaterElement:diff()}层[gold]水元素[/gold]。",
   "LITTLEWIZARD-SHORT_CIRCUIT_WATER_BALL.title": "短路水球",
@@ -196,6 +196,6 @@
   "LITTLEWIZARD-TURNBACK.title": "回转",
   "LITTLEWIZARD-TURNBACK.description": "将弃牌堆的两张能施加[gold]元素[/gold]的牌放入手牌。",
   "LITTLEWIZARD-TURNBACK.selectionScreenPrompt": "选择要放入手牌的牌",
-  "LITTLEWIZARD-FROZEN_WORLD.description": "",
-  "LITTLEWIZARD-FROZEN_WORLD.title": "FrozenWorld"
+  "LITTLEWIZARD-FROZEN_WORLD.description": "获得{CalculatedBlock:diff()}点[gold]格挡[/gold]。如果敌人拥有至少4层[gold]水元素[/gold]，则额外获得{CalculationExtra:diff()}点[gold]格挡[/gold]",
+  "LITTLEWIZARD-FROZEN_WORLD.title": "冻结领域"
 }
