@@ -8,7 +8,7 @@
         <DefaultItemExcludes>packages/**</DefaultItemExcludes>
         <AppOutputBase>$(MSBuildProjectDirectory)\</AppOutputBase>
         <PathMap>$(AppOutputBase)=.\</PathMap>
-        <Version>0.8.3</Version>
+        <Version>0.8.4</Version>
         <Authors>iouter, w_s_L, AOShiRo</Authors>
     </PropertyGroup>
 
@@ -143,7 +143,7 @@
     <ItemGroup Condition="!Exists('$(Sts2DataDir)/sts2.dll')">
         <PackageReference
             Include="BSchneppe.Sts2.ReferenceAssemblies"
-            Version="0.102.0-beta-5fd772f8"
+            Version="0.103.0-beta-bb50d016"
             PrivateAssets="All"
         />
     </ItemGroup>
