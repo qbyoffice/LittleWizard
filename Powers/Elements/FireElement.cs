@@ -1,14 +1,14 @@
 //using System.Linq;//
-using Godot;
-//using LittleWizard.Api.Nodes;//
+
 using LittleWizard.Api.Powers;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
-//using MegaCrit.Sts2.Core.Nodes.Vfx;//
 using MegaCrit.Sts2.Core.ValueProps;
+//using LittleWizard.Api.Nodes;//
+//using MegaCrit.Sts2.Core.Nodes.Vfx;//
 
 namespace LittleWizard.Powers.Elements;
 
