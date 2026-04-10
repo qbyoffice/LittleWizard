@@ -17,12 +17,19 @@ public class Rejuvenation() : LittleWizardCard(6, CardType.Power, CardRarity.Rar
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        var cards = await CommonActions.SelectCards(
-            this,
+        var prefs = new CardSelectorPrefs(
             CardSelectorPrefs.RemoveSelectionPrompt,
-            choiceContext,
-            PileType.Deck,
+            0,
             DynamicVars.Cards.IntValue
+        );
+        var cards = await CardSelectCmd.FromSimpleGrid(
+            choiceContext,
+            PileType
+                .Deck.GetPile(Owner)
+                .Cards.Where(c => !c.Keywords.Contains(CardKeyword.Eternal))
+                .ToList(),
+            Owner,
+            prefs
         );
         foreach (var card in cards)
         {

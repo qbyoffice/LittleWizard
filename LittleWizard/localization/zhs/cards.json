@@ -195,5 +195,7 @@
   "LITTLEWIZARD-REBIRTH_CEREMONY.description": "失去{HpLoss:diff()}点生命值。移除自身所有[gold]负面状态[/gold]。",
   "LITTLEWIZARD-TURNBACK.title": "回转",
   "LITTLEWIZARD-TURNBACK.description": "将弃牌堆的两张能施加[gold]元素[/gold]的牌放入手牌。",
-  "LITTLEWIZARD-TURNBACK.selectionScreenPrompt": "选择要放入手牌的牌"
+  "LITTLEWIZARD-TURNBACK.selectionScreenPrompt": "选择要放入手牌的牌",
+  "LITTLEWIZARD-FROZEN_WORLD.description": "",
+  "LITTLEWIZARD-FROZEN_WORLD.title": "FrozenWorld"
 }

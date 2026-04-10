@@ -30,7 +30,7 @@ public class IgnitePower : LittleWizardPower
             return false;
         }
 
-        modifiedAmount = 2 * amount;
+        modifiedAmount = (Amount + 1) * amount;
         return true;
     }
 }

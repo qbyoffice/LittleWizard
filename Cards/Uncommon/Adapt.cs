@@ -17,12 +17,7 @@ public class Adapt() : LittleWizardCard(1, CardType.Skill, CardRarity.Uncommon, 
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.LittleWizardElement];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [
-            new DamageVar(8, ValueProp.Move),
-            new PowerVar<FireElement>(1),
-            new EnergyVar(2),
-            new BlockVar(13, ValueProp.Move),
-        ];
+        [new CardsVar(1), new EnergyVar(2), new BlockVar(13, ValueProp.Move)];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Innate];
 
@@ -36,19 +31,14 @@ public class Adapt() : LittleWizardCard(1, CardType.Skill, CardRarity.Uncommon, 
 
         if (fireAmount > 0)
         {
-            await CommonActions.CardAttack(this, cardPlay).Execute(choiceContext);
-            await Utils.GivePower<FireElement>(this, cardPlay);
-            return;
+            await CommonActions.Draw(this, choiceContext);
         }
-
-        if (waterAmount > 0)
+        else if (waterAmount > 0)
         {
             if (Owner.Creature.Player != null)
                 await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue, Owner.Creature.Player);
-            return;
         }
-
-        if (earthAmount > 0)
+        else if (earthAmount > 0)
             await CommonActions.CardBlock(this, cardPlay);
         await AnimationHelper.TriggerCastAnimationOwner(this);
     }

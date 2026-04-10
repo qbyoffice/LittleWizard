@@ -23,10 +23,15 @@ public class DeepThoughtPower : LittleWizardPower
         return player != Owner.Player;
     }
 
-    public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    public override async Task AfterPlayerTurnStart(
+        PlayerChoiceContext choiceContext,
+        Player player
+    )
     {
-        if (side != CombatSide.Enemy)
+        if (player != Owner.Player)
+        {
             return;
+        }
         await PowerCmd.Decrement(this);
     }
 }

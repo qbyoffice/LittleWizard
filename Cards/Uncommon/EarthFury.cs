@@ -1,9 +1,12 @@
+using System.Diagnostics;
+using BaseLib.Utils;
 using LittleWizard.Api;
 using LittleWizard.Api.Animation;
 using LittleWizard.Api.Cards;
 using LittleWizard.Api.DynamicVars;
 using LittleWizard.Api.Extensions;
 using LittleWizard.Powers.Elements;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -11,22 +14,23 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 namespace LittleWizard.Cards.Uncommon;
 
 public class EarthFury()
-    : LittleWizardCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.AnyEnemy)
+    : LittleWizardCard(3, CardType.Skill, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.LittleWizardElement];
 
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new PowerVar<EarthElement>(13), new PowerVar<NoFireElementPower>(3)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<EarthElement>(13)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await Utils.GivePower<NoFireElementPower>(this, cardPlay);
-        await Utils.GivePower<EarthElement>(this, cardPlay);
+        Debug.Assert(cardPlay.Target != null);
+        var earth = cardPlay.Target.GetPowerAmount<EarthElement>();
+        await CommonActions.CardAttack(this, cardPlay.Target, earth).Execute(choiceContext);
+        await PowerCmd.Apply<EarthElement>(cardPlay.Target, earth, Owner.Creature, this);
         await AnimationHelper.TriggerCastAnimationOwner(this);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVarsHelper.GetPowerVar<EarthElement>(DynamicVars).UpgradeValueBy(3);
+        EnergyCost.UpgradeBy(-1);
     }
 }
