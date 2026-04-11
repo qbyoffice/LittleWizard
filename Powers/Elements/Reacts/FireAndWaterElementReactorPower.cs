@@ -14,8 +14,20 @@ public class FireAndWaterElementReactorPower : LittleWizardPower
 
     public override Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
+<<<<<<< Updated upstream
         PowerCmd.Apply<ElementTemporaryStrengthPower>(Owner, Amount, applier, cardSource);
         PowerCmd.Apply<VulnerablePower>(Owner, Amount, applier, cardSource);
+=======
+        PowerCmd.Apply<FireWaterStrengthDecreasePower>(Owner, Amount, applier, cardSource);
+        CreatureCmd.Damage(
+            new ThrowingPlayerChoiceContext(),
+            Owner,
+            Amount,
+            ValueProp.Unpowered,
+            applier,
+            cardSource
+        );
+>>>>>>> Stashed changes
         PowerCmd.Remove(this);
         return Task.CompletedTask;
     }

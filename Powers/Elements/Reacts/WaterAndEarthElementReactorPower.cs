@@ -14,8 +14,13 @@ public class WaterAndEarthElementReactorPower : LittleWizardPower
 
     public override Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
+<<<<<<< Updated upstream
         if (applier != null)
             CreatureCmd.GainBlock(applier, Amount, ValueProp.Move, null);
+=======
+        PowerCmd.Apply<WaterEarthStrengthDecreasePower>(Owner, Amount, applier, cardSource);
+        PowerCmd.Apply<ElementBlockPower>(Owner, Amount, applier, cardSource);
+>>>>>>> Stashed changes
         PowerCmd.Remove(this);
         return Task.CompletedTask;
     }
