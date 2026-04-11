@@ -19,8 +19,8 @@ scale = Vector2(0.4, 0.4)
 [node name="SpineBoneNode" type="SpineBoneNode" parent="Visuals"]
 bone_name = "WE"
 show_behind_parent = true
-position = Vector2(-56.56081, -382.1875)
-rotation = 0.021422816
+position = Vector2(-64.21241, -381.89133)
+rotation = 0.0020362907
 scale = Vector2(0.68670243, 0.68670243)
 
 [node name="LittleWizardEnergyA" parent="Visuals/SpineBoneNode" instance=ExtResource("3_ifk35")]
