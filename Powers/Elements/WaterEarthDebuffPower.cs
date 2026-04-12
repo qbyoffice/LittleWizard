@@ -7,14 +7,25 @@ using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Monsters;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 
-namespace LittleWizard.Powers.Elements;
+namespace LittleWizard.Powers.Elements.Reacts;
 
-public class ElementBlockPower : LittleWizardPower
+public class WaterEarthDebuffPower : LittleWizardPower
 {
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Counter;
+
+    public override string CustomPackedIconPath =>
+        "res://LittleWizard/images/powers/water_and_earth_element_reactor_power.png";
+    public override string CustomBigIconPath =>
+        "res://LittleWizard/images/powers/big/water_and_earth_element_reactor_power.png";
+
+    public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
+    {
+        await PowerCmd.Apply<StrengthPower>(Owner, -Amount, applier, cardSource);
+    }
 
     public override async Task AfterDamageReceived(
         PlayerChoiceContext choiceContext,
@@ -27,24 +38,26 @@ public class ElementBlockPower : LittleWizardPower
     {
         if (target != Owner || dealer == null || !props.IsPoweredAttack() || result.WasFullyBlocked)
             return;
+
         var creature = dealer;
         if (dealer.Monster is Osty)
         {
             Debug.Assert(dealer.PetOwner != null);
             creature = dealer.PetOwner.Creature;
         }
+
         if (creature.Player == null)
             return;
+
         Flash();
         await CreatureCmd.GainBlock(creature, Amount, ValueProp.Move, null);
     }
 
     public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {
-        if (side != CombatSide.Enemy)
+        if (side == CombatSide.Enemy)
         {
-            return;
+            await PowerCmd.Remove(this);
         }
-        await PowerCmd.Remove(this);
     }
 }
