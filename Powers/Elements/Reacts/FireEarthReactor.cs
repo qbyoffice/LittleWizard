@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using LittleWizard.Api.Powers;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -9,12 +9,30 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Monsters;
 using MegaCrit.Sts2.Core.ValueProps;
 
-namespace LittleWizard.Powers.Elements;
+namespace LittleWizard.Powers.Elements.Reacts;
 
-public class ElementBlockPower : LittleWizardPower
+public class FireEarthReactor : LittleWizardPower
 {
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Counter;
+
+    public override string CustomPackedIconPath =>
+        "res://LittleWizard/images/powers/fire_and_earth_element_reactor_power.png";
+    public override string CustomBigIconPath =>
+        "res://LittleWizard/images/powers/big/fire_and_earth_element_reactor_power.png";
+
+    public override Task AfterApplied(Creature? applier, CardModel? cardSource)
+    {
+        CreatureCmd.Damage(
+            new ThrowingPlayerChoiceContext(),
+            Owner,
+            Amount,
+            ValueProp.Unpowered,
+            applier,
+            cardSource
+        );
+        return Task.CompletedTask;
+    }
 
     public override async Task AfterDamageReceived(
         PlayerChoiceContext choiceContext,
@@ -25,26 +43,28 @@ public class ElementBlockPower : LittleWizardPower
         CardModel? cardSource
     )
     {
-        if (target != Owner || dealer == null || !props.IsPoweredAttack() || result.WasFullyBlocked)
+        if (target != Owner || dealer == null || result.WasFullyBlocked)
             return;
+
         var creature = dealer;
         if (dealer.Monster is Osty)
         {
             Debug.Assert(dealer.PetOwner != null);
             creature = dealer.PetOwner.Creature;
         }
+
         if (creature.Player == null)
             return;
+
         Flash();
         await CreatureCmd.GainBlock(creature, Amount, ValueProp.Move, null);
     }
 
     public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {
-        if (side != CombatSide.Enemy)
+        if (side == CombatSide.Enemy)
         {
-            return;
+            await PowerCmd.Remove(this);
         }
-        await PowerCmd.Remove(this);
     }
 }
