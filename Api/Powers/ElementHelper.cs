@@ -48,7 +48,7 @@ public static class ElementHelper
         Creature? applier
     )
     {
-        PowerCmd.Apply<FireAndWaterElementReactorPower>(owner, amountA + amountB, applier, null);
+        PowerCmd.Apply<FireWaterReactor>(owner, amountA + amountB, applier, null);
     }
 
     public static void FireAndEarth(
@@ -58,7 +58,7 @@ public static class ElementHelper
         Creature? applier
     )
     {
-        PowerCmd.Apply<FireAndEarthElementReactorPower>(owner, amountA + amountB, applier, null);
+        PowerCmd.Apply<FireEarthReactor>(owner, amountA + amountB, applier, null);
     }
 
     public static void WaterAndEarth(
@@ -68,7 +68,7 @@ public static class ElementHelper
         Creature? applier
     )
     {
-        PowerCmd.Apply<WaterAndEarthElementReactorPower>(owner, amountA + amountB, applier, null);
+        PowerCmd.Apply<WaterEarthReactor>(owner, amountA + amountB, applier, null);
     }
 
     public static bool IsElementCard(CardModel card)
