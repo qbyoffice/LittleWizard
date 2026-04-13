@@ -6,7 +6,7 @@ using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 
-namespace LittleWizard.Powers.Elements.Reacts;
+namespace LittleWizard.Powers.Elements;
 
 public class FireWaterStrengthDecreasePower : CustomTemporaryPowerModel
 {

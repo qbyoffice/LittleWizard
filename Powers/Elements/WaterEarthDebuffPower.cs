@@ -11,7 +11,7 @@ using MegaCrit.Sts2.Core.Models.Monsters;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 
-namespace LittleWizard.Powers.Elements.Reacts;
+namespace LittleWizard.Powers.Elements;
 
 public class WaterEarthDebuffPower : CustomTemporaryPowerModel
 {

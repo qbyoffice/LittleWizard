@@ -9,7 +9,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Monsters;
 using MegaCrit.Sts2.Core.ValueProps;
 
-namespace LittleWizard.Powers.Elements.Reacts;
+namespace LittleWizard.Powers.Elements;
 
 public class FireEarthElementBlockPower : LittleWizardPower
 {
