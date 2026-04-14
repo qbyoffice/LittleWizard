@@ -1,5 +1,4 @@
 using BaseLib.Abstracts;
-using BaseLib.Extensions;
 using LittleWizard.Api.Extensions;
 
 namespace LittleWizard.Api.Powers;
