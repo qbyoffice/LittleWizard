@@ -1,4 +1,5 @@
 using BaseLib.Abstracts;
+using BaseLib.Extensions;
 using BaseLib.Utils;
 using LittleWizard.Api.Extensions;
 using LittleWizard.Character;
@@ -14,5 +15,7 @@ public abstract class LittleWizardRelics : CustomRelicModel
         $"{Utils.GetModelSnakeCase(this)}.tres".TresRelicImagePath();
 
     protected override string PackedIconOutlinePath =>
-        $"{Utils.GetModelSnakeCase(this)}_outline.tres".TresRelicImagePath();
+        $"{GetBaseFileName()}_outline.tres".TresRelicImagePath();
+
+    private string GetBaseFileName() => Id.Entry.RemovePrefix().ToLowerInvariant();
 }
