@@ -34,7 +34,7 @@ public class ElementConvert()
         else if (earthAmount > 0)
         {
             await PowerCmd.Remove<EarthElement>(cardPlay.Target);
-            await PowerCmd.Apply<WaterElement>(cardPlay.Target, earthAmount, Owner.Creature, this);
+            await PowerCmd.Apply<FireElement>(cardPlay.Target, earthAmount, Owner.Creature, this);
         }
 
         await AnimationHelper.TriggerCastAnimationOwner(this);
