@@ -95,6 +95,7 @@
     "LITTLEWIZARD-MANA_BURST.description": "每使用4张[gold]技能[/gold]牌，获得1点{energyPrefix:energyIcons(1)}。",
     "LITTLEWIZARD-DEEPEN_MEMORY.title": "加深记忆",
     "LITTLEWIZARD-DEEPEN_MEMORY.description": "复制一张手牌放入手牌。",
+    "LITTLEWIZARD-DEEPEN_MEMORY.selectionScreenPrompt": "选择要复制的牌",
     "LITTLEWIZARD-MEMORY_PALACE.title": "记忆宫殿",
     "LITTLEWIZARD-MEMORY_PALACE.description": "复制抽牌堆内的{Cards:diff()}张牌。[gold]虚无[/gold]。",
     "LITTLEWIZARD-MEMORY_PALACE.selectionScreenPrompt": "选择要复制的牌",
