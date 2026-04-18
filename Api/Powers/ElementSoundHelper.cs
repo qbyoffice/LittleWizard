@@ -39,9 +39,9 @@ public static class ElementSoundHelper
         string? customSoundPath = null
     )
     {
-        if (applier == null || applier.Side != CombatSide.Player)
+        if (applier is not { Side: CombatSide.Player })
             return;
-        string? path = customSoundPath ?? GetDefaultAppliedSound(element);
+        var path = customSoundPath ?? GetDefaultAppliedSound(element);
         if (!string.IsNullOrEmpty(path))
             PlaySound(path);
     }
@@ -62,7 +62,7 @@ public static class ElementSoundHelper
     }*/
     public static void PlayTriggerSound(PowerModel element, string? customSoundPath = null)
     {
-        string? path = customSoundPath ?? GetDefaultTriggerSound(element);
+        var path = customSoundPath ?? GetDefaultTriggerSound(element);
         if (!string.IsNullOrEmpty(path))
             PlaySound(path);
     }
@@ -83,7 +83,7 @@ public static class ElementSoundHelper
     }*/
     public static void PlayReactionSound(string reactionName, string? customSoundPath = null)
     {
-        string? path = customSoundPath ?? GetDefaultReactionSound(reactionName);
+        var path = customSoundPath ?? GetDefaultReactionSound(reactionName);
         if (!string.IsNullOrEmpty(path))
             PlaySound(path);
     }
