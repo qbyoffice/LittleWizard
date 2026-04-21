@@ -9,7 +9,7 @@ using MegaCrit.Sts2.Core.Models.CardPools;
 namespace LittleWizard.Cards.Others;
 
 [Pool(typeof(TokenCardPool))]
-public class PassOver() : CustomCardModel(1, CardType.Skill, CardRarity.Token, TargetType.Self)
+public class PassOver() : CustomCardModel(0, CardType.Skill, CardRarity.Token, TargetType.Self)
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
@@ -22,6 +22,6 @@ public class PassOver() : CustomCardModel(1, CardType.Skill, CardRarity.Token, T
 
     protected override void OnUpgrade()
     {
-        EnergyCost.UpgradeBy(-1);
+        RemoveKeyword(CardKeyword.Exhaust);
     }
 }
