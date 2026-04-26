@@ -8,11 +8,13 @@ namespace LittleWizard.Cards.Common;
 public class DeadlineDash()
     : LittleWizardCard(0, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         if (Owner.PlayerCombatState == null)
             return;
-        if (Owner.PlayerCombatState.Energy != 0)
+        if (Owner.PlayerCombatState.Energy == 0)
             await PlayerCmd.GainEnergy(1, Owner);
         else
             await CardPileCmd.Draw(choiceContext, Owner);
@@ -20,6 +22,6 @@ public class DeadlineDash()
 
     protected override void OnUpgrade()
     {
-        AddKeyword(CardKeyword.Innate);
+        AddKeyword(CardKeyword.Retain);
     }
 }
